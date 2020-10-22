@@ -19,7 +19,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     private EditText emailEditText;
     private EditText passwordEditText;
     private Button lbutton;
-    private Button register;
+    private Button cregister;
 
     @Nullable
     @Override
@@ -30,9 +30,11 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         emailEditText = view.findViewById(R.id.lemail);
         passwordEditText = view.findViewById(R.id.lpwd);
         lbutton = view.findViewById(R.id.lbutton);
-        register = view.findViewById(R.id.register);
+        cregister = view.findViewById(R.id.register);
+
+        //Listeners for the buttons, declaring them for this fragment
         lbutton.setOnClickListener(this);
-        register.setOnClickListener(this);
+        cregister.setOnClickListener(this);
 
         return view;
     }
