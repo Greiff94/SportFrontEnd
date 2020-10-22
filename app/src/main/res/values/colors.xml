@@ -4,6 +4,7 @@
     <color name="colorPrimaryDark">#000000</color>
     <color name="colorAccent">#f6d365</color>
     <color name="orange_color">#f8b133</color>
+    <color name="transparent"> #00000000 </color>
 
     <color name="address">#2F7092</color>
     <color name="followers">#0D5D98</color>
