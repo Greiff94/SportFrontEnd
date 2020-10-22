@@ -1,4 +1,15 @@
 <resources>
     <string name="app_name">SportsApp</string>
     <string name="user_name">User Name</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="prompt_username">User name</string>
+    <string name="prompt_firstname">First name</string>
+    <string name="prompt_lastname">Last name</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_registerbutton">Register</string>
+    <string name="prompt_gotologin">Already have an user, click here to logg in</string>
 </resources>
