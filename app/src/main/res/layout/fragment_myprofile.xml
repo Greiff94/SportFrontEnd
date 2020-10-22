@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
-        android:background="@color/headings">
+        android:background="@color/orange_color">
 
         <RelativeLayout
             android:id="@+id/userimage"
@@ -78,7 +78,7 @@
                 android:layout_height="wrap_content"
                 android:text="Navn"
                 android:textSize="13sp"
-                android:textColor="@color/headings"/>
+                android:textColor="@color/orange_color"/>
 
             <TextView
                 android:id="@+id/usernameinfo"
@@ -92,7 +92,7 @@
                 android:layout_height="wrap_content"
                 android:text="Email"
                 android:textSize="13sp"
-                android:textColor="@color/headings"
+                android:textColor="@color/orange_color"
                 android:layout_marginTop="20dp"/>
 
             <TextView
@@ -106,7 +106,7 @@
                 android:layout_height="wrap_content"
                 android:text="Telefon"
                 android:textSize="13sp"
-                android:textColor="@color/headings"
+                android:textColor="@color/orange_color"
                 android:layout_marginTop="20dp"/>
 
             <TextView
@@ -121,7 +121,7 @@
                 android:layout_height="wrap_content"
                 android:text="Noe som viser favorittidrett?"
                 android:textSize="13sp"
-                android:textColor="@color/headings"
+                android:textColor="@color/orange_color"
                 android:layout_marginTop="20dp"/>
 
             <TextView
