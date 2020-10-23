@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import com.google.android.material.navigation.NavigationView;
 
 import no.ntnu.sportsapp.R;
+import no.ntnu.sportsapp.fragments.AddEventFragment;
 import no.ntnu.sportsapp.fragments.LoginFragment;
 import no.ntnu.sportsapp.fragments.MyProfileFragment;
 import no.ntnu.sportsapp.fragments.RegisterFragment;
@@ -63,6 +64,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch(item.getItemId()) {
+            case R.id.nav_new:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new AddEventFragment()).commit();
+                break;
             case R.id.nav_login:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new LoginFragment()).commit();
