@@ -8,12 +8,16 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.google.android.material.navigation.NavigationView;
 
 import no.ntnu.sportsapp.R;
+import no.ntnu.sportsapp.fragments.LoginFragment;
+import no.ntnu.sportsapp.fragments.MyProfileFragment;
+import no.ntnu.sportsapp.fragments.RegisterFragment;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout drawerLayout;
@@ -58,6 +62,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        switch(item.getItemId()) {
+            case R.id.nav_login:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new LoginFragment()).commit();
+                break;
+            case R.id.nav_register:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new RegisterFragment()).commit();
+                break;
+              /*  case R.id.nav_profile:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new MyProfileFragment()).commit();
+                break;*/
+        }
         return true;
     }
 
