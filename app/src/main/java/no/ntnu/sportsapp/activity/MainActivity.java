@@ -71,11 +71,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new RegisterFragment()).commit();
                 break;
-              /*  case R.id.nav_profile:
+            case R.id.nav_profile:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new MyProfileFragment()).commit();
-                break;*/
+                break;
         }
+        drawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
 

@@ -15,13 +15,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
+
     <TextView
         android:id="@+id/ltitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/loginheader"
         android:layout_centerHorizontal="true"
-        android:text="Register Now"
+        android:text="Change your password"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.507"
         app:layout_constraintStart_toStartOf="parent"
@@ -76,18 +78,29 @@
             android:textSize="13sp" />
 
         <EditText
-            android:id="@+id/retypenewpwd"
+            android:id="@+id/newPwdAgain"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="New password"
             android:inputType="textPassword" />
 
         <Button
+            android:id="@+id/changepwdButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20sp"
             android:background="@color/orange_color"
             android:text="Change password" />
+
+
+        <Button
+            android:id="@+id/backtomyprofile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20sp"
+            android:background="@color/transparent"
+            android:text="Return to profile" />
+
     </LinearLayout>
 
 </RelativeLayout>
