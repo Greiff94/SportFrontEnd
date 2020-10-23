@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/changepwdParent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/loginheader"
+        android:layout_width="match_parent"
+        android:layout_height="240dp"
+        android:background="@drawable/gradient_bg"
+        android:src="@mipmap/ic_logoself_foreground"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/ltitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/loginheader"
+        android:layout_centerHorizontal="true"
+        android:text="Register Now"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.507"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/loginheader" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="70dp"
+        android:layout_marginRight="40dp"
+        android:orientation="vertical"
+        android:layout_below="@id/loginheader">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Current password"
+            android:textColor="@color/orange_color"
+            android:textSize="13sp" />
+
+        <EditText
+            android:id="@+id/currPwd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Current password"
+            android:inputType="textPassword" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="New password"
+            android:textColor="@color/orange_color"
+            android:textSize="13sp" />
+
+        <EditText
+            android:id="@+id/newPwd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="New password"
+            android:inputType="textPassword" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Confirm new password"
+            android:textColor="@color/orange_color"
+            android:textSize="13sp" />
+
+        <EditText
+            android:id="@+id/retypenewpwd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="New password"
+            android:inputType="textPassword" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20sp"
+            android:background="@color/orange_color"
+            android:text="Change password" />
+    </LinearLayout>
+
+</RelativeLayout>
+
