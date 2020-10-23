@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/loginheader"
         android:layout_centerHorizontal="true"
-        android:text="Register Now"
+        android:text="Change your password"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.507"
         app:layout_constraintStart_toStartOf="parent"

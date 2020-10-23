@@ -49,7 +49,7 @@ public class ChangePasswordFragment extends Fragment implements View.OnClickList
             case R.id.changepwdButton:
                 changePassword();
                 System.out.println("Change password button pressed");
-
+                Toast.makeText(getContext(), "CHANGE PASSWORD PRESSED", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.backtomyprofile:
                 Toast.makeText(view.getContext(), "BACK TO PROFILE WE GO", Toast.LENGTH_SHORT).show();
@@ -87,6 +87,10 @@ public class ChangePasswordFragment extends Fragment implements View.OnClickList
         if (!newPassword.equals(newPasswordAgain)) {
             newPwdAgain.setError("Password doesnt match! Try again!");
             newPwdAgain.requestFocus();
+        }
+        if (currentPassword.equals(newPassword)) {
+            newPwd.setError("Unable to change to your previous password");
+            newPwd.requestFocus();
         }
 
     }
