@@ -98,7 +98,6 @@ public class AddEventFragment extends Fragment implements View.OnClickListener {
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat, Locale.ENGLISH);
 
                 dateView.setText(simpleDateFormat.format(calendar1.getTime()));
-                Toast.makeText(getContext(), dayOfMonth + "-" + (monthOfYear + 1) + "-" + year, Toast.LENGTH_SHORT).show();
             }
         }, day, month, year);
         datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis());
