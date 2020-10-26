@@ -1,6 +1,7 @@
 package no.ntnu.sportsapp.fragments;
 
 import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -62,17 +64,33 @@ public class AddEventFragment extends Fragment implements View.OnClickListener {
         switch (view.getId()) {
             case R.id.eventTimebtn:
                 setTimeButton();
-                Toast.makeText(view.getContext(), "TIME BUTTON PRESSEED", Toast.LENGTH_SHORT).show();
+                Toast.makeText(view.getContext(), "Time set!", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.eventDatebtn:
                 setDateButton();
-                Toast.makeText(view.getContext(), "Date set", Toast.LENGTH_SHORT).show();
+                Toast.makeText(view.getContext(), "Date set!", Toast.LENGTH_SHORT).show();
                 break;
         }
     }
 
 
     private void setTimeButton() {
+        Calendar calendar = Calendar.getInstance();
+
+        int hour = calendar.get(Calendar.HOUR);
+        int minute = calendar.get(Calendar.MINUTE);
+
+        boolean is24Format = DateFormat.is24HourFormat(getContext());
+
+        TimePickerDialog timePickerDialog = new TimePickerDialog(Objects.requireNonNull(getContext()), new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker timePicker, int hour, int minute) {
+                // Creates format for time view.
+                String timeFormat = String.format("%02d:%02d", hour, minute);
+                timeView.setText(timeFormat);
+            }
+        }, hour, minute, is24Format);
+        timePickerDialog.show();
 
     }
 
@@ -90,17 +108,18 @@ public class AddEventFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int monthOfYear, int dayOfMonth) {
 
-                Calendar calendar1 = Calendar.getInstance();
-                calendar1.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                calendar1.set(Calendar.MONTH, monthOfYear);
-                calendar1.set(Calendar.YEAR, year);
+                Calendar myCalendar = Calendar.getInstance();
+                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                myCalendar.set(Calendar.MONTH, monthOfYear);
+                myCalendar.set(Calendar.YEAR, year);
                 String dateFormat = dayOfMonth + "/" + (monthOfYear + 1) + "/" + year;
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat, Locale.ENGLISH);
 
-                dateView.setText(simpleDateFormat.format(calendar1.getTime()));
+                dateView.setText(simpleDateFormat.format(myCalendar.getTime()));
             }
         }, day, month, year);
         datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis());
         datePickerDialog.show();
     }
+
 }
