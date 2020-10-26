@@ -64,11 +64,9 @@ public class AddEventFragment extends Fragment implements View.OnClickListener {
         switch (view.getId()) {
             case R.id.eventTimebtn:
                 setTimeButton();
-                Toast.makeText(view.getContext(), "Time set!", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.eventDatebtn:
                 setDateButton();
-                Toast.makeText(view.getContext(), "Date set!", Toast.LENGTH_SHORT).show();
                 break;
         }
     }
@@ -88,6 +86,7 @@ public class AddEventFragment extends Fragment implements View.OnClickListener {
                 // Creates format for time view.
                 String timeFormat = String.format("%02d:%02d", hour, minute);
                 timeView.setText(timeFormat);
+                Toast.makeText(getContext(), "Time set!", Toast.LENGTH_SHORT).show();
             }
         }, hour, minute, is24Format);
         timePickerDialog.show();
@@ -116,6 +115,7 @@ public class AddEventFragment extends Fragment implements View.OnClickListener {
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat, Locale.ENGLISH);
 
                 dateView.setText(simpleDateFormat.format(myCalendar.getTime()));
+                Toast.makeText(getContext(), "Date set!", Toast.LENGTH_SHORT).show();
             }
         }, day, month, year);
         datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis());
