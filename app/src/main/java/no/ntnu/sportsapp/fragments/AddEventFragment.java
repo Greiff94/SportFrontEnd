@@ -26,9 +26,9 @@ public class AddEventFragment extends Fragment {
         // Get spinner(dropdown) from the xml file
         Spinner dropDown = (Spinner) view.findViewById(R.id.sportdropdown);
         // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(), R.array.sports_array, R.layout.fragment_addevent);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(view.getContext(), android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.sports_array));
         // Specify the layout to use when the list of choices appears
-        adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         dropDown.setAdapter(adapter);
 
