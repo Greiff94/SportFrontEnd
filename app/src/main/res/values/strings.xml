@@ -15,6 +15,7 @@
 
     <!--List of different sports used in the drop down menu-->
     <string-array name="sports_array">
+        <item>Choose your sport...</item>
         <item>Football</item>
         <item>Handball</item>
         <item>Floorball</item>
