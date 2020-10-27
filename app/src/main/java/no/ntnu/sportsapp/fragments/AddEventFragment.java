@@ -49,7 +49,8 @@ public class AddEventFragment extends Fragment implements View.OnClickListener {
         dateButton.setOnClickListener(this);
         createButton.setOnClickListener(this);
 
-
+        // This is for the first dropdown menu in the addevent xml
+        // This is to chose one which sport it is going to be
         // Get spinner(dropdown) from the xml file
         Spinner dropDown = (Spinner) view.findViewById(R.id.sportdropdown);
         // Create an ArrayAdapter using the string array and a default spinner layout
@@ -59,6 +60,12 @@ public class AddEventFragment extends Fragment implements View.OnClickListener {
 
         dropDown.setAdapter(adapter);
 
+        // A dropdown menu to determine if the event is going to be inside or outside
+        Spinner inOutDropDown = (Spinner) view.findViewById(R.id.eventInOutDrop);
+        ArrayAdapter<String> inoutAdapter = new ArrayAdapter<String>(view.getContext(), android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.inout_array));
+        inoutAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        inOutDropDown.setAdapter(inoutAdapter);
         return view;
     }
 

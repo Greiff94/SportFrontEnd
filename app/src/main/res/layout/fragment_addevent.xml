@@ -51,6 +51,19 @@
             android:background="@android:drawable/btn_dropdown"
             android:spinnerMode="dropdown" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Will it be inside or outside?"
+            android:textColor="@color/orange_color"
+            android:textSize="13sp" />
+
+        <Spinner
+            android:id="@+id/eventInOutDrop"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:drawable/btn_dropdown"
+            android:spinnerMode="dropdown" />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -59,21 +72,23 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
                 android:text="Date"
                 android:textColor="@color/orange_color"
-                android:textSize="13sp"
-                android:layout_weight="1"/>
+                android:textSize="13sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
                 android:text="Time"
                 android:textColor="@color/orange_color"
-                android:textSize="13sp"
-                android:layout_weight="1"/>
+                android:textSize="13sp" />
         </LinearLayout>
+
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -126,7 +141,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="Where is it?"
+            android:text="Location"
             android:textColor="@color/orange_color"
             android:textSize="13sp" />
 
@@ -149,6 +164,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Number of spots" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Equipment"
+            android:textColor="@color/orange_color"
+            android:textSize="13sp" />
+
+        <EditText
+            android:id="@+id/eventEquipment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Equipment" />
 
 
         <Button
