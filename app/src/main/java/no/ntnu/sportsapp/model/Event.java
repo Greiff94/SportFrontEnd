@@ -12,7 +12,7 @@ public class Event {
     //@todo instead of string location, google maps location
     private String location;
     private String creator;
-    private ArrayList<> signedUsers = new ArrayList<>();
+    //private ArrayList<User> signedUsers = new ArrayList<>();
     private boolean oldEvent;
 
     public Event(int id, String sport, String description, Date date, String location, String creator, ArrayList signedUsers, boolean oldEvent) {
@@ -22,7 +22,7 @@ public class Event {
         this.date = date;
         this.location = location;
         this.creator = creator;
-        this.signedUsers = signedUsers;
+        //this.signedUsers = signedUsers;
         this.oldEvent = oldEvent;
     }
 
@@ -73,14 +73,14 @@ public class Event {
     public void setCreator(String creator) {
         this.creator = creator;
     }
-
-    public ArrayList getSignedUsers() {
-        return signedUsers;
-    }
-
-    public void setSignedUsers(ArrayList signedUsers) {
-        this.signedUsers = signedUsers;
-    }
+//
+//    public ArrayList getSignedUsers() {
+//        return signedUsers;
+//    }
+//
+//    public void setSignedUsers(ArrayList signedUsers) {
+//        this.signedUsers = signedUsers;
+//    }
 
     public boolean isOldEvent() {
         return oldEvent;
