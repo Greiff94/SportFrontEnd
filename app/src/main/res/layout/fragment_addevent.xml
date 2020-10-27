@@ -145,14 +145,14 @@
             android:textSize="13sp" />
 
         <EditText
-            android:id="@+id/eventmaxnumber"
+            android:id="@+id/eventnumofpeople"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Maximum number of participants" />
+            android:hint="Number of spots" />
 
 
         <Button
-            android:id="@+id/changepwdButton"
+            android:id="@+id/createEventbtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20sp"

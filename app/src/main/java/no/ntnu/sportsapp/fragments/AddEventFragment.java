@@ -31,6 +31,7 @@ public class AddEventFragment extends Fragment implements View.OnClickListener {
     TextView timeView, dateView;
     private Button dateButton;
     private Button timeButton;
+    private Button createButton;
 
     @Nullable
     @Override
@@ -41,10 +42,12 @@ public class AddEventFragment extends Fragment implements View.OnClickListener {
         timeButton = view.findViewById(R.id.eventTimebtn);
         dateView = view.findViewById(R.id.eventdate);
         dateButton = view.findViewById(R.id.eventDatebtn);
+        createButton = view.findViewById(R.id.createEventbtn);
 
         //Listeners for the buttons, declaring them for this fragment
         timeButton.setOnClickListener(this);
         dateButton.setOnClickListener(this);
+        createButton.setOnClickListener(this);
 
 
         // Get spinner(dropdown) from the xml file
@@ -62,6 +65,9 @@ public class AddEventFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
+            case R.id.createEventbtn:
+                createEvent();
+                break;
             case R.id.eventTimebtn:
                 setTimeButton();
                 break;
@@ -71,6 +77,9 @@ public class AddEventFragment extends Fragment implements View.OnClickListener {
         }
     }
 
+    private void createEvent() {
+        Toast.makeText(getContext(), "Event Created!", Toast.LENGTH_SHORT).show();
+    }
 
     private void setTimeButton() {
         Calendar calendar = Calendar.getInstance();
