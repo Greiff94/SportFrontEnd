@@ -6,13 +6,13 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import java.util.ArrayList;
 
-import no.ntnu.sportsapp.adapter.EventListAdapter;
+//import no.ntnu.sportsapp.adapter.EventListAdapter;
 import no.ntnu.sportsapp.model.Event;
 
 public class EventsFragment extends Fragment {
     private SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView eventsRecyclerView;
     private ArrayList<Event> events = new ArrayList<>();
-    private EventListAdapter adapter;
+//    private EventListAdapter adapter;
 
 }
