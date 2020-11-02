@@ -15,12 +15,16 @@ import no.ntnu.sportsapp.R;
 
 public class MyProfileFragment extends Fragment {
 
-    TextView changePassword;
+    TextView profileNameView, usernameInfoView, emailView, phoneNumberView, changePassword;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_myprofile, container, false);
 
+        profileNameView = view.findViewById(R.id.username);
+        usernameInfoView = view.findViewById(R.id.usernameinfo);
+        emailView = view.findViewById(R.id.emailinfo);
+        phoneNumberView = view.findViewById(R.id.phoneinfo);
         changePassword = view.findViewById(R.id.changepwd);
 
         changePassword.setOnClickListener(new View.OnClickListener() {
@@ -33,5 +37,15 @@ public class MyProfileFragment extends Fragment {
         });
 
         return view;
+    }
+
+    public void userInfo() {
+        String profileName = profileNameView.getText().toString().trim();
+        String usernameInfo = usernameInfoView.getText().toString().trim();
+        String email = emailView.getText().toString().trim();
+        String phoneNumber = phoneNumberView.getText().toString().trim();
+
+
+
     }
 }
