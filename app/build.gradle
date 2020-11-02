@@ -40,6 +40,7 @@ dependencies {
     implementation 'com.google.maps.android:android-maps-utils:2.0.3'
     implementation 'com.google.android.gms:play-services-gcm:17.0.0'
     implementation 'com.google.auto.value:auto-value-annotations:1.6.2'
+    implementation 'com.google.android.gms:play-services-awareness:18.0.1'
 
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation fileTree(dir: "libs", include: ["*.jar"])

@@ -19,6 +19,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
@@ -26,7 +33,10 @@ import java.util.Objects;
 
 import no.ntnu.sportsapp.R;
 
-public class AddEventFragment extends Fragment implements View.OnClickListener {
+public class AddEventFragment extends Fragment implements View.OnClickListener, OnMapReadyCallback {
+
+    GoogleMap mapAPI;
+    SupportMapFragment supportMapFragment;
 
     TextView timeView, dateView;
     private Button dateButton;
@@ -43,6 +53,11 @@ public class AddEventFragment extends Fragment implements View.OnClickListener {
         dateView = view.findViewById(R.id.eventdate);
         dateButton = view.findViewById(R.id.eventDatebtn);
         createButton = view.findViewById(R.id.createEventbtn);
+
+        supportMapFragment = (SupportMapFragment) this.getChildFragmentManager()
+                .findFragmentById(R.id.googleMap);
+        supportMapFragment.getMapAsync(this);
+
 
         //Listeners for the buttons, declaring them for this fragment
         timeButton.setOnClickListener(this);
@@ -138,4 +153,12 @@ public class AddEventFragment extends Fragment implements View.OnClickListener {
         datePickerDialog.show();
     }
 
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        mapAPI = googleMap;
+        LatLng test = new LatLng(58.970521932222155, 5.598445861663419);
+        mapAPI.addMarker(new MarkerOptions().position(test).title("THIS TEST"));
+
+        mapAPI.moveCamera(CameraUpdateFactory.newLatLng(test));
+    }
 }

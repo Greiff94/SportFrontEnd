@@ -185,6 +185,12 @@
                 android:layout_height="wrap_content"
                 android:hint="Equipment" />
 
+            <fragment
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:id="@+id/googleMap"
+                android:name="com.google.android.gms.maps.SupportMapFragment"/>
+
 
             <Button
                 android:id="@+id/createEventbtn"
