@@ -13,6 +13,7 @@ local.properties
 # Signing files
 .signing/
 
+
 # User-specific configurations
 .idea/libraries/
 .idea/workspace.xml
@@ -27,6 +28,8 @@ local.properties
 .idea/vcs.xml
 *.iml
 
+
+
 # OS-specific files
 .DS_Store
 .DS_Store?
@@ -35,3 +38,4 @@ local.properties
 .Trashes
 ehthumbs.db
 Thumbs.db
+app/src/main/res/values/map_api.xml
