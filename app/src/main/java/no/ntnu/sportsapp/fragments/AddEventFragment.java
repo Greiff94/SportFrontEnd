@@ -2,7 +2,6 @@ package no.ntnu.sportsapp.fragments;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
-import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
@@ -11,10 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -25,21 +22,17 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.common.api.Status;
-import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.model.Place;
 import com.google.android.libraries.places.api.net.PlacesClient;
-import com.google.android.libraries.places.widget.Autocomplete;
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener;
-import com.google.android.libraries.places.widget.model.AutocompleteActivityMode;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -51,22 +44,20 @@ import java.util.Objects;
 
 import no.ntnu.sportsapp.R;
 
-import static android.app.Activity.RESULT_OK;
-
 public class AddEventFragment extends Fragment implements View.OnClickListener, OnMapReadyCallback {
 
     GoogleMap map;
     SupportMapFragment supportMapFragment;
-    SearchView searchView;
     TextView timeView, dateView;
-    //  AutoCompleteTextView autoComplete;
     AutocompleteSupportFragment autocompleteFragment;
+    PlacesClient placesClient;
 
     private String apiKey;
 
     private Button dateButton;
     private Button timeButton;
     private Button createButton;
+
 
     @Nullable
     @Override
@@ -78,65 +69,61 @@ public class AddEventFragment extends Fragment implements View.OnClickListener, 
         dateView = view.findViewById(R.id.eventdate);
         dateButton = view.findViewById(R.id.eventDatebtn);
         createButton = view.findViewById(R.id.createEventbtn);
-        searchView = view.findViewById(R.id.searchLocation);
 
         apiKey = getString(R.string.map_key);
 
-        // TODO: FIX SEARCH FOR GOOGLE MAPS
         // Initialize places
-        // if (!Places.isInitialized()) {
-        //   Places.initialize(view.getContext(), apiKey);
-        // }
+        if (!Places.isInitialized()) {
+            Places.initialize(getContext(), apiKey);
+        }
 
         // Create new Places client instance
-        //  PlacesClient placesClient = Places.createClient(view.getContext());
+        placesClient = Places.createClient(view.getContext());
+
 
         // Map fragment init
         supportMapFragment = (SupportMapFragment) this.getChildFragmentManager()
                 .findFragmentById(R.id.googleMap);
         supportMapFragment.getMapAsync(this);
 
-        // TODO: FIX SEARCH PLACE FOR GOOGLE MAPS
-        // Initializing the autocomplete support fragment
-        //  autocompleteFragment = (AutocompleteSupportFragment) this.getFragmentManager()
-        //        .findFragmentById(R.id.autocompletefragment);
+        autocompleteFragment = (AutocompleteSupportFragment)
+                this.getChildFragmentManager().findFragmentById(R.id.autocompletefragment);
 
-        //autocompleteFragment.setPlaceFields(Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.LAT_LNG));
+        autocompleteFragment.setPlaceFields(Arrays.asList(Place.Field.ID, Place.Field.NAME));
 
         //Listeners for the buttons, declaring them for this fragment
         timeButton.setOnClickListener(this);
         dateButton.setOnClickListener(this);
         createButton.setOnClickListener(this);
 
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        // Listener for autcomplete fragment.
+        autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
             @Override
-            public boolean onQueryTextSubmit(String s) {
-                String location = searchView.getQuery().toString();
+            public void onPlaceSelected(@NonNull Place place) {
+                String chosenLocation = place.toString();
                 List<Address> addressList = null;
 
-                if (location != null || !location.equals("")) {
+                if (chosenLocation != null || !chosenLocation.equals("")) {
                     Geocoder geocoder = new Geocoder(getContext());
                     try {
-                        addressList = geocoder.getFromLocationName(location, 2);
+                        addressList = geocoder.getFromLocationName(chosenLocation, 1);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
                     Address address = addressList.get(0);
-                    LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
-                    map.addMarker(new MarkerOptions().position(latLng).title(location));
-                    map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 16));
-                    System.out.println(latLng);
 
+                    map.clear();
+                    LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
+                    map.addMarker(new MarkerOptions().position(latLng));
+                    map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
                 }
-                return false;
             }
 
             @Override
-            public boolean onQueryTextChange(String s) {
-                return false;
+            public void onError(@NonNull Status status) {
+
             }
         });
-
 
         // Get spinner(dropdown) from the xml file
         Spinner dropDown = (Spinner) view.findViewById(R.id.sportdropdown);
@@ -153,6 +140,7 @@ public class AddEventFragment extends Fragment implements View.OnClickListener, 
         inoutAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         inOutDropDown.setAdapter(inoutAdapter);
+
         return view;
     }
 
@@ -227,11 +215,9 @@ public class AddEventFragment extends Fragment implements View.OnClickListener, 
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        float zoomLevel = 16.0f;
+        float zoomLevel = 10.0f;
         map = googleMap;
-        LatLng test = new LatLng(62.4747222, 6.2261445);
-        map.addMarker(new MarkerOptions().position(test).title("THIS TEST"));
-
-        map.moveCamera(CameraUpdateFactory.newLatLngZoom(test, zoomLevel));
+        LatLng aalesund = new LatLng(62.4681226, 6.1714086);
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(aalesund, zoomLevel));
     }
 }
