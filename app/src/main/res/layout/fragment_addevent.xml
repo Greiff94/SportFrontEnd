@@ -147,20 +147,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="Location"
-                android:textColor="@color/orange_color"
-                android:textSize="13sp" />
-
-            <EditText
-                android:id="@+id/eventlocation"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Location" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
                 android:text="How many?"
                 android:textColor="@color/orange_color"
                 android:textSize="13sp" />
@@ -185,11 +171,45 @@
                 android:layout_height="wrap_content"
                 android:hint="Equipment" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Location"
+                android:textColor="@color/orange_color"
+                android:textSize="13sp" />
+
+           <!-- <EditText
+                android:id="@+id/eventlocation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Location" /> -->
+
+            <!-- <AutoCompleteTextView
+                android:id="@+id/eventlocation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Location" /> -->
+
+            <SearchView
+                android:id="@+id/searchLocation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:queryHint="Search..."
+                android:iconifiedByDefault="false"/>
+
+           <!-- <fragment
+                android:id="@+id/autocompletefragment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"/> -->
+
             <fragment
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:id="@+id/googleMap"
-                android:name="com.google.android.gms.maps.SupportMapFragment"/>
+                android:name="com.google.android.gms.maps.SupportMapFragment"
+                android:layout_marginTop="20dp" />
 
 
             <Button
