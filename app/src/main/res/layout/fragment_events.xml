@@ -9,7 +9,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:id="@+id/itemsRecView"
+        android:id="@+id/eventsRecView"
         android:layout_centerHorizontal="true"/>
 
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
