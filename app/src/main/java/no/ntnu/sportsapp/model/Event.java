@@ -4,33 +4,37 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Date;
 
+import no.ntnu.sportsapp.model.User;
+
 public class Event {
-    private int id;
+    private long id;
     private String sport;
     private String description;
-    private Date date;
-    //@todo instead of string location, google maps location
+    private String date;
     private String location;
-    private String creator;
-    //private ArrayList<User> signedUsers = new ArrayList<>();
-    private boolean oldEvent;
+    private String time;
+    private int maxPlayers;
+    private User creator;
+    private ArrayList<User> signedUsers = new ArrayList<>();
+//    private boolean oldEvent;
 
-    public Event(int id, String sport, String description, Date date, String location, String creator, ArrayList signedUsers, boolean oldEvent) {
+
+    public Event(long id, String sport, String description, String date, String location, String time, int maxPlayers, User creator) {
         this.id = id;
         this.sport = sport;
         this.description = description;
         this.date = date;
         this.location = location;
+        this.time = time;
+        this.maxPlayers = maxPlayers;
         this.creator = creator;
-        //this.signedUsers = signedUsers;
-        this.oldEvent = oldEvent;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -50,11 +54,11 @@ public class Event {
         this.description = description;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
@@ -66,40 +70,50 @@ public class Event {
         this.location = location;
     }
 
-    public String getCreator() {
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public int getMaxPlayers() {
+        return maxPlayers;
+    }
+
+    public void setMaxPlayers(int maxPlayers) {
+        this.maxPlayers = maxPlayers;
+    }
+
+    public User getCreator() {
         return creator;
     }
 
-    public void setCreator(String creator) {
+    public void setCreator(User creator) {
         this.creator = creator;
     }
-//
-//    public ArrayList getSignedUsers() {
-//        return signedUsers;
-//    }
-//
-//    public void setSignedUsers(ArrayList signedUsers) {
-//        this.signedUsers = signedUsers;
-//    }
 
-    public boolean isOldEvent() {
-        return oldEvent;
+    public ArrayList<User> getSignedUsers() {
+        return signedUsers;
     }
 
-    public void setOldEvent(boolean oldEvent) {
-        this.oldEvent = oldEvent;
-    }
-
-    //@todo fix this when backend is finished
-    @Override
-    public String toString() {
-        return "Event{" +
-                "id=" + id +
-                ", eventName='" + sport + '\'' +
-                ", description='" + description + '\'' +
-                ", date=" + date +
-                ", oldevent=" + oldEvent +
-                ", userid=" + creator +
-                '}';
+    public void setSignedUsers(ArrayList<User> signedUsers) {
+        this.signedUsers = signedUsers;
     }
 }
+
+//
+//        //@todo fix this when backend is finished
+//        @Override
+//        public String toString () {
+//            return "Event{" +
+//                    "id=" + id +
+//                    ", eventName='" + sport + '\'' +
+//                    ", description='" + description + '\'' +
+//                    ", date=" + date +
+//                    ", oldevent=" + oldEvent +
+//                    ", userid=" + creator +
+//                    '}';
+//        }
+
