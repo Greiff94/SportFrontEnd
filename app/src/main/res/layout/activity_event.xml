@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="parent"
+            app:layout_constraintEnd_toTopOf="parent"
+            app:popupTheme="@style/Theme.AppCompat.DayNight" />
+
+        <ImageView
+            android:id="@+id/currenteventheader"
+            android:layout_width="match_parent"
+            android:layout_height="240dp"
+            android:background="@drawable/gradient_bg"
+            android:src="@mipmap/ic_logoself_foreground"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/ltitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/currenteventheader"
+            android:layout_centerHorizontal="true"
+            android:text="Current event"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.507"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/currenteventheader" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/currenteventheader"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginRight="40dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Sport"
+                android:textColor="@color/orange_color"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/eventsport"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Sport"
+                android:textSize="20sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Participants"
+                android:textColor="@color/orange_color"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/eventparticipants"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="0 of 20 spots taken"
+                android:textSize="25sp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/eventDatebtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Attending" />
+
+                <Button
+                    android:id="@+id/eventTimebtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="Not attending"/>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Location"
+                android:textColor="@color/orange_color"
+                android:textSize="13sp" />
+
+
+            <TextView
+                android:id="@+id/eventEquipment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Equipment"
+                android:textSize="20sp"/>
+
+
+            <fragment
+                android:id="@+id/googleMap"
+                android:name="com.google.android.gms.maps.SupportMapFragment"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginTop="20dp" />
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+</ScrollView>
