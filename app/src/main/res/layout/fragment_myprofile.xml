@@ -76,7 +76,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Navn"
+                android:text="Name"
                 android:textSize="13sp"
                 android:textColor="@color/orange_color"/>
 
@@ -84,7 +84,7 @@
                 android:id="@+id/usernameinfo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Jon Doe"
+                android:hint="Name"
                 android:textSize="20dp"/>
 
             <TextView
@@ -99,12 +99,12 @@
                 android:id="@+id/emailinfo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="test@test.com"
+                android:hint="Email"
                 android:textSize="20dp"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Telefon"
+                android:text="Phonenumber"
                 android:textSize="13sp"
                 android:textColor="@color/orange_color"
                 android:layout_marginTop="20dp"/>
@@ -113,13 +113,13 @@
                 android:id="@+id/phoneinfo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="+47 99999999"
+                android:hint="phonenumber"
                 android:textSize="20dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Noe som viser favorittidrett?"
+                android:text="Favourite sport"
                 android:textSize="13sp"
                 android:textColor="@color/orange_color"
                 android:layout_marginTop="20dp"/>
@@ -128,7 +128,7 @@
                 android:id="@+id/interestinfo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Fotball, innebandy, etc...???"
+                android:text="favourite sport"
                 android:textSize="20dp"/>
 
             <TextView
@@ -147,3 +147,4 @@
 
 
 </RelativeLayout>
+

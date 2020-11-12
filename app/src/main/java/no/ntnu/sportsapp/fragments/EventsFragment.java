@@ -29,7 +29,7 @@ public class EventsFragment extends Fragment {
     private SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView eventsRecyclerView;
     private ArrayList<Event> events = new ArrayList<>();
-    private EventListAdapter adapter;
+//    private EventListAdapter adapter;
 
     @Nullable
     @Override
