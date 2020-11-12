@@ -2,6 +2,8 @@ package no.ntnu.sportsapp.fragments;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.view.LayoutInflater;
@@ -19,19 +21,43 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.libraries.places.api.Places;
+import com.google.android.libraries.places.api.model.Place;
+import com.google.android.libraries.places.api.net.PlacesClient;
+import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
+import com.google.android.libraries.places.widget.listener.PlaceSelectionListener;
+
+import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 
 import no.ntnu.sportsapp.R;
 
-public class AddEventFragment extends Fragment implements View.OnClickListener {
+public class AddEventFragment extends Fragment implements View.OnClickListener, OnMapReadyCallback {
 
+    GoogleMap map;
+    SupportMapFragment supportMapFragment;
     TextView timeView, dateView;
+    AutocompleteSupportFragment autocompleteFragment;
+    PlacesClient placesClient;
+
+    private String apiKey;
+
     private Button dateButton;
     private Button timeButton;
     private Button createButton;
+
 
     @Nullable
     @Override
@@ -44,13 +70,62 @@ public class AddEventFragment extends Fragment implements View.OnClickListener {
         dateButton = view.findViewById(R.id.eventDatebtn);
         createButton = view.findViewById(R.id.createEventbtn);
 
+        apiKey = getString(R.string.map_key);
+
+        // Initialize places
+        if (!Places.isInitialized()) {
+            Places.initialize(getContext(), apiKey);
+        }
+
+        // Create new Places client instance
+        placesClient = Places.createClient(view.getContext());
+
+
+        // Map fragment init
+        supportMapFragment = (SupportMapFragment) this.getChildFragmentManager()
+                .findFragmentById(R.id.googleMap);
+        supportMapFragment.getMapAsync(this);
+
+        autocompleteFragment = (AutocompleteSupportFragment)
+                this.getChildFragmentManager().findFragmentById(R.id.autocompletefragment);
+
+        autocompleteFragment.setPlaceFields(Arrays.asList(Place.Field.ID, Place.Field.NAME));
+
         //Listeners for the buttons, declaring them for this fragment
         timeButton.setOnClickListener(this);
         dateButton.setOnClickListener(this);
         createButton.setOnClickListener(this);
 
-        // This is for the first dropdown menu in the addevent xml
-        // This is to chose one which sport it is going to be
+        // Listener for autcomplete fragment.
+        // Sets location and adds marker on the google map.
+        autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
+            @Override
+            public void onPlaceSelected(@NonNull Place place) {
+                String chosenLocation = place.toString();
+                List<Address> addressList = null;
+
+                if (chosenLocation != null || !chosenLocation.equals("")) {
+                    Geocoder geocoder = new Geocoder(getContext());
+                    try {
+                        addressList = geocoder.getFromLocationName(chosenLocation, 1);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    Address address = addressList.get(0);
+
+                    map.clear();
+                    LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
+                    map.addMarker(new MarkerOptions().position(latLng));
+                    map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
+                }
+            }
+
+            @Override
+            public void onError(@NonNull Status status) {
+
+            }
+        });
+
         // Get spinner(dropdown) from the xml file
         Spinner dropDown = (Spinner) view.findViewById(R.id.sportdropdown);
         // Create an ArrayAdapter using the string array and a default spinner layout
@@ -66,6 +141,7 @@ public class AddEventFragment extends Fragment implements View.OnClickListener {
         inoutAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         inOutDropDown.setAdapter(inoutAdapter);
+
         return view;
     }
 
@@ -138,4 +214,11 @@ public class AddEventFragment extends Fragment implements View.OnClickListener {
         datePickerDialog.show();
     }
 
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        float zoomLevel = 10.0f;
+        map = googleMap;
+        LatLng aalesund = new LatLng(62.4681226, 6.1714086);
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(aalesund, zoomLevel));
+    }
 }
