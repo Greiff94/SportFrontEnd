@@ -97,6 +97,7 @@ public class AddEventFragment extends Fragment implements View.OnClickListener, 
         createButton.setOnClickListener(this);
 
         // Listener for autcomplete fragment.
+        // Sets location and adds marker on the google map.
         autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
             @Override
             public void onPlaceSelected(@NonNull Place place) {
