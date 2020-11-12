@@ -30,7 +30,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         emailEditText = view.findViewById(R.id.lemail);
         passwordEditText = view.findViewById(R.id.lpwd);
         lbutton = view.findViewById(R.id.lbutton);
-        cregister = view.findViewById(R.id.register);
+        cregister = view.findViewById(R.id.lregister);
 
         //Listeners for the buttons, declaring them for this fragment
         lbutton.setOnClickListener(this);
@@ -46,7 +46,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                 System.out.println("LOGIN PRESSED");
 
                 break;
-            case R.id.register:
+            case R.id.lregister:
                 Fragment fragment = new RegisterFragment();
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.replace(R.id.fragment_container, fragment).commit();
