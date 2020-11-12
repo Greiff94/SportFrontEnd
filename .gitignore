@@ -39,3 +39,5 @@ local.properties
 ehthumbs.db
 Thumbs.db
 app/src/main/res/values/map_api_key.xml
+
+.idea/
