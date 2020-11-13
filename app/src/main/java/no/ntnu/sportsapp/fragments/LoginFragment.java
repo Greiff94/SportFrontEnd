@@ -13,7 +13,14 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import java.io.IOException;
+
 import no.ntnu.sportsapp.R;
+import no.ntnu.sportsapp.rest.ApiClient;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class LoginFragment extends Fragment implements View.OnClickListener {
     private EditText emailEditText;
@@ -43,6 +50,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.lbutton:
+                userLogin();
                 System.out.println("LOGIN PRESSED");
 
                 break;
@@ -52,5 +60,41 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                 transaction.replace(R.id.fragment_container, fragment).commit();
                 break;
         }
+    }
+
+    public void userLogin() {
+        String email = emailEditText.getText().toString().trim();
+        String pwd = passwordEditText.getText().toString().trim();
+
+        if (email.isEmpty()) {
+            emailEditText.setError("Please enter a valid username");
+            emailEditText.requestFocus();
+        } else if (pwd.isEmpty()) {
+            passwordEditText.setError("Please enter your password");
+            passwordEditText.requestFocus();
+        }
+
+        Call<ResponseBody> call = ApiClient
+                .getSingleton()
+                .getApi()
+                .login(email, pwd);
+
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.isSuccessful()) {
+                    Fragment eventsFragment = new EventsFragment();
+                    FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                    getActivity().recreate();
+                    Toast.makeText(getContext(), "Login successful", Toast.LENGTH_SHORT).show();
+                    fragmentTransaction.replace(R.id.fragment_container, eventsFragment).commit();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
     }
 }

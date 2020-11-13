@@ -13,10 +13,11 @@
             android:layout_height="wrap_content"
             android:background="@android:color/white"
             android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintEnd_toStartOf="parent"
-            app:layout_constraintEnd_toTopOf="parent"
             app:popupTheme="@style/Theme.AppCompat.DayNight" />
+          <!--  app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="parent"
+            app:layout_constraintEnd_toTopOf="parent" -->
+
 
         <ImageView
             android:id="@+id/currenteventheader"

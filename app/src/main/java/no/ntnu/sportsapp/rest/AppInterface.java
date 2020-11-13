@@ -19,8 +19,8 @@ public interface AppInterface {
 
     //LOGIN AND REGISTRATION
 
-
-    @GET("auth/login")
+    @FormUrlEncoded
+    @POST("auth/login")
     public Call<ResponseBody> login(@Field("uid") String username,
                                     @Field("pwd") String password);
 
