@@ -33,7 +33,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
         editemail = view.findViewById(R.id.remail);
         editpwd = view.findViewById(R.id.rpwd);
         editpwd2= view.findViewById(R.id.rpwd2);
-        rbutton = view.findViewById(R.id.register);
+        rbutton = view.findViewById(R.id.rbutton);
         clogin = view.findViewById(R.id.rlogin);
 
         //Listeners for the buttons, declaring them for this fragment
