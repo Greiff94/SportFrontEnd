@@ -24,7 +24,7 @@ public interface AppInterface {
     //LOGIN, REGISTRATION AND CURRENTUSER\\
 
     @FormUrlEncoded
-    @GET("auth/login")
+    @POST("auth/login")
     public Call<ResponseBody> login(@Field("uid") String username,
                                     @Field("pwd") String password);
 

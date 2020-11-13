@@ -4,14 +4,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+            app:popupTheme="@style/Theme.AppCompat.DayNight" />
+          <!--  app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="parent"
+            app:layout_constraintEnd_toTopOf="parent" -->
+
+
         <ImageView
-            android:id="@+id/addeventheader"
+            android:id="@+id/currenteventheader"
             android:layout_width="match_parent"
             android:layout_height="240dp"
             android:background="@drawable/gradient_bg"
@@ -24,18 +33,18 @@
             android:id="@+id/ltitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/addeventheader"
+            android:layout_below="@+id/currenteventheader"
             android:layout_centerHorizontal="true"
-            android:text="Create new event"
+            android:text="Current event"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.507"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/addeventheader" />
+            app:layout_constraintTop_toBottomOf="@+id/currenteventheader" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/addeventheader"
+            android:layout_below="@id/currenteventheader"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="40dp"
@@ -46,60 +55,47 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="What Event?"
+                android:text="Sport"
                 android:textColor="@color/orange_color"
                 android:textSize="13sp" />
-
-            <Spinner
-                android:id="@+id/sportdropdown"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@android:drawable/btn_dropdown"
-                android:spinnerMode="dropdown" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Where will the event take place?"
-                android:textColor="@color/orange_color"
-                android:textSize="13sp" />
-
-            <Spinner
-                android:id="@+id/eventInOutDrop"
+                android:id="@+id/eventsport"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@android:drawable/btn_dropdown"
-                android:spinnerMode="dropdown" />
+                android:hint="Sport"
+                android:textSize="20sp" />
+
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="How many?"
+                android:text="Description"
                 android:textColor="@color/orange_color"
                 android:textSize="13sp" />
 
-            <EditText
-                android:id="@+id/eventnumofpeople"
+            <TextView
+                android:id="@+id/eventdesc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Number of spots" />
+                android:hint="Description"
+                android:textSize="20sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="Equipment"
+                android:text="Participants"
                 android:textColor="@color/orange_color"
                 android:textSize="13sp" />
 
-            <EditText
-                android:id="@+id/eventEquipment"
+            <TextView
+                android:id="@+id/eventparticipants"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Equipment" />
-
-
+                android:hint="x of y spots taken"
+                android:textSize="20sp" />
 
 
             <LinearLayout
@@ -153,9 +149,35 @@
 
             </LinearLayout>
 
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Location"
+                android:textColor="@color/orange_color"
+                android:textSize="13sp" />
+
+
+            <TextView
+                android:id="@+id/eventEquipment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Location"
+                android:textSize="20sp" />
+
+            <fragment
+                android:id="@+id/googleMap"
+                android:name="com.google.android.gms.maps.SupportMapFragment"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginTop="20dp" />
+
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
                 android:orientation="horizontal">
 
                 <Button
@@ -163,49 +185,23 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Set Date" />
+                    android:text="Attending" />
 
                 <Button
                     android:id="@+id/eventTimebtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Set Time" />
-
+                    android:layout_weight="0.5"
+                    android:text="Not attending" />
             </LinearLayout>
 
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="Location"
-                android:textColor="@color/orange_color"
-                android:textSize="13sp" />
-
-            <fragment
-                android:id="@+id/autocompletefragment"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"/>
-
-            <fragment
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:id="@+id/googleMap"
-                android:name="com.google.android.gms.maps.SupportMapFragment"
-                android:layout_marginTop="20dp" />
-
-
             <Button
-                android:id="@+id/createEventbtn"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20sp"
-                android:background="@color/orange_color"
-                android:text="Create Event!" />
-
+                android:layout_height="match_parent"
+                android:text="Generate teams"
+                android:layout_marginTop="5dp"/>
         </LinearLayout>
+
 
     </RelativeLayout>
 
