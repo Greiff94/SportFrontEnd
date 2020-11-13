@@ -54,7 +54,6 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
                 android:text="Sport"
                 android:textColor="@color/orange_color"
                 android:textSize="13sp" />
@@ -64,7 +63,23 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Sport"
-                android:textSize="20sp"/>
+                android:textSize="20sp" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Description"
+                android:textColor="@color/orange_color"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/eventdesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Description"
+                android:textSize="20sp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -78,12 +93,90 @@
                 android:id="@+id/eventparticipants"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="0 of 20 spots taken"
-                android:textSize="25sp"/>
+                android:hint="x of y spots taken"
+                android:textSize="20sp" />
+
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1"
+                    android:text="Date"
+                    android:textColor="@color/orange_color"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1"
+                    android:text="Time"
+                    android:textColor="@color/orange_color"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+
+                <TextView
+                    android:id="@+id/eventdate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="1"
+                    android:hint="Date"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/eventtime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="1"
+                    android:hint="Time"
+                    android:textSize="20sp" />
+
+            </LinearLayout>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Location"
+                android:textColor="@color/orange_color"
+                android:textSize="13sp" />
+
+
+            <TextView
+                android:id="@+id/eventEquipment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Location"
+                android:textSize="20sp" />
+
+            <fragment
+                android:id="@+id/googleMap"
+                android:name="com.google.android.gms.maps.SupportMapFragment"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginTop="20dp" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
                 android:orientation="horizontal">
 
                 <Button
@@ -98,32 +191,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
-                    android:text="Not attending"/>
+                    android:text="Not attending" />
             </LinearLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="Location"
-                android:textColor="@color/orange_color"
-                android:textSize="13sp" />
-
-
-            <TextView
-                android:id="@+id/eventEquipment"
+            <Button
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Equipment"
-                android:textSize="20sp"/>
-
-
-            <fragment
-                android:id="@+id/googleMap"
-                android:name="com.google.android.gms.maps.SupportMapFragment"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_marginTop="20dp" />
+                android:layout_height="match_parent"
+                android:text="Generate teams"
+                android:layout_marginTop="5dp"/>
         </LinearLayout>
 
 

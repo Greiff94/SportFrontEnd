@@ -46,7 +46,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="What sport?"
+                android:text="What Event?"
                 android:textColor="@color/orange_color"
                 android:textSize="13sp" />
 
@@ -60,7 +60,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Will it be inside or outside?"
+                android:text="Where will the event take place?"
                 android:textColor="@color/orange_color"
                 android:textSize="13sp" />
 
@@ -70,6 +70,37 @@
                 android:layout_height="wrap_content"
                 android:background="@android:drawable/btn_dropdown"
                 android:spinnerMode="dropdown" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="How many?"
+                android:textColor="@color/orange_color"
+                android:textSize="13sp" />
+
+            <EditText
+                android:id="@+id/eventnumofpeople"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Number of spots" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Equipment"
+                android:textColor="@color/orange_color"
+                android:textSize="13sp" />
+
+            <EditText
+                android:id="@+id/eventEquipment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Equipment" />
+
+
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -143,33 +174,6 @@
 
             </LinearLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="How many?"
-                android:textColor="@color/orange_color"
-                android:textSize="13sp" />
-
-            <EditText
-                android:id="@+id/eventnumofpeople"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Number of spots" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="Equipment"
-                android:textColor="@color/orange_color"
-                android:textSize="13sp" />
-
-            <EditText
-                android:id="@+id/eventEquipment"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Equipment" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -179,7 +183,7 @@
                 android:textColor="@color/orange_color"
                 android:textSize="13sp" />
 
-           <fragment
+            <fragment
                 android:id="@+id/autocompletefragment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
