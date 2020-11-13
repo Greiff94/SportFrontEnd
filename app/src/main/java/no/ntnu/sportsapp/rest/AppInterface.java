@@ -46,11 +46,12 @@ public interface AppInterface {
 
     @FormUrlEncoded
     @POST("event/add")
-    public Call<ResponseBody> addEvent(@Field("sport") String sport,
+    public Call<ResponseBody> addEvent(@Header("Authorization") String token,
+                                       @Field("sport") String sport,
                                        @Field("description") String description,
-                                       @Field("date") Date date,
+                                       @Field("date") String date,
+                                       @Field("time") String time,
                                        @Field("location") String location,
-                                       @Field("time") Time time,
                                        @Field("maxPlayers") int maxPlayers);
 
     @GET

@@ -60,16 +60,17 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Where will the event take place?"
+                android:layout_marginTop="20dp"
+                android:text="Description"
                 android:textColor="@color/orange_color"
                 android:textSize="13sp" />
 
-            <Spinner
-                android:id="@+id/eventInOutDrop"
+            <EditText
+                android:id="@+id/addeventdesc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@android:drawable/btn_dropdown"
-                android:spinnerMode="dropdown" />
+                android:hint="Description"
+                android:inputType="textMultiLine"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -83,24 +84,8 @@
                 android:id="@+id/eventnumofpeople"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Number of spots" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="Equipment"
-                android:textColor="@color/orange_color"
-                android:textSize="13sp" />
-
-            <EditText
-                android:id="@+id/eventEquipment"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Equipment" />
-
-
-
+                android:hint="Number of spots"
+                android:inputType="number"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
