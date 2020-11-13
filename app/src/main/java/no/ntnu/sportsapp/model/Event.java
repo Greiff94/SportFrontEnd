@@ -1,6 +1,7 @@
 package no.ntnu.sportsapp.model;
 
 import java.lang.reflect.Array;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -10,16 +11,16 @@ public class Event {
     private long id;
     private String sport;
     private String description;
-    private String date;
+    private Date date;
     private String location;
-    private String time;
+    private Time time;
     private int maxPlayers;
     private User creator;
     private ArrayList<User> signedUsers = new ArrayList<>();
 //    private boolean oldEvent;
 
 
-    public Event(long id, String sport, String description, String date, String location, String time, int maxPlayers, User creator) {
+    public Event(long id, String sport, String description, Date date, String location, Time time, int maxPlayers, User creator) {
         this.id = id;
         this.sport = sport;
         this.description = description;
@@ -54,11 +55,11 @@ public class Event {
         this.description = description;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
@@ -70,11 +71,11 @@ public class Event {
         this.location = location;
     }
 
-    public String getTime() {
+    public Time getTime() {
         return time;
     }
 
-    public void setTime(String time) {
+    public void setTime(Time time) {
         this.time = time;
     }
 
