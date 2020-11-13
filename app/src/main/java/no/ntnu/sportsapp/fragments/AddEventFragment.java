@@ -21,6 +21,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -36,7 +37,6 @@ import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener;
 
 import java.io.IOException;
-import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -45,10 +45,14 @@ import java.util.Locale;
 import java.util.Objects;
 
 import no.ntnu.sportsapp.R;
+import no.ntnu.sportsapp.preference.UserPrefs;
+import no.ntnu.sportsapp.rest.ApiClient;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class AddEventFragment extends Fragment implements View.OnClickListener, OnMapReadyCallback {
-
-
 
 
     GoogleMap map;
@@ -57,7 +61,7 @@ public class AddEventFragment extends Fragment implements View.OnClickListener, 
     PlacesClient placesClient;
 
     private TextView timeView, dateView;
-    private EditText editTextSpotsAvailable,editTextDesc;
+    private EditText editTextSpotsAvailable, editTextDesc;
     private Spinner dropDownSport, dropDownInOut;
 
     private String apiKey;
@@ -155,7 +159,6 @@ public class AddEventFragment extends Fragment implements View.OnClickListener, 
         });
 
 
-
         return view;
     }
 
@@ -215,7 +218,6 @@ public class AddEventFragment extends Fragment implements View.OnClickListener, 
                 myCalendar.set(Calendar.YEAR, year);
                 String dateFormat = dayOfMonth + "/" + (monthOfYear + 1) + "/" + year;
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat, Locale.ENGLISH);
-
                 dateView.setText(simpleDateFormat.format(myCalendar.getTime()));
                 Toast.makeText(getContext(), "Date set!", Toast.LENGTH_SHORT).show();
             }
@@ -233,20 +235,61 @@ public class AddEventFragment extends Fragment implements View.OnClickListener, 
     }
 
     public void addEvent() {
-        String spotsAvailable = editTextSpotsAvailable.getText().toString().trim();
+        String sport = dropDownSport.getSelectedItem().toString().trim();
         String description = editTextDesc.getText().toString().trim();
-
         String date = dateView.getText().toString().trim();
+        String location = latLng.toString().trim();
         String time = timeView.getText().toString().trim();
+        int maxPlayers = Integer.parseInt(editTextSpotsAvailable.getText().toString());
 
-        String sportSelected = dropDownSport.getSelectedItem().toString().trim();
-        String chosenLocation = latLng.toString().trim();
+        System.out.println("==========================================================================");
+        System.out.println("DROPDOWN TEST");
+        System.out.println(sport);
+        System.out.println("----------------------------");
+        System.out.println("DATE THIS IS");
+        System.out.println(date);
+        System.out.println("----------------------------");
+        System.out.println("TIME THIS IS");
+        System.out.println(time);
+        System.out.println("==========================================================================");
 
 
+        if (date.isEmpty()) {
+            dateView.setError("Please select a date!");
+            dateView.requestFocus();
+        } else if (time.isEmpty()) {
+            timeView.setError("Please select a time for the event!");
+            timeView.requestFocus();
+        } else if (maxPlayers <= 0) {
+            Toast.makeText(getContext(), "Please enter a valid number!", Toast.LENGTH_SHORT).show();
+        }
 
+        UserPrefs userPrefs = new UserPrefs(getContext());
+        String token = "Bearer " + userPrefs.getToken();
 
+        Call<ResponseBody> call = ApiClient
+                .getSingleton()
+                .getApi()
+                .addEvent(token, sport, description, date, location, time, maxPlayers);
 
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.isSuccessful()) {
+                    Toast.makeText(getContext(), "Event added!", Toast.LENGTH_SHORT).show();
 
+                    Fragment eventsFragment = new EventsFragment();
+                    FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                    fragmentTransaction.replace(R.id.fragment_container, eventsFragment).commit();
+                } else {
+                    Toast.makeText(getContext(), "Something went wrong, please try again!", Toast.LENGTH_SHORT).show();
+                }
+            }
 
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Toast.makeText(getContext(), "ON FAILURE CALLED", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }
