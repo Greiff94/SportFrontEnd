@@ -49,8 +49,8 @@ public interface AppInterface {
     public Call<ResponseBody> addEvent(@Field("sport") String sport,
                                        @Field("description") String description,
                                        @Field("date") Date date,
-                                       @Field("location") String location,
                                        @Field("time") Time time,
+                                       @Field("location") String location,
                                        @Field("maxPlayers") int maxPlayers);
 
     @GET

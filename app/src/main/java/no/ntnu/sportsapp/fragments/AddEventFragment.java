@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -35,6 +36,7 @@ import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -46,11 +48,17 @@ import no.ntnu.sportsapp.R;
 
 public class AddEventFragment extends Fragment implements View.OnClickListener, OnMapReadyCallback {
 
+
+
+
     GoogleMap map;
     SupportMapFragment supportMapFragment;
-    TextView timeView, dateView;
     AutocompleteSupportFragment autocompleteFragment;
     PlacesClient placesClient;
+
+    private TextView timeView, dateView;
+    private EditText editTextSpotsAvailable,editTextDesc;
+    private Spinner dropDownSport, dropDownInOut;
 
     private String apiKey;
 
@@ -58,17 +66,34 @@ public class AddEventFragment extends Fragment implements View.OnClickListener, 
     private Button timeButton;
     private Button createButton;
 
+    private LatLng latLng;
+    private Double latitude;
+    private Double longitude;
+
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_addevent, container, false);
-
+        // Initialize textview
         timeView = view.findViewById(R.id.eventtime);
-        timeButton = view.findViewById(R.id.eventTimebtn);
         dateView = view.findViewById(R.id.eventdate);
+        // Initialize edittext
+        editTextSpotsAvailable = view.findViewById(R.id.eventnumofpeople);
+        editTextDesc = view.findViewById(R.id.addeventdesc);
+        // Initialize buttons
         dateButton = view.findViewById(R.id.eventDatebtn);
+        timeButton = view.findViewById(R.id.eventTimebtn);
         createButton = view.findViewById(R.id.createEventbtn);
+
+        // Get spinner(dropdown) from the xml file
+        dropDownSport = (Spinner) view.findViewById(R.id.sportdropdown);
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(view.getContext(), android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.sports_array));
+        // Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        dropDownSport.setAdapter(adapter);
 
         apiKey = getString(R.string.map_key);
 
@@ -114,9 +139,12 @@ public class AddEventFragment extends Fragment implements View.OnClickListener, 
                     Address address = addressList.get(0);
 
                     map.clear();
-                    LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
+                    latLng = new LatLng(address.getLatitude(), address.getLongitude());
                     map.addMarker(new MarkerOptions().position(latLng));
                     map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
+                    latitude = latLng.latitude;
+                    longitude = latLng.longitude;
+
                 }
             }
 
@@ -126,21 +154,7 @@ public class AddEventFragment extends Fragment implements View.OnClickListener, 
             }
         });
 
-        // Get spinner(dropdown) from the xml file
-        Spinner dropDown = (Spinner) view.findViewById(R.id.sportdropdown);
-        // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(view.getContext(), android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.sports_array));
-        // Specify the layout to use when the list of choices appears
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        dropDown.setAdapter(adapter);
-
-        // A dropdown menu to determine if the event is going to be inside or outside
-        Spinner inOutDropDown = (Spinner) view.findViewById(R.id.eventInOutDrop);
-        ArrayAdapter<String> inoutAdapter = new ArrayAdapter<String>(view.getContext(), android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.inout_array));
-        inoutAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        inOutDropDown.setAdapter(inoutAdapter);
 
         return view;
     }
@@ -149,7 +163,7 @@ public class AddEventFragment extends Fragment implements View.OnClickListener, 
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.createEventbtn:
-                createEvent();
+                addEvent();
                 break;
             case R.id.eventTimebtn:
                 setTimeButton();
@@ -158,10 +172,6 @@ public class AddEventFragment extends Fragment implements View.OnClickListener, 
                 setDateButton();
                 break;
         }
-    }
-
-    private void createEvent() {
-        Toast.makeText(getContext(), "Event Created!", Toast.LENGTH_SHORT).show();
     }
 
     private void setTimeButton() {
@@ -220,5 +230,23 @@ public class AddEventFragment extends Fragment implements View.OnClickListener, 
         map = googleMap;
         LatLng aalesund = new LatLng(62.4681226, 6.1714086);
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(aalesund, zoomLevel));
+    }
+
+    public void addEvent() {
+        String spotsAvailable = editTextSpotsAvailable.getText().toString().trim();
+        String description = editTextDesc.getText().toString().trim();
+
+        String date = dateView.getText().toString().trim();
+        String time = timeView.getText().toString().trim();
+
+        String sportSelected = dropDownSport.getSelectedItem().toString().trim();
+        String chosenLocation = latLng.toString().trim();
+
+
+
+
+
+
+
     }
 }
