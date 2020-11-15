@@ -37,6 +37,10 @@ public interface AppInterface {
     @GET("auth/currentuser")
     public Call<ResponseBody> currentUser();
 
+    @PUT("auth/changepassword")
+    public Call<ResponseBody> changePassword();
+
+
     //------------EVENT SERVICES------------\\
     @GET("event/allevents")
     public Call<List<Event>> getAllEvents();

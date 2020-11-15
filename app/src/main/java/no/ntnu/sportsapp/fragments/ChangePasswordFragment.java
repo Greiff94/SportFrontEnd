@@ -17,6 +17,9 @@ import androidx.fragment.app.FragmentTransaction;
 import java.util.zip.Inflater;
 
 import no.ntnu.sportsapp.R;
+import no.ntnu.sportsapp.rest.ApiClient;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
 
 public class ChangePasswordFragment extends Fragment implements View.OnClickListener {
 
@@ -92,6 +95,11 @@ public class ChangePasswordFragment extends Fragment implements View.OnClickList
             newPwd.setError("Unable to change to your previous password");
             newPwd.requestFocus();
         }
+
+        Call<ResponseBody> call = ApiClient
+                .getSingleton()
+                .getApi()
+                .changePassword();
 
     }
 }
