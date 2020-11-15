@@ -16,6 +16,7 @@ import androidx.fragment.app.FragmentTransaction;
 import java.io.IOException;
 
 import no.ntnu.sportsapp.R;
+import no.ntnu.sportsapp.preference.UserPrefs;
 import no.ntnu.sportsapp.rest.ApiClient;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -66,6 +67,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         String email = emailEditText.getText().toString().trim();
         String pwd = passwordEditText.getText().toString().trim();
 
+        final UserPrefs userPrefs = new UserPrefs(getContext());
         if (email.isEmpty()) {
             emailEditText.setError("Please enter a valid username");
             emailEditText.requestFocus();
@@ -85,7 +87,12 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                 if (response.isSuccessful()) {
                     Fragment eventsFragment = new EventsFragment();
                     FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-                    getActivity().recreate();
+                    try {
+                        userPrefs.setToken(response.body().string());
+                        getActivity().recreate();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                     Toast.makeText(getContext(), "Login successful", Toast.LENGTH_SHORT).show();
                     fragmentTransaction.replace(R.id.fragment_container, eventsFragment).commit();
                 }
