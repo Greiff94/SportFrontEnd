@@ -5,6 +5,7 @@ import android.app.TimePickerDialog;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -62,7 +63,7 @@ public class AddEventFragment extends Fragment implements View.OnClickListener, 
 
     private TextView timeView, dateView;
     private EditText editTextSpotsAvailable, editTextDesc;
-    private Spinner dropDownSport, dropDownInOut;
+    private Spinner dropDownSport;
 
     private String apiKey;
 
@@ -71,8 +72,6 @@ public class AddEventFragment extends Fragment implements View.OnClickListener, 
     private Button createButton;
 
     private LatLng latLng;
-    private Double latitude;
-    private Double longitude;
 
 
     @Nullable
@@ -141,13 +140,10 @@ public class AddEventFragment extends Fragment implements View.OnClickListener, 
                         e.printStackTrace();
                     }
                     Address address = addressList.get(0);
-
                     map.clear();
                     latLng = new LatLng(address.getLatitude(), address.getLongitude());
                     map.addMarker(new MarkerOptions().position(latLng));
                     map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
-                    latitude = latLng.latitude;
-                    longitude = latLng.longitude;
 
                 }
             }
@@ -166,7 +162,12 @@ public class AddEventFragment extends Fragment implements View.OnClickListener, 
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.createEventbtn:
-                addEvent();
+                int maxnumPlayers = Integer.parseInt(editTextSpotsAvailable.getText().toString());
+               /* if (editTextDesc.getText().toString().length() == 0 || maxnumPlayers <= 0) {
+                    Toast.makeText(getContext(), "Please fill in the empty fields", Toast.LENGTH_SHORT).show();
+                } else { */
+                    addEvent();
+                //}
                 break;
             case R.id.eventTimebtn:
                 setTimeButton();
@@ -240,7 +241,8 @@ public class AddEventFragment extends Fragment implements View.OnClickListener, 
         String date = dateView.getText().toString().trim();
         String location = latLng.toString().trim();
         String time = timeView.getText().toString().trim();
-        int maxPlayers = Integer.parseInt(editTextSpotsAvailable.getText().toString());
+        final int maxPlayers = Integer.parseInt(editTextSpotsAvailable.getText().toString());
+
 
         System.out.println("==========================================================================");
         System.out.println("DROPDOWN TEST");
@@ -254,14 +256,20 @@ public class AddEventFragment extends Fragment implements View.OnClickListener, 
         System.out.println("==========================================================================");
 
 
+        if (description.isEmpty()) {
+            editTextDesc.setError("Description is required");
+            editTextDesc.requestFocus();
+            return;
+        }
         if (date.isEmpty()) {
             dateView.setError("Please select a date!");
             dateView.requestFocus();
-        } else if (time.isEmpty()) {
+            return;
+        }
+        if (time.isEmpty()) {
             timeView.setError("Please select a time for the event!");
             timeView.requestFocus();
-        } else if (maxPlayers <= 0) {
-            Toast.makeText(getContext(), "Please enter a valid number!", Toast.LENGTH_SHORT).show();
+            return;
         }
 
         UserPrefs userPrefs = new UserPrefs(getContext());
