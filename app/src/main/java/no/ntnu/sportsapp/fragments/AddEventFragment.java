@@ -162,7 +162,6 @@ public class AddEventFragment extends Fragment implements View.OnClickListener, 
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.createEventbtn:
-                int maxnumPlayers = Integer.parseInt(editTextSpotsAvailable.getText().toString());
                /* if (editTextDesc.getText().toString().length() == 0 || maxnumPlayers <= 0) {
                     Toast.makeText(getContext(), "Please fill in the empty fields", Toast.LENGTH_SHORT).show();
                 } else { */
@@ -261,6 +260,13 @@ public class AddEventFragment extends Fragment implements View.OnClickListener, 
             editTextDesc.requestFocus();
             return;
         }
+
+        // TODO: fix NumberFormatException: For input string: ""
+        /*if (maxPlayers <= 0) {
+            editTextSpotsAvailable.setError("You must have at least 1 spot");
+            editTextSpotsAvailable.requestFocus();
+            return;
+        } */
         if (date.isEmpty()) {
             dateView.setError("Please select a date!");
             dateView.requestFocus();
