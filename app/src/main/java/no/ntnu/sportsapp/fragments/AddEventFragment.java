@@ -238,9 +238,23 @@ public class AddEventFragment extends Fragment implements View.OnClickListener, 
         String sport = dropDownSport.getSelectedItem().toString().trim();
         String description = editTextDesc.getText().toString().trim();
         String date = dateView.getText().toString().trim();
-        String location = latLng.toString().trim();
+        String location = "";
         String time = timeView.getText().toString().trim();
-        final int maxPlayers = Integer.parseInt(editTextSpotsAvailable.getText().toString());
+        int maxPlayers = 0;
+
+        try {
+            maxPlayers  = Integer.parseInt(editTextSpotsAvailable.getText().toString());
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+            editTextSpotsAvailable.requestFocus();
+            editTextSpotsAvailable.setError("Need at least 1 participant");
+        }
+
+        try {
+            location = latLng.toString().trim();
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        }
 
 
         System.out.println("==========================================================================");
@@ -261,17 +275,12 @@ public class AddEventFragment extends Fragment implements View.OnClickListener, 
             return;
         }
 
-        // TODO: fix NumberFormatException: For input string: ""
-        /*if (maxPlayers <= 0) {
-            editTextSpotsAvailable.setError("You must have at least 1 spot");
-            editTextSpotsAvailable.requestFocus();
-            return;
-        } */
         if (date.isEmpty()) {
             dateView.setError("Please select a date!");
             dateView.requestFocus();
             return;
         }
+
         if (time.isEmpty()) {
             timeView.setError("Please select a time for the event!");
             timeView.requestFocus();
