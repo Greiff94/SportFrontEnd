@@ -9,6 +9,7 @@
         android:layout_height="wrap_content">
 
         <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbarEvent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@android:color/white"
@@ -91,7 +92,7 @@
                 android:textSize="13sp" />
 
             <TextView
-                android:id="@+id/eventparticipants"
+                android:id="@+id/eventMaxPlayers"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="x of y spots taken"
@@ -160,7 +161,7 @@
 
 
             <TextView
-                android:id="@+id/eventEquipment"
+                android:id="@+id/eventlocation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Location"
