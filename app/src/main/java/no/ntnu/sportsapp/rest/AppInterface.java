@@ -50,8 +50,8 @@ public interface AppInterface {
                                        @Field("sport") String sport,
                                        @Field("description") String description,
                                        @Field("date") String date,
-                                       @Field("time") String time,
                                        @Field("location") String location,
+                                       @Field("time") String time,
                                        @Field("maxPlayers") int maxPlayers);
 
     @GET
