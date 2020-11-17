@@ -15,12 +15,13 @@ public class Event {
     private String location;
     private Time time;
     private int maxPlayers;
+    private String latLng;
     private User creator;
     private ArrayList<User> signedUsers = new ArrayList<>();
 //    private boolean oldEvent;
 
 
-    public Event(long id, String sport, String description, Date date, String location, Time time, int maxPlayers, User creator) {
+    public Event(long id, String sport, String description, String date, String location, String time, int maxPlayers, String latLng, User creator) {
         this.id = id;
         this.sport = sport;
         this.description = description;
@@ -28,6 +29,7 @@ public class Event {
         this.location = location;
         this.time = time;
         this.maxPlayers = maxPlayers;
+        this.latLng = latLng;
         this.creator = creator;
     }
 
@@ -101,6 +103,14 @@ public class Event {
 
     public void setSignedUsers(ArrayList<User> signedUsers) {
         this.signedUsers = signedUsers;
+    }
+
+    public String getLatLng() {
+        return latLng;
+    }
+
+    public void setLatLng(String latLng) {
+        this.latLng = latLng;
     }
 }
 

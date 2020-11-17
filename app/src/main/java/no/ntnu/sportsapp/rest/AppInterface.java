@@ -1,5 +1,7 @@
 package no.ntnu.sportsapp.rest;
 
+import com.google.android.gms.maps.model.LatLng;
+
 import java.sql.Time;
 import java.util.Date;
 import java.util.List;
@@ -50,9 +52,10 @@ public interface AppInterface {
                                        @Field("sport") String sport,
                                        @Field("description") String description,
                                        @Field("date") String date,
-                                       @Field("time") String time,
                                        @Field("location") String location,
-                                       @Field("maxPlayers") int maxPlayers);
+                                       @Field("time") String time,
+                                       @Field("maxPlayers") int maxPlayers,
+                                       @Field("latLng") String latLng);
 
     @GET
     public Call<List<User>> getAttenders(@Query("eventid") Long eventid);

@@ -2,6 +2,7 @@
 package no.ntnu.sportsapp.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ import com.bumptech.glide.Glide;
 import java.util.ArrayList;
 
 import no.ntnu.sportsapp.R;
+import no.ntnu.sportsapp.activity.EventActivity;
 import no.ntnu.sportsapp.model.Event;
 
 public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.ViewHolder> {
@@ -42,10 +44,22 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.View
         holder.txtEvent.setText(events.get(position).getSport());
         holder.txtDate.setText(events.get(position).getDate());
         holder.txtTime.setText(events.get(position).getTime());
+
         holder.parent.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                Toast.makeText(context, events.get(position).getSport() + "selected", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, events.get(position).getSport() + " selected", Toast.LENGTH_SHORT).show();
+                Event event = events.get(position);
+
+                Intent intent = new Intent(context, EventActivity.class);
+                intent.putExtra("sport", event.getSport());
+                intent.putExtra("description", event.getDescription());
+                intent.putExtra("date", event.getDate());
+                intent.putExtra("time", event.getTime());
+                intent.putExtra("location", event.getLocation());
+                intent.putExtra("maxPlayers", Integer.toString(event.getMaxPlayers()));
+                intent.putExtra("latLng", event.getLatLng());
+                view.getContext().startActivity(intent);
             }
         });
         Glide.with(context)
