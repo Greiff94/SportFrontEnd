@@ -87,7 +87,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="Participants"
+                android:text="Max Participants"
                 android:textColor="@color/orange_color"
                 android:textSize="13sp" />
 
@@ -168,7 +168,7 @@
                 android:textSize="20sp" />
 
             <fragment
-                android:id="@+id/googleMap"
+                android:id="@+id/googleMapEvent"
                 android:name="com.google.android.gms.maps.SupportMapFragment"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
@@ -182,25 +182,29 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/eventDatebtn"
+                    android:id="@+id/eventAttendbtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Attending" />
+                    android:text="Attending"
+                    android:background="#057d08"/>
 
                 <Button
-                    android:id="@+id/eventTimebtn"
+                    android:id="@+id/eventNotAttendbtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
-                    android:text="Not attending" />
+                    android:layout_weight="0.7"
+                    android:text="Not attending"
+                    android:background="#6b0e0e"/>
             </LinearLayout>
 
             <Button
+                android:id="@+id/generateTeambtn"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="Generate teams"
-                android:layout_marginTop="5dp"/>
+                android:layout_marginTop="5dp"
+                android:background="@drawable/gradient_bg"/>
         </LinearLayout>
 
 

@@ -52,14 +52,14 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.View
                 Event event = events.get(position);
 
                 Intent intent = new Intent(context, EventActivity.class);
-                view.getContext().startActivity(intent);
-               /* intent.putExtra("sport", event.getSport());
+                intent.putExtra("sport", event.getSport());
                 intent.putExtra("description", event.getDescription());
                 intent.putExtra("date", event.getDate());
                 intent.putExtra("time", event.getTime());
                 intent.putExtra("location", event.getLocation());
-                intent.putExtra("maxPlayers", event.getMaxPlayers());
-                view.getContext().startActivity(intent); */
+                intent.putExtra("maxPlayers", Integer.toString(event.getMaxPlayers()));
+                intent.putExtra("latLng", event.getLatLng());
+                view.getContext().startActivity(intent);
             }
         });
         Glide.with(context)

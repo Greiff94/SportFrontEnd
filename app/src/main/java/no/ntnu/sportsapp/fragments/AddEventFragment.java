@@ -71,6 +71,7 @@ public class AddEventFragment extends Fragment implements View.OnClickListener, 
     private Button timeButton;
     private Button createButton;
 
+    private String locationName;
     private LatLng latLng;
 
 
@@ -124,6 +125,7 @@ public class AddEventFragment extends Fragment implements View.OnClickListener, 
         dateButton.setOnClickListener(this);
         createButton.setOnClickListener(this);
 
+        autocompleteFragment.setCountry("NO");
         // Listener for autcomplete fragment.
         // Sets location and adds marker on the google map.
         autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
@@ -144,7 +146,7 @@ public class AddEventFragment extends Fragment implements View.OnClickListener, 
                     latLng = new LatLng(address.getLatitude(), address.getLongitude());
                     map.addMarker(new MarkerOptions().position(latLng));
                     map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
-
+                    locationName = addressList.get(0).getLocality();
                 }
             }
 
@@ -162,11 +164,7 @@ public class AddEventFragment extends Fragment implements View.OnClickListener, 
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.createEventbtn:
-               /* if (editTextDesc.getText().toString().length() == 0 || maxnumPlayers <= 0) {
-                    Toast.makeText(getContext(), "Please fill in the empty fields", Toast.LENGTH_SHORT).show();
-                } else { */
                     addEvent();
-                //}
                 break;
             case R.id.eventTimebtn:
                 setTimeButton();
@@ -240,6 +238,7 @@ public class AddEventFragment extends Fragment implements View.OnClickListener, 
         String date = dateView.getText().toString().trim();
         String location = "";
         String time = timeView.getText().toString().trim();
+        String latlngLocation = latLng.toString();
         int maxPlayers = 0;
 
         try {
@@ -251,7 +250,7 @@ public class AddEventFragment extends Fragment implements View.OnClickListener, 
         }
 
         try {
-            location = latLng.toString().trim();
+            location = locationName.trim();
         } catch (NullPointerException e) {
             e.printStackTrace();
         }
@@ -266,6 +265,8 @@ public class AddEventFragment extends Fragment implements View.OnClickListener, 
         System.out.println("----------------------------");
         System.out.println("TIME THIS IS");
         System.out.println(time);
+        System.out.println("LATLNG LOCATION");
+        System.out.println(latlngLocation);
         System.out.println("==========================================================================");
 
 
@@ -293,7 +294,7 @@ public class AddEventFragment extends Fragment implements View.OnClickListener, 
         Call<ResponseBody> call = ApiClient
                 .getSingleton()
                 .getApi()
-                .addEvent(token, sport, description, date, location, time, maxPlayers);
+                .addEvent(token, sport, description, date, location, time, maxPlayers, latlngLocation);
 
         call.enqueue(new Callback<ResponseBody>() {
             @Override
