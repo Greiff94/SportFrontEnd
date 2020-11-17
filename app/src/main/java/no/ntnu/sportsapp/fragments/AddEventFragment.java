@@ -5,6 +5,7 @@ import android.app.TimePickerDialog;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -62,7 +63,7 @@ public class AddEventFragment extends Fragment implements View.OnClickListener, 
 
     private TextView timeView, dateView;
     private EditText editTextSpotsAvailable, editTextDesc;
-    private Spinner dropDownSport, dropDownInOut;
+    private Spinner dropDownSport;
 
     private String apiKey;
 
@@ -70,9 +71,8 @@ public class AddEventFragment extends Fragment implements View.OnClickListener, 
     private Button timeButton;
     private Button createButton;
 
+    private String locationName;
     private LatLng latLng;
-    private Double latitude;
-    private Double longitude;
 
 
     @Nullable
@@ -125,6 +125,7 @@ public class AddEventFragment extends Fragment implements View.OnClickListener, 
         dateButton.setOnClickListener(this);
         createButton.setOnClickListener(this);
 
+        autocompleteFragment.setCountry("NO");
         // Listener for autcomplete fragment.
         // Sets location and adds marker on the google map.
         autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
@@ -141,14 +142,11 @@ public class AddEventFragment extends Fragment implements View.OnClickListener, 
                         e.printStackTrace();
                     }
                     Address address = addressList.get(0);
-
                     map.clear();
                     latLng = new LatLng(address.getLatitude(), address.getLongitude());
                     map.addMarker(new MarkerOptions().position(latLng));
                     map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
-                    latitude = latLng.latitude;
-                    longitude = latLng.longitude;
-
+                    locationName = addressList.get(0).getLocality();
                 }
             }
 
@@ -166,7 +164,7 @@ public class AddEventFragment extends Fragment implements View.OnClickListener, 
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.createEventbtn:
-                addEvent();
+                    addEvent();
                 break;
             case R.id.eventTimebtn:
                 setTimeButton();
@@ -238,9 +236,25 @@ public class AddEventFragment extends Fragment implements View.OnClickListener, 
         String sport = dropDownSport.getSelectedItem().toString().trim();
         String description = editTextDesc.getText().toString().trim();
         String date = dateView.getText().toString().trim();
-        String location = latLng.toString().trim();
+        String location = "";
         String time = timeView.getText().toString().trim();
-        int maxPlayers = Integer.parseInt(editTextSpotsAvailable.getText().toString());
+        String latlngLocation = latLng.toString();
+        int maxPlayers = 0;
+
+        try {
+            maxPlayers  = Integer.parseInt(editTextSpotsAvailable.getText().toString());
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+            editTextSpotsAvailable.requestFocus();
+            editTextSpotsAvailable.setError("Need at least 1 participant");
+        }
+
+        try {
+            location = locationName.trim();
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        }
+
 
         System.out.println("==========================================================================");
         System.out.println("DROPDOWN TEST");
@@ -251,17 +265,27 @@ public class AddEventFragment extends Fragment implements View.OnClickListener, 
         System.out.println("----------------------------");
         System.out.println("TIME THIS IS");
         System.out.println(time);
+        System.out.println("LATLNG LOCATION");
+        System.out.println(latlngLocation);
         System.out.println("==========================================================================");
 
+
+        if (description.isEmpty()) {
+            editTextDesc.setError("Description is required");
+            editTextDesc.requestFocus();
+            return;
+        }
 
         if (date.isEmpty()) {
             dateView.setError("Please select a date!");
             dateView.requestFocus();
-        } else if (time.isEmpty()) {
+            return;
+        }
+
+        if (time.isEmpty()) {
             timeView.setError("Please select a time for the event!");
             timeView.requestFocus();
-        } else if (maxPlayers <= 0) {
-            Toast.makeText(getContext(), "Please enter a valid number!", Toast.LENGTH_SHORT).show();
+            return;
         }
 
         UserPrefs userPrefs = new UserPrefs(getContext());
@@ -270,7 +294,7 @@ public class AddEventFragment extends Fragment implements View.OnClickListener, 
         Call<ResponseBody> call = ApiClient
                 .getSingleton()
                 .getApi()
-                .addEvent(token, sport, description, date, location, time, maxPlayers);
+                .addEvent(token, sport, description, date, location, time, maxPlayers, latlngLocation);
 
         call.enqueue(new Callback<ResponseBody>() {
             @Override
