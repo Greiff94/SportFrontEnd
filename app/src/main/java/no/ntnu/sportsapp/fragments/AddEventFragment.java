@@ -25,6 +25,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.gms.common.api.Status;
+import com.google.android.gms.location.places.AutocompleteFilter;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -80,8 +81,8 @@ public class AddEventFragment extends Fragment implements View.OnClickListener, 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_addevent, container, false);
         // Initialize textview
-        timeView = view.findViewById(R.id.eventtime);
-        dateView = view.findViewById(R.id.eventdate);
+        timeView = view.findViewById(R.id.addeventtime);
+        dateView = view.findViewById(R.id.addeventdate);
         // Initialize edittext
         editTextSpotsAvailable = view.findViewById(R.id.eventnumofpeople);
         editTextDesc = view.findViewById(R.id.addeventdesc);
@@ -253,6 +254,7 @@ public class AddEventFragment extends Fragment implements View.OnClickListener, 
             location = locationName.trim();
         } catch (NullPointerException e) {
             e.printStackTrace();
+            return;
         }
 
 
