@@ -30,16 +30,19 @@ public class SignedUpFragment extends Fragment {
     private RecyclerView usersRecyclerView;
     private ArrayList<User> users = new ArrayList<>();
     private UserListAdapter adapter;
+    private String eventid;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_users, container, false);
 
-        getActivity().setTitle("Home page");
+        getActivity().setTitle("Signed up users");
 
         initViews(view);
         setUserList();
+
+        eventid = getArguments().getString("id");
 
         adapter = new UserListAdapter(getContext());
         adapter.setUsers(users);
@@ -55,11 +58,14 @@ public class SignedUpFragment extends Fragment {
         return view;
     }
 
+    //TODO Test if we don't need to do a call here, since we store the list of users in event?
     public void setUserList() {
+        long longid = Long.parseLong(eventid);
+        System.out.println(longid);
         Call<List<User>> call = ApiClient
                 .getSingleton()
                 .getApi()
-                .getAttenders(long eventid);
+                .getAttenders(longid);
         call.enqueue(new Callback<List<User>>() {
             @Override
             public void onResponse(Call<List<User>> call, Response<List<User>> response) {

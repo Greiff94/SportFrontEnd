@@ -16,6 +16,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import no.ntnu.sportsapp.R;
+import no.ntnu.sportsapp.fragments.SignedUpFragment;
 
 public class EventActivity extends AppCompatActivity implements OnMapReadyCallback {
 
@@ -74,6 +75,15 @@ public class EventActivity extends AppCompatActivity implements OnMapReadyCallba
         String[] latLongSplit = latLng.split(",");
         latitude = Double.parseDouble(latLongSplit[0]);
         longitude = Double.parseDouble(latLongSplit[1]);
+
+        //Sends eventid to  SignedupUserFragment
+        //So that we can fetch signed up users
+        String eventid = this.getIntent().getStringExtra("id");
+        Bundle bundle = new Bundle();
+        bundle.putString(eventid, "From Activity");
+// set Fragmentclass Arguments
+        SignedUpFragment fragobj = new SignedUpFragment();
+        fragobj.setArguments(bundle);
 
     }
 
