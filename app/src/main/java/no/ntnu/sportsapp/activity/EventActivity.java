@@ -10,6 +10,8 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -90,6 +92,7 @@ public class EventActivity extends AppCompatActivity implements View.OnClickList
 
         attendBtn.setOnClickListener(this);
         notAttendingBtn.setOnClickListener(this);
+        txtViewMaxPlayers.setOnClickListener(this);
 
         //Sends eventid to  SignedupUserFragment
         //So that we can fetch signed up users
@@ -118,8 +121,17 @@ public class EventActivity extends AppCompatActivity implements View.OnClickList
             case R.id.generateTeambtn:
                 break;
 
+            case R.id.eventMaxPlayers:
+                viewUsers();
+                break;
 
         }
+    }
+
+    private void viewUsers() {
+       Fragment frag = new SignedUpFragment();
+       FragmentTransaction transaction = getFragmentManager().beginTransaction();
+       transaction.replace(R.id.fragment_container, frag).commit();
     }
 
     @Override
