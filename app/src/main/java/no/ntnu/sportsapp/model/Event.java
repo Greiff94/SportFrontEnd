@@ -8,35 +8,38 @@ import java.util.Date;
 import no.ntnu.sportsapp.model.User;
 
 public class Event {
-    private long id;
+    private long eventid;
     private String sport;
     private String description;
     private Date date;
     private String location;
     private Time time;
     private int maxPlayers;
+    private String latLng;
     private User creator;
     private ArrayList<User> signedUsers = new ArrayList<>();
 //    private boolean oldEvent;
 
 
-    public Event(long id, String sport, String description, Date date, String location, Time time, int maxPlayers, User creator) {
-        this.id = id;
+
+    public Event(long eventid, String sport, String description, String date, String location, String time, int maxPlayers, String latLng, User creator) {
+        this.eventid = eventid;
         this.sport = sport;
         this.description = description;
         this.date = date;
         this.location = location;
         this.time = time;
         this.maxPlayers = maxPlayers;
+        this.latLng = latLng;
         this.creator = creator;
     }
 
     public long getId() {
-        return id;
+        return eventid;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setId(long eventid) {
+        this.eventid = eventid;
     }
 
     public String getSport() {
@@ -101,6 +104,14 @@ public class Event {
 
     public void setSignedUsers(ArrayList<User> signedUsers) {
         this.signedUsers = signedUsers;
+    }
+
+    public String getLatLng() {
+        return latLng;
+    }
+
+    public void setLatLng(String latLng) {
+        this.latLng = latLng;
     }
 }
 
