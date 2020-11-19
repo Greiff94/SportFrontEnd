@@ -184,5 +184,10 @@ public class EventActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
+    /*
+     * TODO: Generate teams, List users fragment.
+     *  buttons should change color or something when active. Buttons needs polishing.
+     */
+
 
 }
