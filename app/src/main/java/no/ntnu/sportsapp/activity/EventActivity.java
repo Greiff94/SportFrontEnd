@@ -90,15 +90,17 @@ public class EventActivity extends AppCompatActivity implements View.OnClickList
 
         attendBtn.setOnClickListener(this);
         notAttendingBtn.setOnClickListener(this);
+
         //Sends eventid to  SignedupUserFragment
         //So that we can fetch signed up users
-        String eventid = this.getIntent().getStringExtra("id");
+        if (bundleExtras != null) {
+            long eventid = bundleExtras.getLong("eventid");
         Bundle bundle = new Bundle();
-        bundle.putString(eventid, "From Activity");
+        bundle.putLong( "From Activity", eventid);
 // set Fragmentclass Arguments
         SignedUpFragment fragobj = new SignedUpFragment();
         fragobj.setArguments(bundle);
-
+        }
 
     }
 
