@@ -8,7 +8,7 @@ import java.util.Date;
 import no.ntnu.sportsapp.model.User;
 
 public class Event {
-    private long id;
+    private long eventid;
     private String sport;
     private String description;
     private String date;
@@ -21,8 +21,9 @@ public class Event {
 //    private boolean oldEvent;
 
 
-    public Event(long id, String sport, String description, String date, String location, String time, int maxPlayers, String latLng, User creator) {
-        this.id = id;
+
+    public Event(long eventid, String sport, String description, String date, String location, String time, int maxPlayers, String latLng, User creator) {
+        this.eventid = eventid;
         this.sport = sport;
         this.description = description;
         this.date = date;
@@ -34,11 +35,11 @@ public class Event {
     }
 
     public long getId() {
-        return id;
+        return eventid;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setId(long eventid) {
+        this.eventid = eventid;
     }
 
     public String getSport() {
