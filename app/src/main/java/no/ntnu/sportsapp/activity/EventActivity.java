@@ -20,7 +20,12 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
+
 import no.ntnu.sportsapp.R;
+import no.ntnu.sportsapp.adapter.UserListAdapter;
 import no.ntnu.sportsapp.model.User;
 import no.ntnu.sportsapp.preference.UserPrefs;
 import no.ntnu.sportsapp.rest.ApiClient;
@@ -42,6 +47,8 @@ public class EventActivity extends AppCompatActivity implements View.OnClickList
     private double longitude;
 
     private Bundle bundleExtras;
+    private ArrayList<User> signups = new ArrayList<>();
+    private UserListAdapter adapter;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -96,14 +103,7 @@ public class EventActivity extends AppCompatActivity implements View.OnClickList
 
         //Sends eventid to  SignedupUserFragment
         //So that we can fetch signed up users
-        if (bundleExtras != null) {
-            long eventid = bundleExtras.getLong("eventid");
-        Bundle bundle = new Bundle();
-        bundle.putLong( "From Activity", eventid);
-// set Fragmentclass Arguments
-        SignedUpFragment fragobj = new SignedUpFragment();
-        fragobj.setArguments(bundle);
-        }
+
 
     }
 
@@ -129,9 +129,16 @@ public class EventActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void viewUsers() {
-       Fragment frag = new SignedUpFragment();
-       FragmentTransaction transaction = getFragmentManager().beginTransaction();
-       transaction.replace(R.id.fragment_container, frag).commit();
+        if (bundleExtras != null) {
+            long eventid = bundleExtras.getLong("eventid");
+            Bundle bundle = new Bundle();
+            bundle.putLong( "From Activity", eventid);
+// set Fragmentclass Arguments
+            SignedUpFragment fragobj = new SignedUpFragment();
+            fragobj.setArguments(bundle);
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.fragment_container, fragobj).commit();
+        }
     }
 
     @Override

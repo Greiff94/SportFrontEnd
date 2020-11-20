@@ -53,7 +53,8 @@ public interface AppInterface {
                                        @Field("latLng") String latLng);
 
     @GET
-    public Call<List<User>> getAttenders(@Query("eventid") Long eventid);
+    public Call<List<User>> getAttenders(@Header("Authorization") String token,
+                                         @Query("eventid") Long eventid);
 
 
     //------------EVENT-INTERACTING------------\\

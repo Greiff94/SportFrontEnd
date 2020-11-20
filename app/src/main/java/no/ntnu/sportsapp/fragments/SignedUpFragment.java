@@ -19,6 +19,7 @@ import java.util.List;
 import no.ntnu.sportsapp.R;
 import no.ntnu.sportsapp.adapter.UserListAdapter;
 import no.ntnu.sportsapp.model.User;
+import no.ntnu.sportsapp.preference.UserPrefs;
 import no.ntnu.sportsapp.rest.ApiClient;
 import no.ntnu.sportsapp.rest.AppInterface;
 import retrofit2.Call;
@@ -30,7 +31,7 @@ public class SignedUpFragment extends Fragment {
     private RecyclerView usersRecyclerView;
     private ArrayList<User> users = new ArrayList<>();
     private UserListAdapter adapter;
-    private String eventid;
+    private Long eventid;
 
     @Nullable
     @Override
@@ -42,7 +43,7 @@ public class SignedUpFragment extends Fragment {
         initViews(view);
         setUserList();
 
-        eventid = getArguments().getString("id");
+        eventid = getArguments().getLong("eventid");
 
         adapter = new UserListAdapter(getContext());
         adapter.setUsers(users);
@@ -60,12 +61,13 @@ public class SignedUpFragment extends Fragment {
 
     //TODO Test if we don't need to do a call here, since we store the list of users in event?
     public void setUserList() {
-        long longid = Long.parseLong(eventid);
-        System.out.println(longid);
+        final UserPrefs userPrefs = new UserPrefs(this.getContext());
+        String token = "Bearer " + userPrefs.getToken();
+        System.out.println(eventid);
         Call<List<User>> call = ApiClient
                 .getSingleton()
                 .getApi()
-                .getAttenders(longid);
+                .getAttenders(token, eventid);
         call.enqueue(new Callback<List<User>>() {
             @Override
             public void onResponse(Call<List<User>> call, Response<List<User>> response) {
