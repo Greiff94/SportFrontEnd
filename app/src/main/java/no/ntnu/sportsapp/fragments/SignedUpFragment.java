@@ -31,7 +31,7 @@ public class SignedUpFragment extends Fragment {
     private RecyclerView usersRecyclerView;
     private ArrayList<User> users = new ArrayList<>();
     private UserListAdapter adapter;
-    private Long eventid;
+    private long eventid = 3;
 
     @Nullable
     @Override
@@ -43,7 +43,8 @@ public class SignedUpFragment extends Fragment {
         initViews(view);
         setUserList();
 
-        eventid = getArguments().getLong("eventid");
+        //eventid = getArguments().getLong("eventid");
+
 
         adapter = new UserListAdapter(getContext());
         adapter.setUsers(users);

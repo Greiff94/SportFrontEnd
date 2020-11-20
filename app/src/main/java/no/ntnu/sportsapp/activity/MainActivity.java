@@ -20,6 +20,7 @@ import no.ntnu.sportsapp.fragments.EventsFragment;
 import no.ntnu.sportsapp.fragments.LoginFragment;
 import no.ntnu.sportsapp.fragments.MyProfileFragment;
 import no.ntnu.sportsapp.fragments.RegisterFragment;
+import no.ntnu.sportsapp.fragments.SignedUpFragment;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout drawerLayout;
@@ -85,6 +86,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new MyProfileFragment()).commit();
                 break;
+
+            case R.id.nav_my_events:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new SignedUpFragment()).commit();
         }
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;

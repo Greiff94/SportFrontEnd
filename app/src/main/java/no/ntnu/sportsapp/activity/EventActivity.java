@@ -121,25 +121,25 @@ public class EventActivity extends AppCompatActivity implements View.OnClickList
             case R.id.generateTeambtn:
                 break;
 
-            case R.id.eventMaxPlayers:
+         /*   case R.id.eventMaxPlayers:
                 viewUsers();
                 break;
-
+*/
         }
     }
 
-    private void viewUsers() {
-        if (bundleExtras != null) {
-            long eventid = bundleExtras.getLong("eventid");
-            Bundle bundle = new Bundle();
-            bundle.putLong( "From Activity", eventid);
-// set Fragmentclass Arguments
-            SignedUpFragment fragobj = new SignedUpFragment();
-            fragobj.setArguments(bundle);
-            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.fragment_container, fragobj).commit();
-        }
-    }
+//    private void viewUsers() {
+//        if (bundleExtras != null) {
+//            long eventid = bundleExtras.getLong("eventid");
+//            Bundle bundle = new Bundle();
+//            bundle.putLong( "From Activity", eventid);
+//// set Fragmentclass Arguments
+//            SignedUpFragment fragobj = new SignedUpFragment();
+//            fragobj.setArguments(bundle);
+//            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+//            fragmentTransaction.replace(R.id.fragment_container, fragobj).commit();
+//        }
+//    }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
