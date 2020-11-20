@@ -52,7 +52,7 @@ public interface AppInterface {
                                        @Field("maxPlayers") int maxPlayers,
                                        @Field("latLng") String latLng);
 
-    @GET
+    @GET("event/eventattenders")
     public Call<List<User>> getAttenders(@Header("Authorization") String token,
                                          @Query("eventid") Long eventid);
 

@@ -132,12 +132,12 @@ public class EventActivity extends AppCompatActivity implements View.OnClickList
         if (bundleExtras != null) {
             long eventid = bundleExtras.getLong("eventid");
             Bundle bundle = new Bundle();
-            bundle.putLong( "From Activity", eventid);
+            bundle.putLong( "eventid", eventid);
 // set Fragmentclass Arguments
             SignedUpFragment fragobj = new SignedUpFragment();
             fragobj.setArguments(bundle);
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.fragment_container, fragobj).commit();
+            fragmentTransaction.replace(R.id.eventActivity, fragobj).commit();
         }
     }
 
