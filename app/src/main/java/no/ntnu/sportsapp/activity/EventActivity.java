@@ -1,5 +1,6 @@
 package no.ntnu.sportsapp.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -38,7 +40,7 @@ import no.ntnu.sportsapp.fragments.SignedUpFragment;
 public class EventActivity extends AppCompatActivity implements View.OnClickListener, OnMapReadyCallback {
 
     private TextView txtViewSport, txtViewDesc, txtViewDate, txtViewTime, txtViewLocation, txtViewMaxPlayers;
-    private Button attendBtn, notAttendingBtn, generateTeamBtn;
+    private Button attendBtn, notAttendingBtn, generateTeamBtn, testParticBtn;
 
     private SupportMapFragment supportMapFragment;
     private GoogleMap map;
@@ -67,6 +69,7 @@ public class EventActivity extends AppCompatActivity implements View.OnClickList
         attendBtn = findViewById(R.id.eventAttendbtn);
         notAttendingBtn = findViewById(R.id.eventNotAttendbtn);
         generateTeamBtn = findViewById(R.id.generateTeambtn);
+        testParticBtn = findViewById(R.id.testingParticipants);
 
         supportMapFragment = (SupportMapFragment) this.getSupportFragmentManager()
                 .findFragmentById(R.id.googleMapEvent);
@@ -100,6 +103,7 @@ public class EventActivity extends AppCompatActivity implements View.OnClickList
         attendBtn.setOnClickListener(this);
         notAttendingBtn.setOnClickListener(this);
         txtViewMaxPlayers.setOnClickListener(this);
+        testParticBtn.setOnClickListener(this);
 
         //Sends eventid to  SignedupUserFragment
         //So that we can fetch signed up users
@@ -121,25 +125,25 @@ public class EventActivity extends AppCompatActivity implements View.OnClickList
             case R.id.generateTeambtn:
                 break;
 
-         /*   case R.id.eventMaxPlayers:
+            case R.id.testingParticipants:
                 viewUsers();
                 break;
-*/
         }
     }
 
-//    private void viewUsers() {
-//        if (bundleExtras != null) {
-//            long eventid = bundleExtras.getLong("eventid");
-//            Bundle bundle = new Bundle();
-//            bundle.putLong( "From Activity", eventid);
-//// set Fragmentclass Arguments
-//            SignedUpFragment fragobj = new SignedUpFragment();
-//            fragobj.setArguments(bundle);
-//            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-//            fragmentTransaction.replace(R.id.fragment_container, fragobj).commit();
-//        }
-//    }
+    private void viewUsers() {
+        if (bundleExtras != null) {
+            long eventid = bundleExtras.getLong("eventid");
+            Bundle bundle = new Bundle();
+            bundle.putLong( "eventid", eventid);
+
+            Intent intent = new Intent(EventActivity.this, FragmentActivity.class);
+            intent.putExtra("eventid", eventid);
+            EventActivity.this.startActivity(intent);
+            System.out.println("HELLO");
+        }
+    }
+
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
