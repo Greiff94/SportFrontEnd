@@ -2,8 +2,11 @@ package no.ntnu.sportsapp.activity;
 
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.view.View;
 import android.widget.Button;
+import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,8 +19,15 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import no.ntnu.sportsapp.R;
+import no.ntnu.sportsapp.model.User;
+import no.ntnu.sportsapp.preference.UserPrefs;
+import no.ntnu.sportsapp.rest.ApiClient;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
-public class EventActivity extends AppCompatActivity implements OnMapReadyCallback {
+public class EventActivity extends AppCompatActivity implements View.OnClickListener, OnMapReadyCallback {
 
     private TextView txtViewSport, txtViewDesc, txtViewDate, txtViewTime, txtViewLocation, txtViewMaxPlayers;
     private Button attendBtn, notAttendingBtn, generateTeamBtn;
@@ -27,6 +37,8 @@ public class EventActivity extends AppCompatActivity implements OnMapReadyCallba
 
     private double latitude;
     private double longitude;
+
+    private Bundle bundleExtras;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -64,10 +76,10 @@ public class EventActivity extends AppCompatActivity implements OnMapReadyCallba
         System.out.println(" ");
         System.out.println("==========================================");
 
-        Bundle bundleExtra = getIntent().getExtras();
+        bundleExtras = getIntent().getExtras();
 
         // Changing
-        String latLng = bundleExtra.getString("latLng");
+        String latLng = bundleExtras.getString("latLng");
         latLng = latLng.replace("lat/lng:", "");
         latLng = latLng.replace("(", "");
         latLng = latLng.replace(")", "");
@@ -75,6 +87,28 @@ public class EventActivity extends AppCompatActivity implements OnMapReadyCallba
         latitude = Double.parseDouble(latLongSplit[0]);
         longitude = Double.parseDouble(latLongSplit[1]);
 
+        attendBtn.setOnClickListener(this);
+        notAttendingBtn.setOnClickListener(this);
+
+
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.eventAttendbtn:
+                joinEvent();
+                break;
+
+            case R.id.eventNotAttendbtn:
+                leaveEvent();
+                break;
+
+            case R.id.generateTeambtn:
+                break;
+
+
+        }
     }
 
     @Override
@@ -85,4 +119,75 @@ public class EventActivity extends AppCompatActivity implements OnMapReadyCallba
         map.addMarker(new MarkerOptions().position(chosenLocation));
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(chosenLocation, zoomLevel));
     }
+
+    public void joinEvent() {
+        final UserPrefs userPrefs = new UserPrefs(this);
+        String token = "Bearer " + userPrefs.getToken();
+
+        if (bundleExtras != null) {
+            long eventid = bundleExtras.getLong("eventid");
+
+            System.out.println(eventid);
+            Call<ResponseBody> call = ApiClient
+                    .getSingleton()
+                    .getApi()
+                    .joinEvent(token, eventid);
+
+            call.enqueue(new Callback<ResponseBody>() {
+                @Override
+                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                    if (response.isSuccessful()) {
+                        Toast.makeText(EventActivity.this, "ATTENDING", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(EventActivity.this, "Something went wrong, please try again later.", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    Toast.makeText(EventActivity.this, "Could not connect...", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+    }
+
+    public void leaveEvent() {
+
+        final UserPrefs userPrefs = new UserPrefs(this);
+
+        String token = "Bearer " + userPrefs.getToken();
+
+        if (bundleExtras != null) {
+            long eventid = bundleExtras.getLong("eventid");
+
+            Call<ResponseBody> call = ApiClient
+                    .getSingleton()
+                    .getApi()
+                    .leaveEvent(token, eventid);
+
+            call.enqueue(new Callback<ResponseBody>() {
+                @Override
+                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                    if (response.isSuccessful()) {
+                        Toast.makeText(EventActivity.this, "NOT ATTENDING", Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        Toast.makeText(EventActivity.this, "TRY AGAIN", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+                }
+            });
+        }
+    }
+
+    /*
+     * TODO: Generate teams, List users fragment.
+     *  buttons should change color or something when active. Buttons needs polishing.
+     */
+
+
 }

@@ -52,6 +52,7 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.View
                 Event event = events.get(position);
 
                 Intent intent = new Intent(context, EventActivity.class);
+                intent.putExtra("eventid", event.getId());
                 intent.putExtra("sport", event.getSport());
                 intent.putExtra("description", event.getDescription());
                 intent.putExtra("date", event.getDate());
