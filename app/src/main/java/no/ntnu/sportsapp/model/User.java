@@ -5,11 +5,11 @@ import com.google.gson.annotations.SerializedName;
 public class User {
     @SerializedName("id")
     private long id;
-    @SerializedName("uid")
-    private String uid;
-    @SerializedName("firstname")
+    @SerializedName("userid")
+    private String userid;
+    @SerializedName("firstName")
     private String firstname;
-    @SerializedName("lastname")
+    @SerializedName("lastName")
     private String lastname;
     @SerializedName("email")
     private String email;
@@ -19,11 +19,13 @@ public class User {
     private String password;
 
 
+    public User() {
 
+    }
 
-    public User(long id, String uid, String firstname, String lastname, String email, String jwt, String password) {
+    public User(long id, String userid, String firstname, String lastname, String email, String jwt, String password) {
         this.id = id;
-        this.uid = uid;
+        this.userid = userid;
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;
@@ -56,11 +58,11 @@ public class User {
     }
 
     public String getUid() {
-        return uid;
+        return userid;
     }
 
     public void setUid(String uid) {
-        this.uid = uid;
+        this.userid = uid;
     }
 
     public String getEmail() {

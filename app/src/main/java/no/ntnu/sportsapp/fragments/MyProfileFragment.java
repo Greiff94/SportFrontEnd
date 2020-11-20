@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -12,20 +13,26 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import no.ntnu.sportsapp.R;
+import no.ntnu.sportsapp.model.User;
+import no.ntnu.sportsapp.preference.UserPrefs;
+import no.ntnu.sportsapp.rest.ApiClient;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MyProfileFragment extends Fragment {
 
-    TextView profileNameView, usernameInfoView, emailView, phoneNumberView, changePassword;
+    TextView fNameView, lNameview, emailView, changePassword;
+    private User user;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_myprofile, container, false);
 
-        profileNameView = view.findViewById(R.id.username);
-        usernameInfoView = view.findViewById(R.id.usernameinfo);
+        fNameView = view.findViewById(R.id.fname);
+        lNameview = view.findViewById(R.id.lname);
         emailView = view.findViewById(R.id.emailinfo);
-        phoneNumberView = view.findViewById(R.id.phoneinfo);
         changePassword = view.findViewById(R.id.changepwd);
 
         userInfo();
@@ -43,16 +50,40 @@ public class MyProfileFragment extends Fragment {
     }
 
     public void userInfo() {
-        String profileName = profileNameView.getText().toString().trim();
-        String usernameInfo = usernameInfoView.getText().toString().trim();
-        String email = emailView.getText().toString().trim();
-        String phoneNumber = phoneNumberView.getText().toString().trim();
+        final UserPrefs userPrefs = new UserPrefs(getContext());
+        String token = "Bearer " + userPrefs.getToken();
 
-        profileNameView.setText(profileName);
-        usernameInfoView.setText(usernameInfo);
-        emailView.setText(email);
-        phoneNumberView.setText(phoneNumber);
+        Call<User> call = ApiClient
+                .getSingleton()
+                .getApi()
+                .currentUser(token);
+
+        call.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                if (response.isSuccessful()) {
+
+                    user = response.body();
+                    String fName = user.getFirstname();
+                    String lName = user.getLastname();
+                    String email = user.getUid();
+
+                    System.out.println(fName+ " " + lName + " " + email);
+
+                    fNameView.setText(fName);
+                    lNameview.setText(lName);
+                    emailView.setText(email);
+                } else {
+                    Toast.makeText(getContext(), "Could not fetch data. Please try again later.", Toast.LENGTH_SHORT).show();
+                }
+            }
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                Toast.makeText(getContext(), "Could not connect", Toast.LENGTH_SHORT).show();
+            }
+        });
 
 
     }
+
 }

@@ -32,7 +32,7 @@ public interface AppInterface {
                                            @Field("pwd") String pwd);
 
     @GET("auth/currentuser")
-    public Call<ResponseBody> currentUser();
+    public Call<User> currentUser(@Header("Authorization") String token);
 
     //------------EVENT SERVICES------------\\
     @GET("event/allevents")

@@ -11,9 +11,9 @@ public class Event {
     private long eventid;
     private String sport;
     private String description;
-    private Date date;
+    private String date;
     private String location;
-    private Time time;
+    private String time;
     private int maxPlayers;
     private String latLng;
     private User creator;
@@ -58,11 +58,11 @@ public class Event {
         this.description = description;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
@@ -74,11 +74,11 @@ public class Event {
         this.location = location;
     }
 
-    public Time getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(Time time) {
+    public void setTime(String time) {
         this.time = time;
     }
 
