@@ -68,6 +68,7 @@ public interface AppInterface {
                                          @Query("eventid") Long eventid);
 
     @GET("event/myevents")
-    public Call<List<Event>> myEvents(@Query("userid") Long userid);
+    public Call<List<Event>> myEvents(@Header("Authorization") String token,
+                                      @Query("userid") String userid);
 }
 
