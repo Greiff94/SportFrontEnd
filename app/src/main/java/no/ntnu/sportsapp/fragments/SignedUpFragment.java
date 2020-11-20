@@ -39,6 +39,9 @@ public class SignedUpFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_users, container, false);
 
         getActivity().setTitle("Signed up users");
+        
+        eventid = getArguments().getLong("eventid");
+        System.out.println(eventid);
 
         initViews(view);
         setUserList();
