@@ -34,6 +34,12 @@ public interface AppInterface {
     @GET("auth/currentuser")
     public Call<User> currentUser(@Header("Authorization") String token);
 
+    @PUT("auth/changepassword")
+    public Call<ResponseBody> changePassword(@Header("Authorization") String token,
+                                             @Query("uid") String userid,
+                                             @Query("pwd") String password);
+
+
     //------------EVENT SERVICES------------\\
     @GET("event/allevents")
     public Call<List<Event>> getAllEvents();
@@ -69,6 +75,6 @@ public interface AppInterface {
 
     @GET("event/myevents")
     public Call<List<Event>> myEvents(@Header("Authorization") String token,
-                                      @Query("userid") String userid);
+                                      @Query("uid") String userid);
 }
 

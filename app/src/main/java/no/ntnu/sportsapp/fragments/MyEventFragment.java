@@ -57,7 +57,7 @@ public class MyEventFragment extends Fragment {
     public void setMyEventList(){
         final UserPrefs userPrefs = new UserPrefs(this.getContext());
         uid = userPrefs.getUid();
-        String token = "Bearer" + userPrefs.getToken();
+        String token = "Bearer " + userPrefs.getToken();
         System.out.println(token);
         System.out.println(uid);
 
