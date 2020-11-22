@@ -75,6 +75,6 @@ public interface AppInterface {
 
     @GET("event/myevents")
     public Call<List<Event>> myEvents(@Header("Authorization") String token,
-                                      @Query("userid") String userid);
+                                      @Query("uid") String userid);
 }
 

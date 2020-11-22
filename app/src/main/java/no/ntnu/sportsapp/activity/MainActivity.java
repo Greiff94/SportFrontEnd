@@ -18,6 +18,7 @@ import no.ntnu.sportsapp.R;
 import no.ntnu.sportsapp.fragments.AddEventFragment;
 import no.ntnu.sportsapp.fragments.EventsFragment;
 import no.ntnu.sportsapp.fragments.LoginFragment;
+import no.ntnu.sportsapp.fragments.MyEventFragment;
 import no.ntnu.sportsapp.fragments.MyProfileFragment;
 import no.ntnu.sportsapp.fragments.RegisterFragment;
 import no.ntnu.sportsapp.fragments.SignedUpFragment;
@@ -89,7 +90,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             case R.id.nav_my_events:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new SignedUpFragment()).commit();
+                        new MyEventFragment()).commit();
         }
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
