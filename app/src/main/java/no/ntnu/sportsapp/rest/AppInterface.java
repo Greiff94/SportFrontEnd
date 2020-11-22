@@ -1,12 +1,9 @@
 package no.ntnu.sportsapp.rest;
 
-import java.sql.Time;
-import java.util.Date;
 import java.util.List;
 
 import no.ntnu.sportsapp.model.Event;
 import no.ntnu.sportsapp.model.User;
-import okhttp3.Response;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.DELETE;
@@ -14,7 +11,6 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
-import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Query;
@@ -34,8 +30,9 @@ public interface AppInterface {
                                            @Field("lname") String lastName,
                                            @Field("email") String email,
                                            @Field("pwd") String pwd);
+
     @GET("auth/currentuser")
-    public Call<ResponseBody> currentUser();
+    public Call<User> currentUser(@Header("Authorization") String token);
 
     @PUT("auth/changepassword")
     public Call<ResponseBody> changePassword();
@@ -54,23 +51,28 @@ public interface AppInterface {
                                        @Field("sport") String sport,
                                        @Field("description") String description,
                                        @Field("date") String date,
-                                       @Field("time") String time,
                                        @Field("location") String location,
-                                       @Field("maxPlayers") int maxPlayers);
+                                       @Field("time") String time,
+                                       @Field("maxPlayers") int maxPlayers,
+                                       @Field("latLng") String latLng);
 
-    @GET
-    public Call<List<User>> getAttenders(@Query("eventid") Long eventid);
+    @GET("event/eventattenders")
+    public Call<List<User>> getAttenders(@Header("Authorization") String token,
+                                         @Query("eventid") Long eventid);
 
 
     //------------EVENT-INTERACTING------------\\
 
     @PUT("event/joinevent")
-    public Call<ResponseBody> joinEvent(@Query("eventid") Long eventid);
+    public Call<ResponseBody> joinEvent(@Header("Authorization") String token,
+                                        @Query("eventid") Long eventid);
 
     @PUT("event/leave")
-    public Call<ResponseBody> leaveEvent(@Query("eventid") Long eventid);
+    public Call<ResponseBody> leaveEvent(@Header("Authorization") String token,
+                                         @Query("eventid") Long eventid);
 
     @GET("event/myevents")
-    public Call<List<Event>> myEvents(@Query("userid") Long userid);
+    public Call<List<Event>> myEvents(@Header("Authorization") String token,
+                                      @Query("userid") String userid);
 }
 

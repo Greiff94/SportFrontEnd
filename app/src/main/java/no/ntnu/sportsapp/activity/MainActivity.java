@@ -16,9 +16,11 @@ import com.google.android.material.navigation.NavigationView;
 
 import no.ntnu.sportsapp.R;
 import no.ntnu.sportsapp.fragments.AddEventFragment;
+import no.ntnu.sportsapp.fragments.EventsFragment;
 import no.ntnu.sportsapp.fragments.LoginFragment;
 import no.ntnu.sportsapp.fragments.MyProfileFragment;
 import no.ntnu.sportsapp.fragments.RegisterFragment;
+import no.ntnu.sportsapp.fragments.SignedUpFragment;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout drawerLayout;
@@ -48,6 +50,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toggle.syncState();
 
         navigationView.setNavigationItemSelectedListener(this);
+
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new EventsFragment()).commit();
+        }
     }
 
 
@@ -80,6 +86,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new MyProfileFragment()).commit();
                 break;
+
+            case R.id.nav_my_events:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new SignedUpFragment()).commit();
         }
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
