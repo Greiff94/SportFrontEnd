@@ -105,7 +105,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
             editpwd.requestFocus();
             return;
         }
-        if (pwd2.equals(pwd)) {
+        if (!pwd.equals(pwd2)) {
             editpwd.setError("Passwords must match");
             editpwd.requestFocus();
             editpwd2.requestFocus();

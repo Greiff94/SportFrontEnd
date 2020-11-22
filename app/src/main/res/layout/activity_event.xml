@@ -226,7 +226,7 @@
                     android:layout_height="match_parent"
                     android:layout_marginTop="5dp"
                     android:background="@drawable/gradient_bg"
-                    android:text="TESTESTSTES teams" />
+                    android:text="Participants" />
             </LinearLayout>
 
 
