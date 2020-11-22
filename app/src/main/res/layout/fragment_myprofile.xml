@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/myprofileParent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!--TODO: USE THIS IF WE DONT GET PROFILE PICTURE-->
+    <ImageView
+        android:id="@+id/myProfileHeader"
+        android:layout_width="match_parent"
+        android:layout_height="240dp"
+        android:src="@mipmap/ic_logoself_foreground"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/gradient_bg"/>
+
+    <!--TODO: USE THIS IF WE GET PROFILE PICTURE-->
+    <!--TODO: START-->
+     <!--<RelativeLayout
+        android:id="@+id/layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/gradient_bg">
+
+        <RelativeLayout
+            android:id="@+id/userimg"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp">
+
+            <ImageView
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:adjustViewBounds="true"
+                android:background="@drawable/circle"
+                android:padding="2dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_user" />
+
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/userimg"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:fontFamily="sans-serif-black"
+            android:text="Jon Doe"
+            android:textSize="25sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/username"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="30dp"
+            android:fontFamily="sans-serif-black"
+            android:text="Stavanger, Norway"
+            android:textSize="10sp" />
+
+
+    </RelativeLayout> -->
+    <!--TODO: END-->
+
+    <RelativeLayout
+        android:id="@+id/infolayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/myProfileHeader">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="70dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Firstname"
+                android:textSize="13sp"
+                android:textColor="@color/orange_color"/>
+
+            <TextView
+                android:id="@+id/fname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lastname"
+                android:textSize="13sp"
+                android:textColor="@color/orange_color"
+                android:layout_marginTop="20dp"/>
+
+            <TextView
+                android:id="@+id/lname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Email"
+                android:textSize="13sp"
+                android:textColor="@color/orange_color"
+                android:layout_marginTop="20dp"/>
+
+            <TextView
+                android:id="@+id/emailinfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"/>
+
+            <TextView
+                android:id="@+id/changepwd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Change password? Click here"
+                android:clickable="true"
+                android:textSize="15sp"
+                android:textColor="#FF0000"
+                android:layout_marginTop="45sp"/>
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+
+</RelativeLayout>
+
