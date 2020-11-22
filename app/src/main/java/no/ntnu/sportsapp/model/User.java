@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 public class User {
 
 
-    private String uid;
+    private String userid;
 
     private String firstName;
     private String lastName;
@@ -14,8 +14,8 @@ public class User {
     private String password;
 
 
-    public User(String uid, String firstName, String lastName, String email, String jwt, String password) {
-        this.uid = uid;
+    public User(String userid, String firstName, String lastName, String email, String jwt, String password) {
+        this.userid = userid;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;

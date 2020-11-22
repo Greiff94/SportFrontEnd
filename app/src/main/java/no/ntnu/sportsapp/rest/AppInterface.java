@@ -35,7 +35,9 @@ public interface AppInterface {
     public Call<User> currentUser(@Header("Authorization") String token);
 
     @PUT("auth/changepassword")
-    public Call<ResponseBody> changePassword();
+    public Call<ResponseBody> changePassword(@Header("Authorization") String token,
+                                             @Query("uid") String userid,
+                                             @Query("pwd") String password);
 
 
     //------------EVENT SERVICES------------\\

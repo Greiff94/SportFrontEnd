@@ -65,7 +65,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
     public void userLogin() {
         final String email = emailEditText.getText().toString().trim();
-        String pwd = passwordEditText.getText().toString().trim();
+        final String pwd = passwordEditText.getText().toString().trim();
 
         final UserPrefs userPrefs = new UserPrefs(getContext());
         if (email.isEmpty()) {
@@ -90,6 +90,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                     try {
                         userPrefs.setToken(response.body().string());
                         userPrefs.setUid(email);
+                        userPrefs.setPwd(pwd);
                         getActivity().recreate();
                     } catch (IOException e) {
                         e.printStackTrace();
