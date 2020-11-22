@@ -52,8 +52,9 @@ public interface AppInterface {
                                        @Field("maxPlayers") int maxPlayers,
                                        @Field("latLng") String latLng);
 
-    @GET
-    public Call<List<User>> getAttenders(@Query("eventid") Long eventid);
+    @GET("event/eventattenders")
+    public Call<List<User>> getAttenders(@Header("Authorization") String token,
+                                         @Query("eventid") Long eventid);
 
 
     //------------EVENT-INTERACTING------------\\
@@ -67,6 +68,7 @@ public interface AppInterface {
                                          @Query("eventid") Long eventid);
 
     @GET("event/myevents")
-    public Call<List<Event>> myEvents(@Query("userid") Long userid);
+    public Call<List<Event>> myEvents(@Header("Authorization") String token,
+                                      @Query("userid") String userid);
 }
 

@@ -1,213 +1,236 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/eventActivity"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".activity.EventActivity">
 
-    <RelativeLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbarEvent"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@android:color/white"
-            android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-            app:popupTheme="@style/Theme.AppCompat.DayNight" />
-          <!--  app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintEnd_toStartOf="parent"
-            app:layout_constraintEnd_toTopOf="parent" -->
-
-
-        <ImageView
-            android:id="@+id/currenteventheader"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="240dp"
-            android:background="@drawable/gradient_bg"
-            android:src="@mipmap/ic_logoself_foreground"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/ltitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/currenteventheader"
-            android:layout_centerHorizontal="true"
-            android:text="Current event"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.507"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/currenteventheader" />
-
-        <LinearLayout
+        <FrameLayout
+            android:id="@+id/fragment_container_activity"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/currenteventheader"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="40dp"
-            android:layout_marginTop="40dp"
-            android:layout_marginRight="40dp"
-            android:orientation="vertical">
+            android:layout_height="match_parent" />
 
-            <TextView
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbarEvent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Sport"
-                android:textColor="@color/orange_color"
-                android:textSize="13sp" />
+                android:background="@android:color/white"
+                android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+                app:popupTheme="@style/Theme.AppCompat.DayNight" />
+            <!--  app:layout_constraintEnd_toEndOf="parent"
+              app:layout_constraintEnd_toStartOf="parent"
+              app:layout_constraintEnd_toTopOf="parent" -->
 
-            <TextView
-                android:id="@+id/eventsport"
+
+            <ImageView
+                android:id="@+id/currenteventheader"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Sport"
-                android:textSize="20sp" />
-
+                android:layout_height="240dp"
+                android:background="@drawable/gradient_bg"
+                android:src="@mipmap/ic_logoself_foreground"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
+                android:id="@+id/ltitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="Description"
-                android:textColor="@color/orange_color"
-                android:textSize="13sp" />
-
-            <TextView
-                android:id="@+id/eventdesc"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Description"
-                android:textSize="20sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="Max Participants"
-                android:textColor="@color/orange_color"
-                android:textSize="13sp" />
-
-            <TextView
-                android:id="@+id/eventMaxPlayers"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="x of y spots taken"
-                android:textSize="20sp" />
-
+                android:layout_below="@+id/currenteventheader"
+                android:layout_centerHorizontal="true"
+                android:text="Current event"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.507"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/currenteventheader" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_below="@id/currenteventheader"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="40dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginRight="40dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sport"
+                    android:textColor="@color/orange_color"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/eventsport"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Sport"
+                    android:textSize="20sp" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="Description"
+                    android:textColor="@color/orange_color"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/eventdesc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Description"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="Max Participants"
+                    android:textColor="@color/orange_color"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/eventMaxPlayers"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:onClick="onClick"
+                    android:hint="x of y spots taken"
+                    android:textSize="20sp" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_weight="1"
+                        android:text="Date"
+                        android:textColor="@color/orange_color"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_weight="1"
+                        android:text="Time"
+                        android:textColor="@color/orange_color"
+                        android:textSize="13sp" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+
+                    <TextView
+                        android:id="@+id/eventdate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="1"
+                        android:hint="Date"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/eventtime"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="1"
+                        android:hint="Time"
+                        android:textSize="20sp" />
+
+                </LinearLayout>
+
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:layout_weight="1"
-                    android:text="Date"
+                    android:text="Location"
                     android:textColor="@color/orange_color"
                     android:textSize="13sp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_weight="1"
-                    android:text="Time"
-                    android:textColor="@color/orange_color"
-                    android:textSize="13sp" />
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
 
                 <TextView
-                    android:id="@+id/eventdate"
+                    android:id="@+id/eventlocation"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:layout_weight="1"
-                    android:hint="Date"
+                    android:hint="Location"
                     android:textSize="20sp" />
 
-                <TextView
-                    android:id="@+id/eventtime"
+                <fragment
+                    android:id="@+id/googleMapEvent"
+                    android:name="com.google.android.gms.maps.SupportMapFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginTop="20dp" />
+
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/eventAttendbtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="#057d08"
+                        android:text="Attending" />
+
+                    <Button
+                        android:id="@+id/eventNotAttendbtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.7"
+                        android:background="#6b0e0e"
+                        android:text="Not attending" />
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/generateTeambtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_marginTop="5dp"
-                    android:layout_weight="1"
-                    android:hint="Time"
-                    android:textSize="20sp" />
+                    android:background="@drawable/gradient_bg"
+                    android:text="Generate teams" />
 
+                <Button
+                    android:id="@+id/testingParticipants"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/gradient_bg"
+                    android:text="TESTESTSTES teams" />
             </LinearLayout>
 
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="Location"
-                android:textColor="@color/orange_color"
-                android:textSize="13sp" />
+        </RelativeLayout>
+    </ScrollView>
 
-
-            <TextView
-                android:id="@+id/eventlocation"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Location"
-                android:textSize="20sp" />
-
-            <fragment
-                android:id="@+id/googleMapEvent"
-                android:name="com.google.android.gms.maps.SupportMapFragment"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_marginTop="20dp" />
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="3dp"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/eventAttendbtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Attending"
-                    android:background="#057d08"/>
-
-                <Button
-                    android:id="@+id/eventNotAttendbtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.7"
-                    android:text="Not attending"
-                    android:background="#6b0e0e"/>
-            </LinearLayout>
-
-            <Button
-                android:id="@+id/generateTeambtn"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="Generate teams"
-                android:layout_marginTop="5dp"
-                android:background="@drawable/gradient_bg"/>
-        </LinearLayout>
-
-
-    </RelativeLayout>
-
-</ScrollView>
+</LinearLayout>

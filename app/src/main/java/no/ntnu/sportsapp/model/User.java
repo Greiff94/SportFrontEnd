@@ -3,58 +3,40 @@ package no.ntnu.sportsapp.model;
 import com.google.gson.annotations.SerializedName;
 
 public class User {
-    @SerializedName("id")
-    private long id;
-    @SerializedName("userid")
-    private String userid;
-    @SerializedName("firstName")
-    private String firstname;
-    @SerializedName("lastName")
-    private String lastname;
-    @SerializedName("email")
+
+
+    private String uid;
+
+    private String firstName;
+    private String lastName;
     private String email;
-    @SerializedName("jwt")
     private String jwt;
-    @SerializedName("password")
     private String password;
 
 
-    public User() {
-
-    }
-
-    public User(long id, String userid, String firstname, String lastname, String email, String jwt, String password) {
-        this.id = id;
-        this.userid = userid;
-        this.firstname = firstname;
-        this.lastname = lastname;
+    public User(String uid, String firstName, String lastName, String email, String jwt, String password) {
+        this.uid = uid;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.email = email;
         this.jwt = jwt;
         this.password = password;
     }
 
     public String getFirstname() {
-        return firstname;
+        return firstName;
     }
 
     public void setFirstname(String firstname) {
-        this.firstname = firstname;
+        this.firstName = firstname;
     }
 
     public String getLastname() {
-        return lastname;
+        return lastName;
     }
 
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
+    public void setLastname(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getUid() {
