@@ -30,10 +30,7 @@ public class MyProfileFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_myprofile, container, false);
 
-        fNameView = view.findViewById(R.id.fname);
-        lNameview = view.findViewById(R.id.lname);
-        emailView = view.findViewById(R.id.emailinfo);
-        changePassword = view.findViewById(R.id.changepwd);
+        initViews(view);
 
         userInfo();
 
@@ -84,6 +81,13 @@ public class MyProfileFragment extends Fragment {
         });
 
 
+    }
+
+    public void initViews(View view) {
+        fNameView = view.findViewById(R.id.fname);
+        lNameview = view.findViewById(R.id.lname);
+        emailView = view.findViewById(R.id.emailinfo);
+        changePassword = view.findViewById(R.id.changepwd);
     }
 
 }

@@ -20,7 +20,6 @@ import no.ntnu.sportsapp.R;
 import no.ntnu.sportsapp.adapter.EventListAdapter;
 import no.ntnu.sportsapp.model.Event;
 import no.ntnu.sportsapp.rest.ApiClient;
-import no.ntnu.sportsapp.rest.AppInterface;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -73,7 +72,7 @@ public class EventsFragment extends Fragment {
 
         @Override
         public void onFailure(Call<List<Event>> call, Throwable t) {
-
+            Toast.makeText(getContext(), "Could not connect...", Toast.LENGTH_SHORT).show();
         }
     });
 

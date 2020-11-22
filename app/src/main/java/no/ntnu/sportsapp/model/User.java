@@ -1,7 +1,5 @@
 package no.ntnu.sportsapp.model;
 
-import com.google.gson.annotations.SerializedName;
-
 public class User {
 
 

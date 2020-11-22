@@ -30,7 +30,6 @@ public class MyEventFragment extends Fragment {
     private RecyclerView myEventsRecyclerView;
     private ArrayList<Event> myEvents = new ArrayList<>();
     private EventListAdapter adapter;
-    private Bundle bundleExtras;
     private String uid;
 
     @Nullable
@@ -72,13 +71,13 @@ public class MyEventFragment extends Fragment {
                     myEvents = (ArrayList<Event>) response.body();
                     adapter.setEvents(myEvents);
                 }else{
-                    Toast.makeText(getContext(), "failed to see your events, please try again", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Failed to see your events, please try again", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<List<Event>> call, Throwable t) {
-
+                Toast.makeText(getContext(), "Could not connect...", Toast.LENGTH_SHORT).show();
             }
         });
 

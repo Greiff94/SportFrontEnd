@@ -2,18 +2,13 @@ package no.ntnu.sportsapp.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -22,9 +17,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.List;
 
 import no.ntnu.sportsapp.R;
 import no.ntnu.sportsapp.adapter.UserListAdapter;
@@ -35,7 +28,6 @@ import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import no.ntnu.sportsapp.fragments.SignedUpFragment;
 
 public class EventActivity extends AppCompatActivity implements View.OnClickListener, OnMapReadyCallback {
 
@@ -49,8 +41,6 @@ public class EventActivity extends AppCompatActivity implements View.OnClickList
     private double longitude;
 
     private Bundle bundleExtras;
-    private ArrayList<User> signups = new ArrayList<>();
-    private UserListAdapter adapter;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -91,7 +81,8 @@ public class EventActivity extends AppCompatActivity implements View.OnClickList
 
         bundleExtras = getIntent().getExtras();
 
-        // Changing
+        // Changing latlng string to get coordinates only.
+        // Splitting the coordinates with the ,
         String latLng = bundleExtras.getString("latLng");
         latLng = latLng.replace("lat/lng:", "");
         latLng = latLng.replace("(", "");
@@ -104,11 +95,6 @@ public class EventActivity extends AppCompatActivity implements View.OnClickList
         notAttendingBtn.setOnClickListener(this);
         txtViewMaxPlayers.setOnClickListener(this);
         testParticBtn.setOnClickListener(this);
-
-        //Sends eventid to  SignedupUserFragment
-        //So that we can fetch signed up users
-
-
     }
 
     @Override
@@ -140,11 +126,10 @@ public class EventActivity extends AppCompatActivity implements View.OnClickList
             Intent intent = new Intent(EventActivity.this, FragmentActivity.class);
             intent.putExtra("eventid", eventid);
             EventActivity.this.startActivity(intent);
-            System.out.println("HELLO");
         }
     }
 
-
+    // Gets a google map that has a marker for the events location
     @Override
     public void onMapReady(GoogleMap googleMap) {
         float zoomLevel = 15.0f;
@@ -186,9 +171,7 @@ public class EventActivity extends AppCompatActivity implements View.OnClickList
     }
 
     public void leaveEvent() {
-
         final UserPrefs userPrefs = new UserPrefs(this);
-
         String token = "Bearer " + userPrefs.getToken();
 
         if (bundleExtras != null) {
@@ -206,13 +189,13 @@ public class EventActivity extends AppCompatActivity implements View.OnClickList
                         Toast.makeText(EventActivity.this, "NOT ATTENDING", Toast.LENGTH_SHORT).show();
                     }
                     else {
-                        Toast.makeText(EventActivity.this, "TRY AGAIN", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(EventActivity.this, "Something went wrong, please try again later.", Toast.LENGTH_SHORT).show();
                     }
                 }
 
                 @Override
                 public void onFailure(Call<ResponseBody> call, Throwable t) {
-
+                    Toast.makeText(EventActivity.this, "Could not connect...", Toast.LENGTH_SHORT).show();
                 }
             });
         }
@@ -222,6 +205,4 @@ public class EventActivity extends AppCompatActivity implements View.OnClickList
      * TODO: Generate teams, List users fragment.
      *  buttons should change color or something when active. Buttons needs polishing.
      */
-
-
 }

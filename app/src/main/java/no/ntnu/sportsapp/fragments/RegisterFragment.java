@@ -36,14 +36,8 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_register, container, false);
-        //Fetches and stores inputs from registerfragment
-        editfirstname = view.findViewById(R.id.rfirstname);
-        editlastname = view.findViewById(R.id.rlastname);
-        editemail = view.findViewById(R.id.remail);
-        editpwd = view.findViewById(R.id.rpwd);
-        editpwd2 = view.findViewById(R.id.rpwd2);
-        rbutton = view.findViewById(R.id.rbutton);
-        clogin = view.findViewById(R.id.rlogin);
+
+        initViews(view);
 
         //Listeners for the buttons, declaring them for this fragment
         rbutton.setOnClickListener(this);
@@ -146,5 +140,16 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
             Toast.makeText(getActivity(), t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    public void initViews(View view) {
+        //Fetches and stores inputs from registerfragment
+        editfirstname = view.findViewById(R.id.rfirstname);
+        editlastname = view.findViewById(R.id.rlastname);
+        editemail = view.findViewById(R.id.remail);
+        editpwd = view.findViewById(R.id.rpwd);
+        editpwd2 = view.findViewById(R.id.rpwd2);
+        rbutton = view.findViewById(R.id.rbutton);
+        clogin = view.findViewById(R.id.rlogin);
     }
 }

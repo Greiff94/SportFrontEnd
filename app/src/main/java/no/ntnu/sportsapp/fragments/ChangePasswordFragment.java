@@ -34,16 +34,7 @@ public class ChangePasswordFragment extends Fragment implements View.OnClickList
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_changepwd, container, false);
 
-        // Stores inputs from changepasswordfragment
-        changepwdBtn = view.findViewById(R.id.changepwdButton);
-        returnToProfile = view.findViewById(R.id.backtomyprofile);
-        currentPwd = view.findViewById(R.id.currPwd);
-        newPwd = view.findViewById(R.id.newPwd);
-        newPwdAgain = view.findViewById(R.id.newPwdAgain);
-
-        //Listeners for the buttons, declaring them for this fragment
-        changepwdBtn.setOnClickListener(this);
-        returnToProfile.setOnClickListener(this);
+        initViews(view);
 
         return view;
     }
@@ -75,7 +66,6 @@ public class ChangePasswordFragment extends Fragment implements View.OnClickList
         String token = "Bearer " + userPrefs.getToken();
         uid = userPrefs.getUid();
         pwd = userPrefs.getPwd();
-        System.out.println(pwd);
 
         // If different criterias isnt fulfilled, user wont be able to complete the task
         if (currentPassword.isEmpty()) {
@@ -84,7 +74,7 @@ public class ChangePasswordFragment extends Fragment implements View.OnClickList
         }
 
         if (!currentPassword.equals(pwd)) {
-            currentPwd.setError("Current password is not correct!");
+            currentPwd.setError("Current password is wrong!");
             currentPwd.requestFocus();
         }
 
@@ -103,11 +93,13 @@ public class ChangePasswordFragment extends Fragment implements View.OnClickList
         }
 
         if (!newPassword.equals(newPasswordAgain)) {
-            newPwdAgain.setError("Password doesnt match! Try again!");
+            newPwd.setError("Password doesn't match! Try again!");
+            newPwdAgain.setError("Password doesn't match! Try again!");
+            newPwd.requestFocus();
             newPwdAgain.requestFocus();
         }
         if (currentPassword.equals(newPassword)) {
-            newPwd.setError("Unable to change to your previous password");
+            newPwd.setError("New password can't be you current one!");
             newPwd.requestFocus();
         }
         if (currentPassword.equals(pwd) && !currentPassword.equals(newPassword) && newPassword.equals(newPasswordAgain)) {
@@ -125,14 +117,29 @@ public class ChangePasswordFragment extends Fragment implements View.OnClickList
                         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
                         fragmentTransaction.replace(R.id.fragment_container, myProfile).commit();
                         Toast.makeText(getContext(), "Password changed", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getContext(), "Could not change password. Please try again later.", Toast.LENGTH_SHORT).show();
                     }
                 }
 
                 @Override
                 public void onFailure(Call<ResponseBody> call, Throwable t) {
-
+                    Toast.makeText(getContext(), "Could not connect...", Toast.LENGTH_SHORT).show();
                 }
             });
         }
+    }
+
+    public void initViews(View view) {
+        // Stores inputs from changepasswordfragment
+        changepwdBtn = view.findViewById(R.id.changepwdButton);
+        returnToProfile = view.findViewById(R.id.backtomyprofile);
+        currentPwd = view.findViewById(R.id.currPwd);
+        newPwd = view.findViewById(R.id.newPwd);
+        newPwdAgain = view.findViewById(R.id.newPwdAgain);
+
+        //Listeners for the buttons, declaring them for this fragment
+        changepwdBtn.setOnClickListener(this);
+        returnToProfile.setOnClickListener(this);
     }
 }

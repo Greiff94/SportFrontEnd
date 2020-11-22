@@ -8,7 +8,6 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -22,11 +21,9 @@ import no.ntnu.sportsapp.fragments.LoginFragment;
 import no.ntnu.sportsapp.fragments.MyEventFragment;
 import no.ntnu.sportsapp.fragments.MyProfileFragment;
 import no.ntnu.sportsapp.fragments.RegisterFragment;
-import no.ntnu.sportsapp.fragments.SignedUpFragment;
 import no.ntnu.sportsapp.model.User;
 import no.ntnu.sportsapp.preference.UserPrefs;
 import no.ntnu.sportsapp.rest.ApiClient;
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -66,8 +63,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new EventsFragment()).commit();
         }
     }
-
-
 
     @Override
     public void onBackPressed() {
@@ -160,18 +155,4 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
     }
-
-/*    public void updateOnStartUp() {
-
-        UserPrefs userPrefs = new UserPrefs(getApplicationContext());
-
-        if (userPrefs.getToken().isEmpty()) {
-            navMenu.findItem(R.id.nav_profile).setVisible(false);
-            navMenu.findItem(R.id.nav_logout).setVisible(false);
-        } else {
-            navMenu.findItem(R.id.nav_login).setVisible(false);
-            navMenu.findItem(R.id.nav_register).setVisible(false);
-        }
-
-    }*/
 }
