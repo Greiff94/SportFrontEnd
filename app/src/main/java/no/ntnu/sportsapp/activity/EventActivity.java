@@ -1,10 +1,9 @@
 package no.ntnu.sportsapp.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,7 +17,10 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.ArrayList;
+
 import no.ntnu.sportsapp.R;
+import no.ntnu.sportsapp.adapter.UserListAdapter;
 import no.ntnu.sportsapp.model.User;
 import no.ntnu.sportsapp.preference.UserPrefs;
 import no.ntnu.sportsapp.rest.ApiClient;
@@ -30,7 +32,7 @@ import retrofit2.Response;
 public class EventActivity extends AppCompatActivity implements View.OnClickListener, OnMapReadyCallback {
 
     private TextView txtViewSport, txtViewDesc, txtViewDate, txtViewTime, txtViewLocation, txtViewMaxPlayers;
-    private Button attendBtn, notAttendingBtn, generateTeamBtn;
+    private Button attendBtn, notAttendingBtn, generateTeamBtn, testParticBtn;
 
     private SupportMapFragment supportMapFragment;
     private GoogleMap map;
@@ -57,6 +59,7 @@ public class EventActivity extends AppCompatActivity implements View.OnClickList
         attendBtn = findViewById(R.id.eventAttendbtn);
         notAttendingBtn = findViewById(R.id.eventNotAttendbtn);
         generateTeamBtn = findViewById(R.id.generateTeambtn);
+        testParticBtn = findViewById(R.id.testingParticipants);
 
         supportMapFragment = (SupportMapFragment) this.getSupportFragmentManager()
                 .findFragmentById(R.id.googleMapEvent);
@@ -78,7 +81,8 @@ public class EventActivity extends AppCompatActivity implements View.OnClickList
 
         bundleExtras = getIntent().getExtras();
 
-        // Changing
+        // Changing latlng string to get coordinates only.
+        // Splitting the coordinates with the ,
         String latLng = bundleExtras.getString("latLng");
         latLng = latLng.replace("lat/lng:", "");
         latLng = latLng.replace("(", "");
@@ -89,8 +93,8 @@ public class EventActivity extends AppCompatActivity implements View.OnClickList
 
         attendBtn.setOnClickListener(this);
         notAttendingBtn.setOnClickListener(this);
-
-
+        txtViewMaxPlayers.setOnClickListener(this);
+        testParticBtn.setOnClickListener(this);
     }
 
     @Override
@@ -107,10 +111,25 @@ public class EventActivity extends AppCompatActivity implements View.OnClickList
             case R.id.generateTeambtn:
                 break;
 
-
+            case R.id.testingParticipants:
+                viewUsers();
+                break;
         }
     }
 
+    private void viewUsers() {
+        if (bundleExtras != null) {
+            long eventid = bundleExtras.getLong("eventid");
+            Bundle bundle = new Bundle();
+            bundle.putLong( "eventid", eventid);
+
+            Intent intent = new Intent(EventActivity.this, FragmentActivity.class);
+            intent.putExtra("eventid", eventid);
+            EventActivity.this.startActivity(intent);
+        }
+    }
+
+    // Gets a google map that has a marker for the events location
     @Override
     public void onMapReady(GoogleMap googleMap) {
         float zoomLevel = 15.0f;
@@ -152,9 +171,7 @@ public class EventActivity extends AppCompatActivity implements View.OnClickList
     }
 
     public void leaveEvent() {
-
         final UserPrefs userPrefs = new UserPrefs(this);
-
         String token = "Bearer " + userPrefs.getToken();
 
         if (bundleExtras != null) {
@@ -172,13 +189,13 @@ public class EventActivity extends AppCompatActivity implements View.OnClickList
                         Toast.makeText(EventActivity.this, "NOT ATTENDING", Toast.LENGTH_SHORT).show();
                     }
                     else {
-                        Toast.makeText(EventActivity.this, "TRY AGAIN", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(EventActivity.this, "Something went wrong, please try again later.", Toast.LENGTH_SHORT).show();
                     }
                 }
 
                 @Override
                 public void onFailure(Call<ResponseBody> call, Throwable t) {
-
+                    Toast.makeText(EventActivity.this, "Could not connect...", Toast.LENGTH_SHORT).show();
                 }
             });
         }
@@ -188,6 +205,4 @@ public class EventActivity extends AppCompatActivity implements View.OnClickList
      * TODO: Generate teams, List users fragment.
      *  buttons should change color or something when active. Buttons needs polishing.
      */
-
-
 }

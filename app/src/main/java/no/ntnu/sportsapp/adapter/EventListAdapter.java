@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,6 +43,7 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.View
         holder.txtEvent.setText(events.get(position).getSport());
         holder.txtDate.setText(events.get(position).getDate());
         holder.txtTime.setText(events.get(position).getTime());
+        holder.txtLocation.setText(events.get(position).getLocation());
 
         holder.parent.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -80,7 +80,7 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.View
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView txtEvent, txtDate, txtTime;
+        private TextView txtEvent, txtDate, txtTime, txtLocation;
         private CardView parent;
         private ImageView image;
         public ViewHolder(@NonNull View eventView) {
@@ -88,6 +88,7 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.View
             txtEvent = eventView.findViewById(R.id.event);
             txtDate = eventView.findViewById(R.id.date);
             txtTime = eventView.findViewById(R.id.time);
+            txtLocation = eventView.findViewById(R.id.location);
             parent = eventView.findViewById(R.id.parent);
             image = eventView.findViewById(R.id.image);
         }

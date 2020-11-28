@@ -34,15 +34,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_login, container, false);
 
-        //Fetches and stores the text written in the inputs, will be used to send to server when button is pressed
-        emailEditText = view.findViewById(R.id.lemail);
-        passwordEditText = view.findViewById(R.id.lpwd);
-        lbutton = view.findViewById(R.id.lbutton);
-        cregister = view.findViewById(R.id.lregister);
-
-        //Listeners for the buttons, declaring them for this fragment
-        lbutton.setOnClickListener(this);
-        cregister.setOnClickListener(this);
+        initViews(view);
 
         return view;
     }
@@ -64,8 +56,8 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     }
 
     public void userLogin() {
-        String email = emailEditText.getText().toString().trim();
-        String pwd = passwordEditText.getText().toString().trim();
+        final String email = emailEditText.getText().toString().trim();
+        final String pwd = passwordEditText.getText().toString().trim();
 
         final UserPrefs userPrefs = new UserPrefs(getContext());
         if (email.isEmpty()) {
@@ -89,19 +81,35 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                     FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
                     try {
                         userPrefs.setToken(response.body().string());
+                        userPrefs.setUid(email);
+                        userPrefs.setPwd(pwd);
                         getActivity().recreate();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
                     Toast.makeText(getContext(), "Login successful", Toast.LENGTH_SHORT).show();
                     fragmentTransaction.replace(R.id.fragment_container, eventsFragment).commit();
+                } else {
+                    Toast.makeText(getContext(), "Email or password is wrong, please try again!", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-
+                Toast.makeText(getContext(), "Could not connect...", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    public void initViews(View view) {
+        //Fetches and stores the text written in the inputs, will be used to send to server when button is pressed
+        emailEditText = view.findViewById(R.id.lemail);
+        passwordEditText = view.findViewById(R.id.lpwd);
+        lbutton = view.findViewById(R.id.lbutton);
+        cregister = view.findViewById(R.id.lregister);
+
+        //Listeners for the buttons, declaring them for this fragment
+        lbutton.setOnClickListener(this);
+        cregister.setOnClickListener(this);
     }
 }

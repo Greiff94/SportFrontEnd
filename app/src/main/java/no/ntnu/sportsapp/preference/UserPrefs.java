@@ -25,4 +25,21 @@ public class UserPrefs {
         prefsEditor.putString("token", token).commit();
     }
 
+    public String getUid() {
+        return sharedPreferences.getString("uid", "");
+    }
+
+    public void setUid(String uid) {
+        prefsEditor.putString("uid", uid).commit();
+    }
+
+    public String getPwd() {
+        return sharedPreferences.getString("pwd", "");
+    }
+
+    public void setPwd(String pwd) {
+        prefsEditor.putString("pwd", pwd).commit();
+    }
+
+
 }

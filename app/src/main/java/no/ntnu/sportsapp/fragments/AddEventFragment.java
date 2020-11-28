@@ -5,7 +5,6 @@ import android.app.TimePickerDialog;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -56,10 +55,10 @@ import retrofit2.Response;
 public class AddEventFragment extends Fragment implements View.OnClickListener, OnMapReadyCallback {
 
 
-    GoogleMap map;
-    SupportMapFragment supportMapFragment;
-    AutocompleteSupportFragment autocompleteFragment;
-    PlacesClient placesClient;
+    private GoogleMap map;
+    private SupportMapFragment supportMapFragment;
+    private AutocompleteSupportFragment autocompleteFragment;
+    private PlacesClient placesClient;
 
     private TextView timeView, dateView;
     private EditText editTextSpotsAvailable, editTextDesc;
@@ -79,16 +78,8 @@ public class AddEventFragment extends Fragment implements View.OnClickListener, 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_addevent, container, false);
-        // Initialize textview
-        timeView = view.findViewById(R.id.eventtime);
-        dateView = view.findViewById(R.id.eventdate);
-        // Initialize edittext
-        editTextSpotsAvailable = view.findViewById(R.id.eventnumofpeople);
-        editTextDesc = view.findViewById(R.id.addeventdesc);
-        // Initialize buttons
-        dateButton = view.findViewById(R.id.eventDatebtn);
-        timeButton = view.findViewById(R.id.eventTimebtn);
-        createButton = view.findViewById(R.id.createEventbtn);
+
+        initViews(view);
 
         // Get spinner(dropdown) from the xml file
         dropDownSport = (Spinner) view.findViewById(R.id.sportdropdown);
@@ -253,22 +244,8 @@ public class AddEventFragment extends Fragment implements View.OnClickListener, 
             location = locationName.trim();
         } catch (NullPointerException e) {
             e.printStackTrace();
+            return;
         }
-
-
-        System.out.println("==========================================================================");
-        System.out.println("DROPDOWN TEST");
-        System.out.println(sport);
-        System.out.println("----------------------------");
-        System.out.println("DATE THIS IS");
-        System.out.println(date);
-        System.out.println("----------------------------");
-        System.out.println("TIME THIS IS");
-        System.out.println(time);
-        System.out.println("LATLNG LOCATION");
-        System.out.println(latlngLocation);
-        System.out.println("==========================================================================");
-
 
         if (description.isEmpty()) {
             editTextDesc.setError("Description is required");
@@ -312,8 +289,21 @@ public class AddEventFragment extends Fragment implements View.OnClickListener, 
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Toast.makeText(getContext(), "ON FAILURE CALLED", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Could not connect...", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    public void initViews(View view) {
+        // Initialize textview
+        timeView = view.findViewById(R.id.addeventtime);
+        dateView = view.findViewById(R.id.addeventdate);
+        // Initialize edittext
+        editTextSpotsAvailable = view.findViewById(R.id.eventnumofpeople);
+        editTextDesc = view.findViewById(R.id.addeventdesc);
+        // Initialize buttons
+        dateButton = view.findViewById(R.id.eventDatebtn);
+        timeButton = view.findViewById(R.id.eventTimebtn);
+        createButton = view.findViewById(R.id.createEventbtn);
     }
 }

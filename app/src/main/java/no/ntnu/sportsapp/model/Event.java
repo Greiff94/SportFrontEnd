@@ -1,10 +1,6 @@
 package no.ntnu.sportsapp.model;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Date;
-
-import no.ntnu.sportsapp.model.User;
 
 public class Event {
     private long eventid;

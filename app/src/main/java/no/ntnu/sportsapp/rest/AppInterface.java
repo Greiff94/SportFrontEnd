@@ -32,7 +32,13 @@ public interface AppInterface {
                                            @Field("pwd") String pwd);
 
     @GET("auth/currentuser")
-    public Call<ResponseBody> currentUser();
+    public Call<User> currentUser(@Header("Authorization") String token);
+
+    @PUT("auth/changepassword")
+    public Call<ResponseBody> changePassword(@Header("Authorization") String token,
+                                             @Query("uid") String userid,
+                                             @Query("pwd") String password);
+
 
     //------------EVENT SERVICES------------\\
     @GET("event/allevents")
@@ -52,8 +58,9 @@ public interface AppInterface {
                                        @Field("maxPlayers") int maxPlayers,
                                        @Field("latLng") String latLng);
 
-    @GET
-    public Call<List<User>> getAttenders(@Query("eventid") Long eventid);
+    @GET("event/eventattenders")
+    public Call<List<User>> getAttenders(@Header("Authorization") String token,
+                                         @Query("eventid") Long eventid);
 
 
     //------------EVENT-INTERACTING------------\\
@@ -67,6 +74,7 @@ public interface AppInterface {
                                          @Query("eventid") Long eventid);
 
     @GET("event/myevents")
-    public Call<List<Event>> myEvents(@Query("userid") Long userid);
+    public Call<List<Event>> myEvents(@Header("Authorization") String token,
+                                      @Query("uid") String userid);
 }
 
