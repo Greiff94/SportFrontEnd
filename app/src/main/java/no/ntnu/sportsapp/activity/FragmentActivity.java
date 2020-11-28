@@ -13,6 +13,7 @@ import no.ntnu.sportsapp.fragments.SignedUpFragment;
 import retrofit2.Call;
 
 public class FragmentActivity extends AppCompatActivity {
+long eventid;
 
 
 
@@ -21,19 +22,33 @@ public class FragmentActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_holder);
         Intent intent = getIntent();
-        long eventid = intent.getLongExtra("eventid", 0);
+        eventid = intent.getLongExtra("eventid", 0);
         System.out.println(eventid);
 
         System.out.println("FRAGMENTACRTIVITY OPENED");
+        if(intent.getStringExtra("users").equals("users")){
+            listUser();
+        } else {
+            generateTeams();
+        }
 
-// set Fragmentclass Arguments
+    }
+
+    private void generateTeams() {
+        Bundle bundle = new Bundle();
+        bundle.putLong("eventid", eventid);
+        TeamGeneratorFragment fragobj = new TeamGeneratorFragment();
+        fragobj.setArguments(bundle);
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_container_activityholder, fragobj).commit();
+    }
+
+    public void listUser() {
         Bundle bundle = new Bundle();
         bundle.putLong("eventid", eventid);
         SignedUpFragment fragobj = new SignedUpFragment();
         fragobj.setArguments(bundle);
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.fragment_container_activityholder, fragobj).commit();
-
     }
-
 }
