@@ -62,6 +62,9 @@ public interface AppInterface {
     public Call<List<User>> getAttenders(@Header("Authorization") String token,
                                          @Query("eventid") Long eventid);
 
+    @GET("event/size")
+    public Call<Integer> getSize(@Query("eventid") Long eventid);
+
 
     //------------EVENT-INTERACTING------------\\
 

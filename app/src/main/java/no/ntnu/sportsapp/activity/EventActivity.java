@@ -31,7 +31,7 @@ import retrofit2.Response;
 
 public class EventActivity extends AppCompatActivity implements View.OnClickListener, OnMapReadyCallback {
 
-    private TextView txtViewSport, txtViewDesc, txtViewDate, txtViewTime, txtViewLocation, txtViewMaxPlayers;
+    private TextView txtViewSport, txtViewDesc, txtViewDate, txtViewTime, txtViewLocation, txtViewNumPlayers, txtViewMaxPlayers;
     private Button attendBtn, notAttendingBtn, generateTeamBtn, testParticBtn;
 
     private SupportMapFragment supportMapFragment;
@@ -53,6 +53,7 @@ public class EventActivity extends AppCompatActivity implements View.OnClickList
         txtViewDate = findViewById(R.id.eventdate);
         txtViewTime = findViewById(R.id.eventtime);
         txtViewMaxPlayers = findViewById(R.id.eventMaxPlayers);
+        txtViewNumPlayers = findViewById(R.id.eventJoinedPlayers);
         txtViewLocation = findViewById(R.id.eventlocation);
 
         // Init buttons
@@ -65,11 +66,11 @@ public class EventActivity extends AppCompatActivity implements View.OnClickList
                 .findFragmentById(R.id.googleMapEvent);
         supportMapFragment.getMapAsync(this);
 
-
         txtViewSport.setText(getIntent().getStringExtra("sport"));
         txtViewDesc.setText(getIntent().getStringExtra("description"));
         txtViewDate.setText(getIntent().getStringExtra("date"));
         txtViewTime.setText(getIntent().getStringExtra("time"));
+        txtViewNumPlayers.setText(getIntent().getStringExtra("numOfPlayers"));
         txtViewMaxPlayers.setText(getIntent().getStringExtra("maxPlayers"));
         txtViewLocation.setText(getIntent().getStringExtra("location"));
 
@@ -94,6 +95,7 @@ public class EventActivity extends AppCompatActivity implements View.OnClickList
         attendBtn.setOnClickListener(this);
         notAttendingBtn.setOnClickListener(this);
         txtViewMaxPlayers.setOnClickListener(this);
+        txtViewNumPlayers.setOnClickListener(this);
         testParticBtn.setOnClickListener(this);
     }
 
@@ -159,6 +161,7 @@ public class EventActivity extends AppCompatActivity implements View.OnClickList
                         Toast.makeText(EventActivity.this, "ATTENDING", Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(EventActivity.this, "Something went wrong, please try again later.", Toast.LENGTH_SHORT).show();
+                        System.out.println("Response when something is wrong: " + response);
                     }
                 }
 
