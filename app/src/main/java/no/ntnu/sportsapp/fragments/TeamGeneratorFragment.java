@@ -1,6 +1,7 @@
 package no.ntnu.sportsapp.fragments;
 
 import android.os.Bundle;
+import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,22 +55,36 @@ private EditText editNumberOfTeams;
     }
 
     private void generateTeams(){
-        Random randomGenerator = new Random();
         String input = editNumberOfTeams.getText().toString().trim();
+
         int numberOfTeams = Integer.parseInt(input);
         int numberOfPlayers = users.size();
-        int teamSize;
-        int leftOvers;
-        if(numberOfPlayers % numberOfTeams == 0){
-            teamSize = numberOfPlayers/numberOfTeams;
-            int index = randomGenerator.nextInt(numberOfPlayers);
-        } else  {
-            teamSize = Math.floorDiv(numberOfPlayers, numberOfTeams);
-            leftOvers = numberOfPlayers % numberOfTeams;
+        int teamSize = Math.floorDiv(numberOfPlayers, numberOfTeams);
+        int rest = numberOfPlayers % numberOfTeams;
+
+        for(int t=1; t<=numberOfTeams; t++){
+            //ArrayList<String> team = new ArrayList<>();
+            System.out.println("TEAM " + t + ":");
+
+            for(int s=0; s<teamSize; s++){
+                numberOfPlayers -= numberOfPlayers;
+                int random = (int)((Math.random()*numberOfPlayers));
+                User user = users.get(random);
+                String username = user.getFirstname() + " " + user.getLastname();
+                //team.add(username);
+                users.remove(random);
+                System.out.println(username);
+            }
+            if(rest != 0){
+                int random = (int)((Math.random()*numberOfPlayers));
+                User user = users.get(random);
+                String username = user.getFirstname() + " " + user.getLastname();
+                //team.add(username);
+                users.remove(random);
+                System.out.println(username);
+            }
+            //something team
         }
-
-
-
     }
 
     private void setUserList() {
