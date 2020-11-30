@@ -20,6 +20,10 @@ public class User {
         this.jwt = jwt;
         this.password = password;
     }
+    public User(String firstName, String lastName){
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
 
     public String getFirstname() {
         return firstName;

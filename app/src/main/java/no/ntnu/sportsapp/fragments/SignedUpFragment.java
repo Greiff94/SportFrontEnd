@@ -1,14 +1,19 @@
 package no.ntnu.sportsapp.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.transition.TransitionManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -17,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import no.ntnu.sportsapp.R;
+import no.ntnu.sportsapp.activity.FragmentActivity;
 import no.ntnu.sportsapp.adapter.UserListAdapter;
 import no.ntnu.sportsapp.model.User;
 import no.ntnu.sportsapp.preference.UserPrefs;
@@ -45,7 +51,6 @@ public class SignedUpFragment extends Fragment {
 
         initViews(view);
         setUserList();
-
         adapter = new UserListAdapter(getContext());
         adapter.setUsers(users);
 
@@ -58,7 +63,9 @@ public class SignedUpFragment extends Fragment {
             }
         });
         return view;
+
     }
+
 
     //TODO Test if we don't need to do a call here, since we store the list of users in event?
     public void setUserList() {
@@ -77,7 +84,6 @@ public class SignedUpFragment extends Fragment {
                     adapter.setUsers(users);
                     System.out.println(users);
                     System.out.println("TESTING CALL IN SIGNEDUPUSER");
-                    // getLayoutInflater().inflate(R.id.fragment_container, new SignedUpFragment());
                 }else{
                     Toast.makeText(getContext(), "failed to fetch users, try again", Toast.LENGTH_SHORT).show();
                 }

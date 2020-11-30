@@ -32,7 +32,7 @@ import retrofit2.Response;
 public class EventActivity extends AppCompatActivity implements View.OnClickListener, OnMapReadyCallback {
 
     private TextView txtViewSport, txtViewDesc, txtViewDate, txtViewTime, txtViewLocation, txtViewMaxPlayers;
-    private Button attendBtn, notAttendingBtn, generateTeamBtn, testParticBtn;
+    private Button attendBtn, notAttendingBtn, genButton, testParticBtn;
 
     private SupportMapFragment supportMapFragment;
     private GoogleMap map;
@@ -58,7 +58,7 @@ public class EventActivity extends AppCompatActivity implements View.OnClickList
         // Init buttons
         attendBtn = findViewById(R.id.eventAttendbtn);
         notAttendingBtn = findViewById(R.id.eventNotAttendbtn);
-        generateTeamBtn = findViewById(R.id.generateTeambtn);
+        genButton = findViewById(R.id.generateTeambtn);
         testParticBtn = findViewById(R.id.testingParticipants);
 
         supportMapFragment = (SupportMapFragment) this.getSupportFragmentManager()
@@ -95,6 +95,7 @@ public class EventActivity extends AppCompatActivity implements View.OnClickList
         notAttendingBtn.setOnClickListener(this);
         txtViewMaxPlayers.setOnClickListener(this);
         testParticBtn.setOnClickListener(this);
+        genButton.setOnClickListener(this);
     }
 
     @Override
@@ -108,8 +109,9 @@ public class EventActivity extends AppCompatActivity implements View.OnClickList
                 leaveEvent();
                 break;
 
-            case R.id.generateTeambtn:
-                break;
+//            case R.id.generateTeambtn:
+//                generateTeams();
+//                break;
 
             case R.id.testingParticipants:
                 viewUsers();
@@ -131,19 +133,19 @@ public class EventActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
-    private void generateTeams() {
-        if (bundleExtras != null) {
-            long eventid = bundleExtras.getLong("eventid");
-            Bundle bundle = new Bundle();
-            bundle.putLong( "eventid", eventid);
-
-            Intent intent = new Intent(EventActivity.this, FragmentActivity.class);
-            intent.putExtra("eventid", eventid);
-            intent.putExtra("generate", "generate");
-            EventActivity.this.startActivity(intent);
-            System.out.println("GENERATE");
-        }
-    }
+//    private void generateTeams() {
+//        if (bundleExtras != null) {
+//            long eventid = bundleExtras.getLong("eventid");
+//            Bundle bundle = new Bundle();
+//            bundle.putLong( "eventid", eventid);
+//
+//            Intent intent = new Intent(EventActivity.this, FragmentActivity.class);
+//            intent.putExtra("eventid", eventid);
+//            intent.putExtra("generate", "generate");
+//            EventActivity.this.startActivity(intent);
+//            System.out.println("GENERATE");
+//        }
+//    }
 
     // Gets a google map that has a marker for the events location
     @Override
