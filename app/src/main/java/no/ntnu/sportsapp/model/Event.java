@@ -9,7 +9,6 @@ public class Event {
     private String date;
     private String location;
     private String time;
-    private int numOfPlayers;
     private int maxPlayers;
     private String latLng;
     private User creator;
@@ -18,14 +17,13 @@ public class Event {
 
 
 
-    public Event(long eventid, String sport, String description, String date, String location, String time, int numOfPlayers, int maxPlayers, String latLng, User creator) {
+    public Event(long eventid, String sport, String description, String date, String location, String time, int maxPlayers, String latLng, User creator) {
         this.eventid = eventid;
         this.sport = sport;
         this.description = description;
         this.date = date;
         this.location = location;
         this.time = time;
-        this.numOfPlayers = numOfPlayers;
         this.maxPlayers = maxPlayers;
         this.latLng = latLng;
         this.creator = creator;
@@ -85,14 +83,6 @@ public class Event {
 
     public void setMaxPlayers(int maxPlayers) {
         this.maxPlayers = maxPlayers;
-    }
-
-    public int getNumOfPlayers() {
-        return numOfPlayers;
-    }
-
-    public void setNumOfPlayers(int numOfPlayers) {
-        this.numOfPlayers = numOfPlayers;
     }
 
     public User getCreator() {

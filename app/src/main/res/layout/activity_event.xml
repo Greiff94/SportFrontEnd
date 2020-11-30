@@ -217,36 +217,37 @@
                     android:layout_marginTop="20dp" />
 
 
-                <LinearLayout
+                <RadioGroup
+                    android:id="@+id/radioButtonView"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="50dp"
                     android:layout_marginTop="3dp"
                     android:orientation="horizontal">
 
-                    <Button
+                    <RadioButton
                         android:id="@+id/eventAttendbtn"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:background="#057d08"
+                        android:layout_marginRight="5dp"
+                        android:gravity="center"
+                        android:background="@drawable/radio_flat_selector"
+                        android:button="@color/transparent"
                         android:text="Attending" />
 
-                    <Button
+                    <RadioButton
                         android:id="@+id/eventNotAttendbtn"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:checked="true"
                         android:layout_weight="0.7"
-                        android:background="#6b0e0e"
+                        android:layout_marginLeft="5dp"
+                        android:background="@drawable/radio_flat_selector"
+                        android:button="@color/transparent"
                         android:text="Not attending" />
-                </LinearLayout>
 
-                <Button
-                    android:id="@+id/generateTeambtn"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="5dp"
-                    android:background="@drawable/gradient_bg"
-                    android:text="Generate teams" />
+                </RadioGroup>
 
                 <Button
                     android:id="@+id/testingParticipants"
@@ -255,10 +256,15 @@
                     android:layout_marginTop="5dp"
                     android:background="@drawable/gradient_bg"
                     android:text="Participants" />
+
+                <Button
+                    android:id="@+id/generateTeambtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/gradient_bg"
+                    android:text="Remove event"/>
             </LinearLayout>
-
-
         </RelativeLayout>
     </ScrollView>
-
 </LinearLayout>

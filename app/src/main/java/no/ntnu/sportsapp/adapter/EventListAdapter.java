@@ -58,7 +58,6 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.View
                 intent.putExtra("date", event.getDate());
                 intent.putExtra("time", event.getTime());
                 intent.putExtra("location", event.getLocation());
-                intent.putExtra("numOfPlayers", Integer.toString(event.getNumOfPlayers()));
                 intent.putExtra("maxPlayers", Integer.toString(event.getMaxPlayers()));
                 intent.putExtra("latLng", event.getLatLng());
                 view.getContext().startActivity(intent);
