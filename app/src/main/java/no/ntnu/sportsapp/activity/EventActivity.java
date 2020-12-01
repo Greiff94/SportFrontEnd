@@ -29,7 +29,7 @@ import retrofit2.Response;
 public class EventActivity extends AppCompatActivity implements View.OnClickListener, OnMapReadyCallback {
 
     private TextView txtViewSport, txtViewDesc, txtViewDate, txtViewTime, txtViewLocation, txtViewNumPlayers, txtViewMaxPlayers;
-    private Button attendBtn, notAttendingBtn, generateTeamBtn, testParticBtn;
+    private Button attendBtn, notAttendingBtn, deleteEventBtn, testParticBtn;
 
     private SupportMapFragment supportMapFragment;
     private GoogleMap map;
@@ -57,7 +57,7 @@ public class EventActivity extends AppCompatActivity implements View.OnClickList
         // Init buttons
         attendBtn = findViewById(R.id.eventAttendbtn);
         notAttendingBtn = findViewById(R.id.eventNotAttendbtn);
-        generateTeamBtn = findViewById(R.id.generateTeambtn);
+        deleteEventBtn = findViewById(R.id.deleteEvent);
         testParticBtn = findViewById(R.id.testingParticipants);
 
         supportMapFragment = (SupportMapFragment) this.getSupportFragmentManager()
@@ -71,9 +71,12 @@ public class EventActivity extends AppCompatActivity implements View.OnClickList
         txtViewMaxPlayers.setText(getIntent().getStringExtra("maxPlayers"));
         txtViewLocation.setText(getIntent().getStringExtra("location"));
 
+
+
         System.out.println("==========================================");
         System.out.println(" ");
         System.out.println("EVENT ACTIVITY OPENED");
+
         System.out.println(" ");
         System.out.println("==========================================");
 
@@ -92,7 +95,9 @@ public class EventActivity extends AppCompatActivity implements View.OnClickList
         attendBtn.setOnClickListener(this);
         notAttendingBtn.setOnClickListener(this);
         testParticBtn.setOnClickListener(this);
+        deleteEventBtn.setOnClickListener(this);
 
+        showRemoveButton();
         updateNumPlayers();
         getButtonStatus();
     }
@@ -108,7 +113,8 @@ public class EventActivity extends AppCompatActivity implements View.OnClickList
                 leaveEvent();
                 break;
 
-            case R.id.generateTeambtn:
+            case R.id.deleteEvent:
+                deleteEvent();
                 break;
 
             case R.id.testingParticipants:
@@ -243,6 +249,37 @@ public class EventActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
+    public void deleteEvent() {
+
+        if (bundleExtras != null) {
+            final Intent intent = new Intent(this, MainActivity.class);
+            final UserPrefs userPrefs = new UserPrefs(this);
+            String token = "Bearer " + userPrefs.getToken();
+            long eventid = bundleExtras.getLong("eventid");
+
+                Call<ResponseBody> call = ApiClient
+                        .getSingleton()
+                        .getApi()
+                        .removeEvent(token, eventid);
+
+                call.enqueue(new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                        if (response.isSuccessful()) {
+                            Toast.makeText(EventActivity.this, "Deleted event!", Toast.LENGTH_SHORT).show();
+                            startActivity(intent);
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                        Toast.makeText(EventActivity.this, "Could not connect...", Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+            }
+    }
+
     public void getButtonStatus() {
         final UserPrefs userPrefs = new UserPrefs(this);
         RadioGroup radioGroup = findViewById(R.id.radioButtonView);
@@ -253,5 +290,22 @@ public class EventActivity extends AppCompatActivity implements View.OnClickList
                 userPrefs.setButtonState(i);
             }
         });
+    }
+
+    public void showRemoveButton() {
+        View view = null;
+        if (bundleExtras != null) {
+            UserPrefs userPrefs = new UserPrefs(this);
+            String eventCreator = bundleExtras.getString("eventCreator");
+            String currentUser = userPrefs.getUid();
+            System.out.println(currentUser + " " + eventCreator);
+
+            if (eventCreator.equals(currentUser) || currentUser.equals(null)) {
+                deleteEventBtn.setVisibility(view.VISIBLE);
+            } else {
+                deleteEventBtn.setVisibility(view.INVISIBLE);
+            }
+
+        }
     }
 }

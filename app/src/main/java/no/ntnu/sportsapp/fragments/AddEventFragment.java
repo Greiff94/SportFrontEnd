@@ -265,8 +265,8 @@ public class AddEventFragment extends Fragment implements View.OnClickListener, 
             return;
         }
 
-        UserPrefs userPrefs = new UserPrefs(getContext());
-        String token = "Bearer " + userPrefs.getToken();
+        final UserPrefs userPrefs = new UserPrefs(getContext());
+        final String token = "Bearer " + userPrefs.getToken();
 
         Call<ResponseBody> call = ApiClient
                 .getSingleton()
@@ -278,7 +278,6 @@ public class AddEventFragment extends Fragment implements View.OnClickListener, 
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.isSuccessful()) {
                     Toast.makeText(getContext(), "Event added!", Toast.LENGTH_SHORT).show();
-
                     Fragment eventsFragment = new EventsFragment();
                     FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
                     fragmentTransaction.replace(R.id.fragment_container, eventsFragment).commit();
@@ -306,4 +305,8 @@ public class AddEventFragment extends Fragment implements View.OnClickListener, 
         timeButton = view.findViewById(R.id.eventTimebtn);
         createButton = view.findViewById(R.id.createEventbtn);
     }
+
+
+
+
 }

@@ -107,7 +107,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.nav_logout:
                 UserPrefs userPrefs = new UserPrefs(this);
-                userPrefs.setToken("");
+                userPrefs.setToken(null);
+                userPrefs.setUid(null);
+                userPrefs.setPwd(null);
                 finish();
                 startActivity(getIntent());
                 break;

@@ -45,7 +45,8 @@ public interface AppInterface {
     public Call<List<Event>> getAllEvents();
 
     @DELETE("event/remove")
-    public Call<ResponseBody> removeEvent(@Query("eventid") Long eventid);
+    public Call<ResponseBody> removeEvent(@Header("Authorization") String token,
+                                          @Query("eventid") Long eventid);
 
     @FormUrlEncoded
     @POST("event/add")
