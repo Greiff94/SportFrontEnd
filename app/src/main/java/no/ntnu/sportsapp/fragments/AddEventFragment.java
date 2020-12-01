@@ -132,12 +132,19 @@ public class AddEventFragment extends Fragment implements View.OnClickListener, 
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                    Address address = addressList.get(0);
-                    map.clear();
-                    latLng = new LatLng(address.getLatitude(), address.getLongitude());
-                    map.addMarker(new MarkerOptions().position(latLng));
-                    map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
-                    locationName = addressList.get(0).getLocality();
+                    if (addressList != null && !addressList.isEmpty()) {
+                        Address address = addressList.get(0);
+                        map.clear();
+                        latLng = new LatLng(address.getLatitude(), address.getLongitude());
+                        map.addMarker(new MarkerOptions().position(latLng));
+                        map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
+                        locationName = address.getLocality();
+                        System.out.println("Location name is: " + locationName);
+                    } else {
+                        latLng = new LatLng(0,0);
+                        locationName = "No location currently available";
+                        Toast.makeText(getContext(), "Unable to add marker to the map!", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
 
@@ -244,6 +251,11 @@ public class AddEventFragment extends Fragment implements View.OnClickListener, 
             location = locationName.trim();
         } catch (NullPointerException e) {
             e.printStackTrace();
+            return;
+        }
+        if (locationName == null || latLng == null) {
+            location = "Not available";
+            latlngLocation = "Not available";
             return;
         }
 
