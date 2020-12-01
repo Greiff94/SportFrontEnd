@@ -21,6 +21,7 @@ import java.util.Random;
 
 import no.ntnu.sportsapp.R;
 import no.ntnu.sportsapp.adapter.TeamListAdapter;
+//import no.ntnu.sportsapp.model.TeamMember;
 import no.ntnu.sportsapp.model.User;
 import no.ntnu.sportsapp.preference.UserPrefs;
 import no.ntnu.sportsapp.rest.ApiClient;
@@ -34,7 +35,7 @@ private SwipeRefreshLayout swipeRefreshLayout;
 private RecyclerView teamsRecyclerView;
 private TeamListAdapter adapter;
 private ArrayList<User> users = new ArrayList<>();
-private ArrayList<ArrayList<String>> teams = new ArrayList<>();
+private ArrayList<User> teams = new ArrayList<>();
 private TextView teamsText;
 private int numberOfTeams;
 
@@ -50,10 +51,10 @@ private int numberOfTeams;
         setUserList();
 
         adapter = new TeamListAdapter(getContext());
-        adapter.setUsers(users, numberOfTeams);
+        adapter.setUsers(users);
 
         teamsRecyclerView.setAdapter(adapter);
-        teamsRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
+        teamsRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 1));
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -76,7 +77,8 @@ private int numberOfTeams;
             public void onResponse(Call<List<User>> call, Response<List<User>> response) {
                 if(response.isSuccessful()){
                     users = (ArrayList<User>) response.body();
-                    adapter.setUsers(users, numberOfTeams);
+                    generateTeams();
+
                 }else{
                     Toast.makeText(getContext(), "failed to fetch users, try again", Toast.LENGTH_SHORT).show();
                 }
@@ -89,38 +91,41 @@ private int numberOfTeams;
         });
     }
 
-    private void generateTeams(){
+    private void generateTeams() {
         int numberOfPlayers = users.size();
         int teamSize = Math.floorDiv(numberOfPlayers, numberOfTeams);
         int rest = numberOfPlayers % numberOfTeams;
-        System.out.println(numberOfTeams);
-        System.out.println(numberOfPlayers);
-        System.out.println(teamSize);
-        System.out.println(rest);
-
-        for(int t=1; t<=numberOfTeams; t++){
-            ArrayList<String> team = new ArrayList<>();
+        ArrayList<User> team = new ArrayList<>();
+        for (int t = 1; t <= numberOfTeams; t++) {
+            System.out.println("NUMBER OF TEAMS " + numberOfTeams);
+            System.out.println("NUMBER OF PLAYERS " + numberOfPlayers);
+            System.out.println("TEAMSIZE " + teamSize);
+            System.out.println("REST " + rest);
+            User teamNumber = new User("teamleader@team.com","Team ", String.valueOf(t));
+            team.add(teamNumber);
             System.out.println("TEAM " + t + ":");
-            for(int s=0; s<teamSize; s++){
-                numberOfPlayers -= numberOfPlayers;
-                int random = (int)((Math.random()*numberOfPlayers));
-                User user = users.get(random);
-                System.out.println(user);
-                String username = user.getFirstname() + " " + user.getLastname();
-                team.add(username);
-                users.remove(random);
-                System.out.println(username);
+            for (int s = 0; s < teamSize; s++) {
+                if (users!= null && users.size() != 0) {
+                    int random = (int) ((Math.random() * users.size()));
+                    User user = users.get(random);
+                    team.add(user);
+                    users.remove(random);
+                    System.out.println("Player: " + user.getFirstname());
+                }
             }
-            if(rest != 0){
-                int random = (int)((Math.random()*numberOfPlayers));
-                User user = users.get(random);
-                String username = user.getFirstname() + " " + user.getLastname();
-                team.add(username);
-                users.remove(random);
-                System.out.println(username);
+            if (rest != 0) {
+                if (users!= null && users.size() != 0) {
+                    int random = (int) ((Math.random() * users.size()));
+                    User user = users.get(random);
+                    team.add(user);
+                    users.remove(random);
+                    System.out.println("Player: " + user.getFirstname());
+                    rest -= rest;
+                }
             }
-            teams.add(team);
         }
+        this.teams = team;
+        adapter.setUsers(team);
     }
 
     public void initViews(View view){

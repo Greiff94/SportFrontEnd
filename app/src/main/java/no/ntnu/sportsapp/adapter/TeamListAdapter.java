@@ -14,12 +14,12 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import no.ntnu.sportsapp.R;
-import no.ntnu.sportsapp.model.TeamMember;
+//import no.ntnu.sportsapp.model.TeamMember;
 import no.ntnu.sportsapp.model.User;
 
 public class TeamListAdapter extends RecyclerView.Adapter<TeamListAdapter.ViewHolder>{
    ArrayList<User> users = new ArrayList<>();
-   ArrayList<TeamMember> teams = new ArrayList<>();
+   //ArrayList<TeamMember> teams = new ArrayList<>();
    private Context context;
    private int numberOfTeams;
 
@@ -37,20 +37,20 @@ public class TeamListAdapter extends RecyclerView.Adapter<TeamListAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull TeamListAdapter.ViewHolder holder, int position) {
-        holder.fName.setText(teams.get(position).getFirstName());
-        holder.lName.setText(teams.get(position).getLastName());
+        holder.fName.setText(users.get(position).getFirstname());
+        holder.lName.setText(users.get(position).getLastname());
     }
 
     public int getItemCount() {
        return users.size();
     }
-    public void setUsers(ArrayList<User> users, int numberOfTeams) {
-       this.numberOfTeams = numberOfTeams;
+    public void setUsers(ArrayList<User> users) {
+     //  this.numberOfTeams = numberOfTeams;
        this.users = users;
-       this.teams = generateTeams();
+      // this.teams = generateTeams();
        notifyDataSetChanged();
     }
-    private ArrayList<TeamMember> generateTeams() {
+/*    private ArrayList<TeamMember> generateTeams() {
         int numberOfPlayers = users.size();
         int teamSize = Math.floorDiv(numberOfPlayers, numberOfTeams);
         int rest = numberOfPlayers % numberOfTeams;
@@ -86,7 +86,7 @@ public class TeamListAdapter extends RecyclerView.Adapter<TeamListAdapter.ViewHo
             }
         }
         return team;
-    }
+    }*/
 
     public class ViewHolder extends RecyclerView.ViewHolder{
        private TextView fName, lName;

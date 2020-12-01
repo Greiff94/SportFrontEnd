@@ -14,7 +14,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/transparent">
+        android:background="@color/transparent"
+        android:layout_marginTop="2dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -24,7 +25,7 @@
             android:textStyle="bold"
             android:layout_centerVertical="true"/>
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Username"
             android:id="@+id/teamlname"
