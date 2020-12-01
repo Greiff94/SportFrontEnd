@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import no.ntnu.sportsapp.R;
 import no.ntnu.sportsapp.activity.EventActivity;
@@ -44,15 +45,7 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.View
         holder.txtDate.setText(events.get(position).getDate());
         holder.txtTime.setText(events.get(position).getTime());
         holder.txtLocation.setText(events.get(position).getLocation());
-        if(events.get(position).getSport() == "Football"){
-            holder.image.setImageResource(R.drawable.football);
-        }else if(events.get(position).getSport() == "Volleyball"){
-            holder.image.setImageResource(R.drawable.volleyball);
-        }else if(events.get(position).getSport() == "Basketball"){
-            holder.image.setImageResource(R.drawable.basketball);
-        } else {
-            holder.image.setImageResource(R.drawable.logo200);
-        }
+        holder.image.setImageResource(events.get(position).getImage());
 
 
         holder.parent.setOnClickListener(new View.OnClickListener(){

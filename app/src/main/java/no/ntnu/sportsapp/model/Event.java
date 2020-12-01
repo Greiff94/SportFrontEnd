@@ -2,6 +2,8 @@ package no.ntnu.sportsapp.model;
 
 import java.util.ArrayList;
 
+import no.ntnu.sportsapp.R;
+
 public class Event {
     int image;
     private long eventid;
@@ -15,7 +17,7 @@ public class Event {
     private User creator;
     private ArrayList<User> signedUsers = new ArrayList<>();
 //    private boolean oldEvent;
-
+ int picture[] = {R.drawable.football, R.drawable.volleyball, R.drawable.basketball, R.drawable.logo200};
 
 
     public Event(int image, long eventid, String sport, String description, String date, String location, String time, int maxPlayers, String latLng, User creator) {
@@ -30,15 +32,20 @@ public class Event {
         this.latLng = latLng;
         this.creator = creator;
     }
-
-    public int getImage() {
-        return image;
+    public int getImage(){
+        String football = "Football";
+        String volleyball = "Volleyball";
+        String basketball = "Basketball";
+        if(this.sport.equals(football)){
+            return R.drawable.football;
+        } else if(this.sport.equals(volleyball)){
+            return R.drawable.volleyball;
+        } else if(this.sport.equals(basketball)){
+            return R.drawable.basketball;
+        }else {
+            return R.drawable.logo200;
+        }
     }
-
-    public void setImage(int image) {
-        this.image = image;
-    }
-
     public long getId() {
         return eventid;
     }
