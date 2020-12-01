@@ -17,9 +17,9 @@
     <string-array name="sports_array">
         <item> </item>
         <item>Football</item>
-        <item>Handball</item>
-        <item>Floorball</item>
         <item>Volleyball</item>
+        <item>Basketball</item>
+        <item>Handball</item>
         <item>Frisbeegolf</item>
         <item>Acrobatics</item>
         <item>Swimming</item>

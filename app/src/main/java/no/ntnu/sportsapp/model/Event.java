@@ -3,6 +3,7 @@ package no.ntnu.sportsapp.model;
 import java.util.ArrayList;
 
 public class Event {
+    int image;
     private long eventid;
     private String sport;
     private String description;
@@ -17,7 +18,8 @@ public class Event {
 
 
 
-    public Event(long eventid, String sport, String description, String date, String location, String time, int maxPlayers, String latLng, User creator) {
+    public Event(int image, long eventid, String sport, String description, String date, String location, String time, int maxPlayers, String latLng, User creator) {
+        this.image = image;
         this.eventid = eventid;
         this.sport = sport;
         this.description = description;
@@ -27,6 +29,14 @@ public class Event {
         this.maxPlayers = maxPlayers;
         this.latLng = latLng;
         this.creator = creator;
+    }
+
+    public int getImage() {
+        return image;
+    }
+
+    public void setImage(int image) {
+        this.image = image;
     }
 
     public long getId() {
