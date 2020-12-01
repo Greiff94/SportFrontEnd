@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import no.ntnu.sportsapp.R;
 import no.ntnu.sportsapp.activity.EventActivity;
 import no.ntnu.sportsapp.model.Event;
-import no.ntnu.sportsapp.model.User;
 
 public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.ViewHolder> {
     private ArrayList<Event> events = new ArrayList<>();
@@ -61,7 +60,7 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.View
                 intent.putExtra("date", event.getDate());
                 intent.putExtra("time", event.getTime());
                 intent.putExtra("location", event.getLocation());
-                intent.putExtra("eventCreator", event.getCreator().getUid());
+                intent.putExtra("eventCreator", event.getEventCreator().getUid());
                 intent.putExtra("maxPlayers", Integer.toString(event.getMaxPlayers()));
                 intent.putExtra("latLng", event.getLatLng());
                 view.getContext().startActivity(intent);

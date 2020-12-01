@@ -11,13 +11,13 @@ public class Event {
     private String time;
     private int maxPlayers;
     private String latLng;
-    private User creator;
+    private User eventCreator;
     private ArrayList<User> signedUsers = new ArrayList<>();
 //    private boolean oldEvent;
 
 
 
-    public Event(long eventid, String sport, String description, String date, String location, String time, int maxPlayers, String latLng, User creator) {
+    public Event(long eventid, String sport, String description, String date, String location, String time, int maxPlayers, String latLng, User eventCreator) {
         this.eventid = eventid;
         this.sport = sport;
         this.description = description;
@@ -26,7 +26,7 @@ public class Event {
         this.time = time;
         this.maxPlayers = maxPlayers;
         this.latLng = latLng;
-        this.creator = creator;
+        this.eventCreator = eventCreator;
     }
 
     public long getId() {
@@ -85,12 +85,12 @@ public class Event {
         this.maxPlayers = maxPlayers;
     }
 
-    public User getCreator() {
-        return creator;
+    public User getEventCreator() {
+        return eventCreator;
     }
 
-    public void setCreator(User creator) {
-        this.creator = creator;
+    public void setEventCreator(User eventCreator) {
+        this.eventCreator = eventCreator;
     }
 
     public ArrayList<User> getSignedUsers() {

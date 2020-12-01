@@ -2,8 +2,13 @@ package no.ntnu.sportsapp.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,7 +33,7 @@ import retrofit2.Response;
 
 public class EventActivity extends AppCompatActivity implements View.OnClickListener, OnMapReadyCallback {
 
-    private TextView txtViewSport, txtViewDesc, txtViewDate, txtViewTime, txtViewLocation, txtViewNumPlayers, txtViewMaxPlayers;
+    private TextView txtViewSport, txtViewDesc, txtViewDate, txtViewTime, txtViewLocation, txtViewNumPlayers, txtViewMaxPlayers, txtViewPopup;
     private Button attendBtn, notAttendingBtn, deleteEventBtn, testParticBtn;
 
     private SupportMapFragment supportMapFragment;
@@ -45,6 +50,7 @@ public class EventActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event);
 
+
         // TextView Init
         txtViewSport = findViewById(R.id.eventsport);
         txtViewDesc = findViewById(R.id.eventdesc);
@@ -60,6 +66,10 @@ public class EventActivity extends AppCompatActivity implements View.OnClickList
         deleteEventBtn = findViewById(R.id.deleteEvent);
         testParticBtn = findViewById(R.id.testingParticipants);
 
+        // Popupview inits
+        txtViewPopup = findViewById(R.id.popuptext);
+
+
         supportMapFragment = (SupportMapFragment) this.getSupportFragmentManager()
                 .findFragmentById(R.id.googleMapEvent);
         supportMapFragment.getMapAsync(this);
@@ -70,7 +80,6 @@ public class EventActivity extends AppCompatActivity implements View.OnClickList
         txtViewTime.setText(getIntent().getStringExtra("time"));
         txtViewMaxPlayers.setText(getIntent().getStringExtra("maxPlayers"));
         txtViewLocation.setText(getIntent().getStringExtra("location"));
-
 
 
         System.out.println("==========================================");
@@ -114,8 +123,9 @@ public class EventActivity extends AppCompatActivity implements View.OnClickList
                 break;
 
             case R.id.deleteEvent:
-                deleteEvent();
+                onDeleteShowPopUpWindow(view);
                 break;
+
 
             case R.id.testingParticipants:
                 viewUsers();
@@ -249,6 +259,48 @@ public class EventActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
+    public void onDeleteShowPopUpWindow(View view) {
+        LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+        View popupView = inflater.inflate(R.layout.popup, null);
+
+        // Create popup window
+        int width = LinearLayout.LayoutParams.WRAP_CONTENT;
+        int height = LinearLayout.LayoutParams.WRAP_CONTENT;
+        boolean focusable = true;
+        final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
+
+        // Shows the popupWindow
+        popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+
+        // dismiss popup window when touched
+        popupView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                popupWindow.dismiss();
+                return true;
+            }
+        });
+
+        Button popupDeleteBtn = (Button) popupView.findViewById(R.id.popupdelete);
+        popupDeleteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                System.out.println("POPUPDELETECLICKED");
+                deleteEvent();
+                popupWindow.dismiss();
+            }
+        });
+
+        Button popupCancelBtn = (Button) popupView.findViewById(R.id.popupcancel);
+        popupCancelBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                System.out.println("POPUPCANCELCLICKED");
+                popupWindow.dismiss();
+            }
+        });
+    }
+
     public void deleteEvent() {
 
         if (bundleExtras != null) {
@@ -257,27 +309,27 @@ public class EventActivity extends AppCompatActivity implements View.OnClickList
             String token = "Bearer " + userPrefs.getToken();
             long eventid = bundleExtras.getLong("eventid");
 
-                Call<ResponseBody> call = ApiClient
-                        .getSingleton()
-                        .getApi()
-                        .removeEvent(token, eventid);
+            Call<ResponseBody> call = ApiClient
+                    .getSingleton()
+                    .getApi()
+                    .removeEvent(token, eventid);
 
-                call.enqueue(new Callback<ResponseBody>() {
-                    @Override
-                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                        if (response.isSuccessful()) {
-                            Toast.makeText(EventActivity.this, "Deleted event!", Toast.LENGTH_SHORT).show();
-                            startActivity(intent);
-                        }
+            call.enqueue(new Callback<ResponseBody>() {
+                @Override
+                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                    if (response.isSuccessful()) {
+                        Toast.makeText(EventActivity.this, "Deleted event!", Toast.LENGTH_SHORT).show();
+                        startActivity(intent);
                     }
+                }
 
-                    @Override
-                    public void onFailure(Call<ResponseBody> call, Throwable t) {
-                        Toast.makeText(EventActivity.this, "Could not connect...", Toast.LENGTH_SHORT).show();
+                @Override
+                public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    Toast.makeText(EventActivity.this, "Could not connect...", Toast.LENGTH_SHORT).show();
 
-                    }
-                });
-            }
+                }
+            });
+        }
     }
 
     public void getButtonStatus() {
