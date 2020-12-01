@@ -59,6 +59,7 @@ private int numberOfTeams;
             @Override
             public void onRefresh() {
                 setUserList();
+                swipeRefreshLayout.setRefreshing(false);
             }
         });
         System.out.println("TEAMGENERATOR");

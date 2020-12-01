@@ -49,6 +49,7 @@ public class EventsFragment extends Fragment {
             @Override
             public void onRefresh() {
                 setEventList();
+                swipeRefreshLayout.setRefreshing(false);
             }
         });
         return view;

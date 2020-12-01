@@ -60,6 +60,7 @@ public class SignedUpFragment extends Fragment {
             @Override
             public void onRefresh() {
                 setUserList();
+                swipeRefreshLayout.setRefreshing(false);
             }
         });
         return view;
