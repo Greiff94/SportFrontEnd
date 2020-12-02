@@ -43,7 +43,6 @@ public class MyEventFragment extends Fragment {
         setMyEventList();
 
         adapter = new EventListAdapter(getContext());
-        adapter.setEvents(myEvents);
 
         myEventsRecyclerView.setAdapter(adapter);
         myEventsRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 1));

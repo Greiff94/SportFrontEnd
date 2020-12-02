@@ -35,12 +35,12 @@
 
 
         <ImageView
+            android:id="@+id/userimg"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:id="@+id/userimg"
             android:layout_below="@id/parent"
             android:layout_margin="4dp"
-            android:src="@drawable/ic_launcher_background"
+            android:src="@drawable/ic_profile"
             tools:ignore="NotSibling" />
 
 
