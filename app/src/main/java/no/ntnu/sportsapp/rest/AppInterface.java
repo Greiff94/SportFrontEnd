@@ -31,6 +31,9 @@ public interface AppInterface {
                                            @Field("email") String email,
                                            @Field("pwd") String pwd);
 
+    @GET("auth/resetpassword")
+    public Call<ResponseBody> resetPassword(@Query("uid") String userid);
+
     @GET("auth/currentuser")
     public Call<User> currentUser(@Header("Authorization") String token);
 

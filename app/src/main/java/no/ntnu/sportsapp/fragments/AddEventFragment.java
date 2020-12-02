@@ -253,11 +253,6 @@ public class AddEventFragment extends Fragment implements View.OnClickListener, 
             e.printStackTrace();
             return;
         }
-        if (locationName == null || latLng == null) {
-            location = "Not available";
-            latlngLocation = "Not available";
-            return;
-        }
 
         if (description.isEmpty()) {
             editTextDesc.setError("Description is required");

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <ImageView
+        android:id="@+id/forgotpwdheader"
+        android:layout_width="match_parent"
+        android:layout_height="240dp"
+        android:src="@mipmap/ic_logoself_foreground"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/gradient_bg"/>
+
+    <TextView
+        android:id="@+id/forgotpwdtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enter your email to get a new password"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.507"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/forgotpwdheader" />
+
+    <EditText
+        android:id="@+id/forgotpwdemail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:ems="10"
+        android:inputType="textEmailAddress"
+        android:hint="@string/prompt_email"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/forgotpwdtitle" />
+
+    <Button
+        android:id="@+id/forgotpwdbtn"
+        android:layout_width="match_parent"
+        android:layout_marginHorizontal="40dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="Get new password"
+        android:background="@drawable/gradient_bg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/forgotpwdemail" />
+
+    <Button
+        android:id="@+id/forgotpwdreturntologin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="40dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/transparent"
+        android:text="Return to login"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/forgotpwdbtn"
+        app:layout_constraintVertical_bias="0.068" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
