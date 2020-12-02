@@ -4,6 +4,8 @@ package no.ntnu.sportsapp.preference;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 public class UserPrefs {
 
@@ -11,10 +13,12 @@ public class UserPrefs {
 
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor prefsEditor;
+    private int lBtnState;
 
     public UserPrefs(Context context) {
         this.sharedPreferences = context.getSharedPreferences(SHARED_PREF_NAME, Activity.MODE_PRIVATE);
         this.prefsEditor = sharedPreferences.edit();
+
     }
 
     public String getToken() {
@@ -41,5 +45,11 @@ public class UserPrefs {
         prefsEditor.putString("pwd", pwd).commit();
     }
 
+    public void setButtonState(int btnState) {
+        prefsEditor.putInt("buttonState", btnState).commit();
+    }
 
+    public int getButtonState () {
+        return sharedPreferences.getInt("buttonState", lBtnState);
+    }
 }

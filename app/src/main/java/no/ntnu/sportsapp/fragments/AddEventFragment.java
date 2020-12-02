@@ -132,12 +132,19 @@ public class AddEventFragment extends Fragment implements View.OnClickListener, 
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                    Address address = addressList.get(0);
-                    map.clear();
-                    latLng = new LatLng(address.getLatitude(), address.getLongitude());
-                    map.addMarker(new MarkerOptions().position(latLng));
-                    map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
-                    locationName = addressList.get(0).getLocality();
+                    if (addressList != null && !addressList.isEmpty()) {
+                        Address address = addressList.get(0);
+                        map.clear();
+                        latLng = new LatLng(address.getLatitude(), address.getLongitude());
+                        map.addMarker(new MarkerOptions().position(latLng));
+                        map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
+                        locationName = address.getLocality();
+                        System.out.println("Location name is: " + locationName);
+                    } else {
+                        latLng = new LatLng(0,0);
+                        locationName = "No location currently available";
+                        Toast.makeText(getContext(), "Unable to add marker to the map!", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
 
@@ -265,8 +272,8 @@ public class AddEventFragment extends Fragment implements View.OnClickListener, 
             return;
         }
 
-        UserPrefs userPrefs = new UserPrefs(getContext());
-        String token = "Bearer " + userPrefs.getToken();
+        final UserPrefs userPrefs = new UserPrefs(getContext());
+        final String token = "Bearer " + userPrefs.getToken();
 
         Call<ResponseBody> call = ApiClient
                 .getSingleton()
@@ -278,7 +285,6 @@ public class AddEventFragment extends Fragment implements View.OnClickListener, 
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.isSuccessful()) {
                     Toast.makeText(getContext(), "Event added!", Toast.LENGTH_SHORT).show();
-
                     Fragment eventsFragment = new EventsFragment();
                     FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
                     fragmentTransaction.replace(R.id.fragment_container, eventsFragment).commit();
@@ -306,4 +312,8 @@ public class AddEventFragment extends Fragment implements View.OnClickListener, 
         timeButton = view.findViewById(R.id.eventTimebtn);
         createButton = view.findViewById(R.id.createEventbtn);
     }
+
+
+
+
 }

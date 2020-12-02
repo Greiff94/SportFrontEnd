@@ -15,10 +15,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-        <FrameLayout
-            android:id="@+id/fragment_container_activity"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            <FrameLayout
+                android:id="@+id/fragment_container_activity"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbarEvent"
@@ -99,18 +99,46 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
-                    android:text="Max Participants"
+                    android:text="Participants"
                     android:textColor="@color/orange_color"
                     android:textSize="13sp" />
 
-                <TextView
-                    android:id="@+id/eventMaxPlayers"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:clickable="true"
-                    android:onClick="onClick"
-                    android:hint="x of y spots taken"
-                    android:textSize="20sp" />
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/eventJoinedPlayers"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="1"
+                        android:hint="numpar"
+                        android:onClick="onClick"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="1"
+                        android:text="of"
+                        android:onClick="onClick"
+                        android:gravity="center"
+                        android:textSize="20sp"/>
+
+                    <TextView
+                        android:id="@+id/eventMaxPlayers"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="1"
+                        android:hint="maxpar"
+                        android:onClick="onClick"
+                        android:textSize="20sp" />
+
+                </LinearLayout>
 
 
                 <LinearLayout
@@ -189,36 +217,37 @@
                     android:layout_marginTop="20dp" />
 
 
-                <LinearLayout
+                <RadioGroup
+                    android:id="@+id/radioButtonView"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="50dp"
                     android:layout_marginTop="3dp"
                     android:orientation="horizontal">
 
-                    <Button
+                    <RadioButton
                         android:id="@+id/eventAttendbtn"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:background="#057d08"
+                        android:layout_marginRight="5dp"
+                        android:gravity="center"
+                        android:background="@drawable/radio_flat_selector"
+                        android:button="@color/transparent"
                         android:text="Attending" />
 
-                    <Button
+                    <RadioButton
                         android:id="@+id/eventNotAttendbtn"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:checked="true"
                         android:layout_weight="0.7"
-                        android:background="#6b0e0e"
+                        android:layout_marginLeft="5dp"
+                        android:background="@drawable/radio_flat_selector"
+                        android:button="@color/transparent"
                         android:text="Not attending" />
-                </LinearLayout>
 
-                <Button
-                    android:id="@+id/generateTeambtn"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="5dp"
-                    android:background="@drawable/gradient_bg"
-                    android:text="Generate teams" />
+                </RadioGroup>
 
                 <Button
                     android:id="@+id/testingParticipants"
@@ -227,10 +256,15 @@
                     android:layout_marginTop="5dp"
                     android:background="@drawable/gradient_bg"
                     android:text="Participants" />
+
+                <Button
+                    android:id="@+id/deleteEvent"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="5dp"
+                    android:background="#D52C08"
+                    android:text="Delete event"/>
             </LinearLayout>
-
-
         </RelativeLayout>
     </ScrollView>
-
 </LinearLayout>

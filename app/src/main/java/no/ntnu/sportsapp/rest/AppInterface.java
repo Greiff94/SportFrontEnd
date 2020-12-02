@@ -31,6 +31,9 @@ public interface AppInterface {
                                            @Field("email") String email,
                                            @Field("pwd") String pwd);
 
+    @GET("auth/resetpassword")
+    public Call<ResponseBody> resetPassword(@Query("uid") String userid);
+
     @GET("auth/currentuser")
     public Call<User> currentUser(@Header("Authorization") String token);
 
@@ -45,7 +48,8 @@ public interface AppInterface {
     public Call<List<Event>> getAllEvents();
 
     @DELETE("event/remove")
-    public Call<ResponseBody> removeEvent(@Query("eventid") Long eventid);
+    public Call<ResponseBody> removeEvent(@Header("Authorization") String token,
+                                          @Query("eventid") Long eventid);
 
     @FormUrlEncoded
     @POST("event/add")
@@ -61,6 +65,9 @@ public interface AppInterface {
     @GET("event/eventattenders")
     public Call<List<User>> getAttenders(@Header("Authorization") String token,
                                          @Query("eventid") Long eventid);
+
+    @GET("event/size")
+    public Call<Integer> getSize(@Query("eventid") Long eventid);
 
 
     //------------EVENT-INTERACTING------------\\

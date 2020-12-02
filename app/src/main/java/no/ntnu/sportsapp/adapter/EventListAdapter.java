@@ -51,6 +51,8 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.View
                 Toast.makeText(context, events.get(position).getSport() + " selected", Toast.LENGTH_SHORT).show();
                 Event event = events.get(position);
 
+
+
                 Intent intent = new Intent(context, EventActivity.class);
                 intent.putExtra("eventid", event.getId());
                 intent.putExtra("sport", event.getSport());
@@ -58,6 +60,7 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.View
                 intent.putExtra("date", event.getDate());
                 intent.putExtra("time", event.getTime());
                 intent.putExtra("location", event.getLocation());
+                intent.putExtra("eventCreator", event.getEventCreator().getUid());
                 intent.putExtra("maxPlayers", Integer.toString(event.getMaxPlayers()));
                 intent.putExtra("latLng", event.getLatLng());
                 view.getContext().startActivity(intent);

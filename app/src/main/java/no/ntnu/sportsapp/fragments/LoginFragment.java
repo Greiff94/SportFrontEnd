@@ -28,6 +28,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     private EditText passwordEditText;
     private Button lbutton;
     private Button cregister;
+    private Button forgotpwdBtn;
 
     @Nullable
     @Override
@@ -51,6 +52,12 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                 Fragment fragment = new RegisterFragment();
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.replace(R.id.fragment_container, fragment).commit();
+                break;
+
+            case R.id.lforgotpwd:
+                Fragment fpwdfragment = new ForgotPasswordFragment();
+                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.fragment_container, fpwdfragment).commit();
                 break;
         }
     }
@@ -107,9 +114,11 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         passwordEditText = view.findViewById(R.id.lpwd);
         lbutton = view.findViewById(R.id.lbutton);
         cregister = view.findViewById(R.id.lregister);
+        forgotpwdBtn = view.findViewById(R.id.lforgotpwd);
 
         //Listeners for the buttons, declaring them for this fragment
         lbutton.setOnClickListener(this);
         cregister.setOnClickListener(this);
+        forgotpwdBtn.setOnClickListener(this);
     }
 }

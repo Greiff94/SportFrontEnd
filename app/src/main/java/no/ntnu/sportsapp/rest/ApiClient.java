@@ -8,7 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ApiClient {
 
     //URL FOR SERVER
-    private static final String BASE_URL = "http://localhost:8080/Sport/api/";
+    private static final String BASE_URL = "http://158.38.101.251:8080/Sport-1.0/api/";
 
     private static ApiClient singleton;
 
