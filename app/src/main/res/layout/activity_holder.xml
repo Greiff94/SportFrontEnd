@@ -2,9 +2,35 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/optionsLay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary">
+
+        <EditText
+            android:id="@+id/numberOfTeams"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+
+            android:hint="Number of teams"/>
+        <Button
+            android:id="@+id/generateButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Generate teams"
+            android:background="@color/transparent"
+            android:layout_toRightOf="@id/numberOfTeams"/>
+
+    </RelativeLayout>
+
+
     <FrameLayout
         android:id="@+id/fragment_container_activityholder"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_below="@+id/optionsLay"/>
 
 </RelativeLayout>

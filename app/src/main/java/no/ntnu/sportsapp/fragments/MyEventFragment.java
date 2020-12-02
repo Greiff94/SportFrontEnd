@@ -14,6 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import no.ntnu.sportsapp.R;
@@ -49,6 +51,7 @@ public class MyEventFragment extends Fragment {
             @Override
             public void onRefresh() {
                 setMyEventList();
+                swipeRefreshLayout.setRefreshing(false);
             }
         });
         return view;
@@ -69,7 +72,7 @@ public class MyEventFragment extends Fragment {
             public void onResponse(Call<List<Event>> call, Response<List<Event>> response) {
                 if(response.isSuccessful()){
                     myEvents = (ArrayList<Event>) response.body();
-                    adapter.setEvents(myEvents);
+                    sortList(myEvents);
                 }else{
                     Toast.makeText(getContext(), "Failed to see your events, please try again", Toast.LENGTH_SHORT).show();
                 }
@@ -81,6 +84,15 @@ public class MyEventFragment extends Fragment {
             }
         });
 
+    }
+    public void sortList(ArrayList<Event> event){
+        Collections.sort(event, new Comparator<Event>() {
+            @Override
+            public int compare(Event event, Event t1) {
+                return event.getSport().compareTo(t1.getSport());
+            }
+        });
+        adapter.setEvents(event);
     }
 
     public void initViews(View view) {

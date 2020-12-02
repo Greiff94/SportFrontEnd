@@ -2,7 +2,10 @@ package no.ntnu.sportsapp.model;
 
 import java.util.ArrayList;
 
+import no.ntnu.sportsapp.R;
+
 public class Event {
+    int image;
     private long eventid;
     private String sport;
     private String description;
@@ -13,11 +16,10 @@ public class Event {
     private String latLng;
     private User eventCreator;
     private ArrayList<User> signedUsers = new ArrayList<>();
-//    private boolean oldEvent;
 
 
-
-    public Event(long eventid, String sport, String description, String date, String location, String time, int maxPlayers, String latLng, User eventCreator) {
+    public Event(int image, long eventid, String sport, String description, String date, String location, String time, int maxPlayers, String latLng, User creator) {
+        this.image = image;
         this.eventid = eventid;
         this.sport = sport;
         this.description = description;
@@ -28,7 +30,20 @@ public class Event {
         this.latLng = latLng;
         this.eventCreator = eventCreator;
     }
-
+    public int getImage(){
+        String football = "Football";
+        String volleyball = "Volleyball";
+        String basketball = "Basketball";
+        if(this.sport.equals(football)){
+            return R.drawable.football;
+        } else if(this.sport.equals(volleyball)){
+            return R.drawable.volleyball;
+        } else if(this.sport.equals(basketball)){
+            return R.drawable.basketball;
+        }else {
+            return R.drawable.logo400;
+        }
+    }
     public long getId() {
         return eventid;
     }
@@ -110,17 +125,4 @@ public class Event {
     }
 }
 
-//
-//        //@todo fix this when backend is finished
-//        @Override
-//        public String toString () {
-//            return "Event{" +
-//                    "id=" + id +
-//                    ", eventName='" + sport + '\'' +
-//                    ", description='" + description + '\'' +
-//                    ", date=" + date +
-//                    ", oldevent=" + oldEvent +
-//                    ", userid=" + creator +
-//                    '}';
-//        }
 

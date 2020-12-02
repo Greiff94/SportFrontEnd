@@ -79,7 +79,7 @@
                                             <option name="values">
                                               <map>
                                                 <entry key="color" value="000000" />
-                                                <entry key="imagePath" value="C:\Users\sigur\Documents\GitHub\SportApp\SportFrontEnd\extras\logo200x80.png" />
+                                                <entry key="imagePath" value="C:\Users\sigur\Documents\GitHub\SportApp\SportFrontEnd\extras\football.png" />
                                                 <entry key="scalingPercent" value="62" />
                                               </map>
                                             </option>
@@ -112,7 +112,8 @@
                                   </option>
                                   <option name="values">
                                     <map>
-                                      <entry key="outputName" value="ic_logoself" />
+                                      <entry key="outputName" value="ic_football" />
+                                      <entry key="previewDensity" value="HIGH" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -276,6 +277,11 @@
                                           </PersistentState>
                                         </value>
                                       </entry>
+                                    </map>
+                                  </option>
+                                  <option name="values">
+                                    <map>
+                                      <entry key="previewDensity" value="HIGH" />
                                     </map>
                                   </option>
                                 </PersistentState>

@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import no.ntnu.sportsapp.R;
 import no.ntnu.sportsapp.activity.EventActivity;
@@ -39,11 +40,13 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.View
     }
 
     @Override
-    public void onBindViewHolder(@NonNull EventListAdapter.ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         holder.txtEvent.setText(events.get(position).getSport());
         holder.txtDate.setText(events.get(position).getDate());
         holder.txtTime.setText(events.get(position).getTime());
         holder.txtLocation.setText(events.get(position).getLocation());
+        holder.image.setImageResource(events.get(position).getImage());
+
 
         holder.parent.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -66,10 +69,7 @@ public class EventListAdapter extends RecyclerView.Adapter<EventListAdapter.View
                 view.getContext().startActivity(intent);
             }
         });
-        Glide.with(context)
-                .asBitmap()
-                .load("https://picsum.photos/200")
-                .into(holder.image);
+
     }
 
     @Override
