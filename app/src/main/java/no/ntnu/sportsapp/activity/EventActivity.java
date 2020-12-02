@@ -175,19 +175,6 @@ public class EventActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
-//    private void generateTeams() {
-//        if (bundleExtras != null) {
-//            long eventid = bundleExtras.getLong("eventid");
-//            Bundle bundle = new Bundle();
-//            bundle.putLong( "eventid", eventid);
-//
-//            Intent intent = new Intent(EventActivity.this, FragmentActivity.class);
-//            intent.putExtra("eventid", eventid);
-//            intent.putExtra("generate", "generate");
-//            EventActivity.this.startActivity(intent);
-//            System.out.println("GENERATE");
-//        }
-//    }
 
     // Gets a google map that has a marker for the events location
     @Override
