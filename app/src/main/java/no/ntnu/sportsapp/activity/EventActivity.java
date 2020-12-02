@@ -262,6 +262,7 @@ public class EventActivity extends AppCompatActivity implements View.OnClickList
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                     if (response.isSuccessful()) {
                         updateNumPlayers();
+                        Toast.makeText(EventActivity.this, "Event left", Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(EventActivity.this, "Something went wrong, please try again later.", Toast.LENGTH_SHORT).show();
                     }

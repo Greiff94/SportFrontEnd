@@ -141,7 +141,7 @@ public class AddEventFragment extends Fragment implements View.OnClickListener, 
                         locationName = address.getLocality();
                         System.out.println("Location name is: " + locationName);
                     } else {
-                        latLng = new LatLng(0,0);
+                        latLng = new LatLng(0, 0);
                         locationName = "No location currently available";
                         Toast.makeText(getContext(), "Unable to add marker to the map!", Toast.LENGTH_SHORT).show();
                     }
@@ -162,7 +162,7 @@ public class AddEventFragment extends Fragment implements View.OnClickListener, 
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.createEventbtn:
-                    addEvent();
+                addEvent();
                 break;
             case R.id.eventTimebtn:
                 setTimeButton();
@@ -236,17 +236,16 @@ public class AddEventFragment extends Fragment implements View.OnClickListener, 
         String date = dateView.getText().toString().trim();
         String location = "";
         String time = timeView.getText().toString().trim();
-        String latlngLocation = latLng.toString();
+        String latlngLocation = "";
         int maxPlayers = 0;
 
-        try {
-            maxPlayers  = Integer.parseInt(editTextSpotsAvailable.getText().toString());
-        } catch (NumberFormatException e) {
-            e.printStackTrace();
-            editTextSpotsAvailable.requestFocus();
-            editTextSpotsAvailable.setError("Need at least 1 participant");
-        }
 
+        try {
+            latlngLocation = latLng.toString();
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+            autocompleteFragment.setHint("A location is required");
+        }
         try {
             location = locationName.trim();
         } catch (NullPointerException e) {
@@ -258,6 +257,14 @@ public class AddEventFragment extends Fragment implements View.OnClickListener, 
             editTextDesc.setError("Description is required");
             editTextDesc.requestFocus();
             return;
+        }
+
+        try {
+            maxPlayers = Integer.parseInt(editTextSpotsAvailable.getText().toString());
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+            editTextSpotsAvailable.requestFocus();
+            editTextSpotsAvailable.setError("Need at least 1 participant");
         }
 
         if (date.isEmpty()) {
@@ -312,8 +319,6 @@ public class AddEventFragment extends Fragment implements View.OnClickListener, 
         timeButton = view.findViewById(R.id.eventTimebtn);
         createButton = view.findViewById(R.id.createEventbtn);
     }
-
-
 
 
 }
