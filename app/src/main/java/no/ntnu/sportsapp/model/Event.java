@@ -16,8 +16,6 @@ public class Event {
     private String latLng;
     private User creator;
     private ArrayList<User> signedUsers = new ArrayList<>();
-//    private boolean oldEvent;
- int picture[] = {R.drawable.football, R.drawable.volleyball, R.drawable.basketball, R.drawable.logo200};
 
 
     public Event(int image, long eventid, String sport, String description, String date, String location, String time, int maxPlayers, String latLng, User creator) {
@@ -43,7 +41,7 @@ public class Event {
         } else if(this.sport.equals(basketball)){
             return R.drawable.basketball;
         }else {
-            return R.drawable.logo200;
+            return R.drawable.logo400;
         }
     }
     public long getId() {
@@ -127,17 +125,4 @@ public class Event {
     }
 }
 
-//
-//        //@todo fix this when backend is finished
-//        @Override
-//        public String toString () {
-//            return "Event{" +
-//                    "id=" + id +
-//                    ", eventName='" + sport + '\'' +
-//                    ", description='" + description + '\'' +
-//                    ", date=" + date +
-//                    ", oldevent=" + oldEvent +
-//                    ", userid=" + creator +
-//                    '}';
-//        }
 
